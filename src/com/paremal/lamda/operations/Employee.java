@@ -3,7 +3,7 @@ package com.paremal.lamda.operations;
 public class Employee {
 	private String firstName;
 	private String lastName;
-	private double salary;
+	private Double salary;
 	private String department;
 	
 	public String getFirstName() {
@@ -22,11 +22,11 @@ public class Employee {
 		this.lastName = lastName;
 	}
 
-	public double getSalary() {
+	public Double getSalary() {
 		return salary;
 	}
 
-	public void setSalary(double salary) {
+	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
 

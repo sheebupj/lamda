@@ -2,10 +2,13 @@ package com.paremal.lamda.operations;
 
 import java.io.ObjectInputStream.GetField;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import com.paremal.lamda.operations.comparator.EmployeeComparator;
 
 public class ProcessEmployee {
 	
@@ -34,15 +37,21 @@ public class ProcessEmployee {
 		forEach(System.out::println);
 		System.out.printf("highest salary less than 6001 %n%s%n",list.stream().filter(fourToSixThousand).findFirst().get());
 		
-		Function<Employee,String> byFirstName=Employee::getFirstName;
 		Function<Employee,String> byLastName=Employee::getLastName;
+		Function<Employee,Double> bySalary=Employee::getSalary;
 		
 		
 		Comparator<Employee> lastThenFirstName=Comparator.comparing(byLastName)
-														 .thenComparing(byFirstName);
+														 .thenComparing(bySalary);
 		System.out.printf("last name then first");
 		System.out.println();
 		list.stream().sorted(lastThenFirstName).forEach(System.out::println);
+		Collections.sort(list,new EmployeeComparator());
+		for(Employee e:list) {
+			System.out.println(e);
+		}
+		list.stream().forEach(System.out::println);
+		
 
 		}
 	
