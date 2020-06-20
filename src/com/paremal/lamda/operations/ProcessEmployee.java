@@ -5,8 +5,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.paremal.lamda.operations.comparator.EmployeeComparator;
 
@@ -22,7 +25,7 @@ public class ProcessEmployee {
 				new Employee("James", "Indigo", 4700.77, "Marketing"),
 				new Employee("Luke", "Indigo", 6200, "IT"),
 				new Employee("Jason", "Blue", 3200, "Sales"),
-				new Employee("Wendy", "Brown", 4236.4, "marketing")};
+				new Employee("Wendy", "Brown", 4236.4, "Marketing")};
 		
 		List<Employee> list=Arrays.asList(employees);
 		
@@ -43,6 +46,8 @@ public class ProcessEmployee {
 		
 		Comparator<Employee> lastThenFirstName=Comparator.comparing(byLastName)
 														 .thenComparing(bySalary);
+		
+		
 		System.out.printf("last name then first");
 		System.out.println();
 		list.stream().sorted(lastThenFirstName).forEach(System.out::println);
@@ -52,8 +57,27 @@ public class ProcessEmployee {
 		}
 		list.stream().forEach(System.out::println);
 		
+		Map<String,List<Employee>> groupedByDepartMent=list.stream().collect(Collectors.groupingBy(Employee::getDepartment));
+		
+		groupedByDepartMent.forEach((department,employeesInDepartment)->
+		{
+			System.out.println(department);
+			employeesInDepartment.forEach(employee->System.out.printf("   %s%n", employee ));
+		});
+		
+		Map<String,Long> employeeCountByDepartMent=list.stream().
+				collect(Collectors.groupingBy(Employee::getDepartment,TreeMap::new,Collectors.counting()));
+		
+		employeeCountByDepartMent.forEach((department,count)->System.out.printf("%s has %d employee(s)%n",department,count));
+		
+		System.out.printf("%nSum of the employee salary using sum method %.2f%n",
+				list.stream().mapToDouble(Employee::getSalary).sum());
+		
+		System.out.printf("%nSum of the employee salary using reduce method %.2f%n",
+				list.stream().mapToDouble(Employee::getSalary).reduce(0,(val1,val2)->val1+val2));
 
 		}
+
 	
 
 }
