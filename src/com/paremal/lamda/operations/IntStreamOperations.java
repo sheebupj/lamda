@@ -2,15 +2,19 @@ package com.paremal.lamda.operations;
 
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class IntStreamOperations {
 	
 	
 	public static void main(String[] args) {
 		
-		int [] values= {7,9,3,6,4,10,5,2,8,1};
+		int [] values= {11,7,9,3,6,4,10,5,2,8,1};
 		
 		System.out.println("Original values");
 		IntStream.of(values).sorted().forEach(value->System.out.printf("%d%n",value));
@@ -23,7 +27,12 @@ public class IntStreamOperations {
 		System.out.printf("Average: %.3f%n",IntStream.of(values).average().getAsDouble());
 		IntStream.of(values).filter(value-> value % 3 ==0).sorted().forEach(value->System.out.printf("%d%n",value));
 		//System.out.println("Sorted values: %s%n",Arrays.stream(values).filter(value-> value>4).collect(Collectors.toList()));
-		
+		List<Integer> valuesCollection= IntStream.of(values).boxed().collect(Collectors.toList());
+		valuesCollection.forEach(value->System.out.printf("%n%d", value));
+		valuesCollection.sort((Integer i1,Integer i2)-> i1.compareTo(i2));
+		int[] sorted=IntStream.of(values).sorted().toArray();
+		System.out.println("Second smallest :"+ sorted[1]+" :"+valuesCollection.get(1));
+		valuesCollection.forEach(value->System.out.printf("%n%d", value));
 		
 		
 		System.out.printf("Orignial values: %s%n" , Arrays.stream(values));

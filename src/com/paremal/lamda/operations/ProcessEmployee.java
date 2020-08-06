@@ -23,7 +23,7 @@ public class ProcessEmployee {
 				new Employee("James", "Indigo", 4700.77, "Marketing"), 
 				new Employee("Luke", "Indigo", 6200, "IT"),
 				new Employee("Jason", "Blue", 3200, "Sales"),
-				new Employee("Jason", "Blue", 3200, "Sales"),
+				new Employee("Jason", "Blue", 3200, "finance"),
 				new Employee("Wendy", "Brown", 4236.4, "Marketing") };
 
 		List<Employee> list = Arrays.asList(employees);
@@ -82,9 +82,16 @@ public class ProcessEmployee {
 		//salaries.stream().forEach(System.out::println);
 		
 		list.stream().map(Employee::getSalary).collect(Collectors.toList()).forEach(System.out::println);
-		
+		System.out.println("..........");
 		names.stream().filter(i -> Collections.frequency(names, i) ==2)
         .collect(Collectors.toSet()).forEach(System.out::println);
+		System.out.println("..........");
+		list.stream().map(Employee::getDepartment).distinct().collect(Collectors.toList()).forEach(System.out::println);
+		
+		System.out.println(".........&&&.");
+		//list.stream().map(Employee::getFirstName)
+		names.stream().filter(n->Collections.frequency(names, n)>1)
+		.collect(Collectors.toSet()).forEach(System.out::println);
 		
 		
 		
@@ -92,8 +99,14 @@ public class ProcessEmployee {
 		
 		
 		
+		names.stream().filter(i->Collections.frequency(names, i)>1).collect(Collectors.toList()).forEach(System.out::println);
 		
-		//list.stream().map(Employee::getSalary).collect(Collectors.toList()).forEach(System.out::println);
+		
+		
+		
+		
+		
+		list.stream().map(Employee::getSalary).collect(Collectors.toList()).forEach(System.out::println);
 
 	}
 }
