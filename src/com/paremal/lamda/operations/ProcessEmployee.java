@@ -95,7 +95,7 @@ public class ProcessEmployee {
 		
 		
 		
-		
+		list.stream().filter(e-> e.getSalary()>5000).forEach(employee -> System.out.printf("   %s%n", employee));
 		
 		
 		
@@ -107,6 +107,8 @@ public class ProcessEmployee {
 		
 		
 		list.stream().map(Employee::getSalary).collect(Collectors.toList()).forEach(System.out::println);
+		list.stream().filter(e-> e.getSalary()>5000).collect(Collectors.toList());
 
+		list.stream().filter(e-> e.getSalary()>4000).limit(3).forEach(e -> System.out.printf("   %s%n", e));
 	}
 }

@@ -29,7 +29,7 @@ public class IntStreamOperations {
 		//System.out.println("Sorted values: %s%n",Arrays.stream(values).filter(value-> value>4).collect(Collectors.toList()));
 		List<Integer> valuesCollection= IntStream.of(values).boxed().collect(Collectors.toList());
 		valuesCollection.forEach(value->System.out.printf("%n%d", value));
-		valuesCollection.sort((Integer i1,Integer i2)-> i1.compareTo(i2));
+		valuesCollection.sort(Comparator.comparing(Integer::intValue));
 		int[] sorted=IntStream.of(values).sorted().toArray();
 		System.out.println("Second smallest :"+ sorted[1]+" :"+valuesCollection.get(1));
 		valuesCollection.forEach(value->System.out.printf("%n%d", value));
