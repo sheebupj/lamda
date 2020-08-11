@@ -100,16 +100,59 @@ public class ProcessEmployee {
 		
 		
 		names.stream().filter(i->Collections.frequency(names, i)>1).collect(Collectors.toList()).forEach(System.out::println);
+			
 		
-		
-		
-		
-		
-		
+		/*
+		 * mapping salaries of all employee objects to list of salaries
+		 */
 		list.stream().map(Employee::getSalary).collect(Collectors.toList()).forEach(System.out::println);
-		list.stream().filter(e-> e.getSalary()>5000).collect(Collectors.toList());
-
+		
+		/*
+		 * filtering Employees  with predicate here e-> e.getSalary()>5000)
+		 */
+		List<Employee> salries=list.stream().filter(e-> e.getSalary()>5000).collect(Collectors.toList());
+		
+		/*
+		 * filtering Employees  with predicate here e-> e.getSalary()>400) chained with skip()
+		 */
 		list.stream().filter(e-> e.getSalary()>4000).skip(1).forEach(e -> System.out.printf("   %s%n", e));
+		
+		/*
+		 * maping names of employees to list of strings and print them
+		 */
 		list.stream().map(Employee::getFirstName).forEach(System.out::println);
+		
+		/*
+		 * Map() and flatMap()
+		 */
+		List<String> words = Arrays.asList("Hello", "World");
+		
+		/*
+		 * following will return Stream<Stream<String>>
+		 */
+		words.stream().map(word->word.split(""))
+		.map(Arrays::stream).distinct().forEach(System.out::println);
+		
+		/*
+		 * following will return distinct stream<characters> 
+		 */
+		words.stream().map(word->word.split(""))
+		.flatMap(Arrays::stream).distinct().forEach(System.out::println);
+		
+		/*
+		 * map integer list to its squires
+		 */
+		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5,9);
+		numbers.stream().map(n-> n*n).forEach(System.out::println);
+		
+		/*
+		 * create pairs from two list of integers
+		 */
+		
+		List<Integer> numbers1 = Arrays.asList(1, 2, 3);
+		List<Integer> numbers2 = Arrays.asList(3, 4);
+		numbers1.stream().flatMap(i->numbers2.stream().map(j-> new int[] {i,j}))
+		.forEach(n-> System.out.printf("%d, %d%n", n[0],n[1]));
+		
 	}
 }
