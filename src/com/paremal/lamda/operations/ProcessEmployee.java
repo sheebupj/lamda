@@ -146,13 +146,22 @@ public class ProcessEmployee {
 		numbers.stream().map(n-> n*n).forEach(System.out::println);
 		
 		/*
-		 * create pairs from two list of integers
+		 * create pairs from two list of integers(combinations)
 		 */
-		
+		System.out.println("combination of two integer list");
 		List<Integer> numbers1 = Arrays.asList(1, 2, 3,5,6);
 		List<Integer> numbers2 = Arrays.asList(3, 4,7,9);
-		numbers1.stream().flatMap(i->numbers2.stream().map(j-> new int[] {i,j}))
-		.forEach(n-> System.out.printf("%d, %d%n", n[0],n[1]));
+		numbers1.stream().flatMap(i->numbers2.stream()
+				.map(j-> new int[] {i,j}))
+		.forEach(n-> System.out.printf("%d,%d%n", n[0],n[1]));
+		
+		/*
+		 * two list of integers(combinations) with filter predicate
+		 */
+		System.out.println("after filtering the combination sum less than 7");
+		numbers1.stream().flatMap(i->numbers2.stream()
+				.filter(j-> (i+j)<7).map(j->new int[] {i,j}))
+		.forEach(n->System.out.printf("%d,%d%n",n[0],n[1]));
 		
 	}
 }
