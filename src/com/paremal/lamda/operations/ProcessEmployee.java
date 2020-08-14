@@ -156,7 +156,7 @@ public class ProcessEmployee {
 		.forEach(n-> System.out.printf("%d,%d%n", n[0],n[1]));
 		
 		/*
-		 * two list of integers(combinations) with filter predicate
+		 * two list of integers(combinations)  filtering with predicate
 		 */
 		System.out.println("after filtering the combination sum less than 7");
 		numbers1.stream().flatMap(i->numbers2.stream()
