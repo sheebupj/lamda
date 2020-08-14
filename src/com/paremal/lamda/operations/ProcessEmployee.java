@@ -28,83 +28,138 @@ public class ProcessEmployee {
 
 		List<Employee> list = Arrays.asList(employees);
 
+		/*
+		 * list all employee objects
+		 */
+		System.out.println("\n\n#All employee objects");
 		list.stream().forEach(System.out::println);
+		/*
+		 * create predicate
+		 */
 		Predicate<Employee> fourToSixThousand = e -> (e.getSalary() >= 3000 & e.getSalary() <= 6000);
-		System.out.println("Employees with salary 4000 to 6000");
+		System.out.println("\n\n#Employees with salary 4000 to 6000");
 
+		/*
+		 * filter with predicate
+		 */
 		list.stream().filter(fourToSixThousand).sorted(Comparator.comparing(Employee::getLastName))
 				.forEach(System.out::println);
-		System.out.printf("highest salary less than 6001 %n%s%n",
+		
+		System.out.printf("\n\n#highest salary less than 6001 \n%s\n",
 				list.stream().filter(fourToSixThousand).findFirst().get());
 
+		/*
+		 * Function
+		 */
 		Function<Employee, String> byLastName = Employee::getLastName;
 		Function<Employee, Double> bySalary = Employee::getSalary;
-
+		
+		/*
+		 * Comparator with multiple comparison
+		 */
 		Comparator<Employee> lastThenFirstName = Comparator.comparing(byLastName).thenComparing(bySalary);
 
-		System.out.printf("last name then first");
-		System.out.println();
+		
+		/*
+		 * sort by comparator with multiple value comparing
+		 */
+		System.out.println("\n\n#list of employees sorted first by last name then first name");
 		list.stream().sorted(lastThenFirstName).forEach(System.out::println);
+		/*
+		 * 
+		 * Collection.sort()
+		 */
+		System.out.println("\n\n#list of employees sorted with commparator prior to java 8");
 		Collections.sort(list, new EmployeeComparator());
 		for (Employee e : list) {
 			System.out.println(e);
 		}
+		/*
+		 * going through all item in the list with forEach()
+		 */
+		System.out.println("\n\n#going through all item in the list with forEach()");
 		list.stream().forEach(System.out::println);
-
+		/*
+		 * creating TreeMap with departmentname as key and list of employee as value using Collectores.groupingBY()
+		 */
 		Map<String, List<Employee>> groupedByDepartMent = list.stream()
 				.collect(Collectors.groupingBy(Employee::getDepartment));
-
+		System.out.println("\n\n#iterating with forEach and collectores.groupedBy  ");
 		groupedByDepartMent.forEach((department, employeesInDepartment) -> {
 			System.out.println(department);
 			employeesInDepartment.forEach(employee -> System.out.printf("   %s%n", employee));
 		});
 
+		/*
+		 * creating TreeMap with departmentname as key and count as value using Collectores.groupingBY()
+		 */
 		Map<String, Long> employeeCountByDepartMent = list.stream()
 				.collect(Collectors.groupingBy(Employee::getDepartment, TreeMap::new, Collectors.counting()));
-
+		System.out.println("\n\n#Iterating with forEach() ");
 		employeeCountByDepartMent
 				.forEach((department, count) -> System.out.printf("%s has %d employee(s)%n", department, count));
 
-		System.out.printf("%nSum of the employee salary using sum method %.2f%n",
+		/*
+		 * mapToDouble and sum()
+		 */
+		System.out.printf("%n%n%n#Sum of the employee salary using sum method %.2f%n",
 				list.stream().mapToDouble(Employee::getSalary).sum());
-
-		System.out.printf("%nSum of the employee salary using reduce method %.2f%n",
-				list.stream().mapToDouble(Employee::getSalary).reduce(0, (val1, val2) -> val1 + val2));
-
-		System.out.printf("%nSum of the employee salary using reduce method %.2f%n",
-				list.stream().mapToDouble(Employee::getSalary).reduce(0, (v1, v2) -> v1 + v2));
-		System.out.printf("%nAverage of the employee salary using average method %.2ff%n",
-				list.stream().mapToDouble(Employee::getSalary).average().getAsDouble());
-
-		List<String> names = list.stream().map(Employee::getDepartment).collect(Collectors.toList());
-
-		//System.out.printf("%n salary:%f", salaries);
-		//salaries.stream().forEach(System.out::println);
 		
-		list.stream().map(Employee::getSalary).collect(Collectors.toList()).forEach(System.out::println);
-		System.out.println("..........");
-		names.stream().filter(i -> Collections.frequency(names, i) ==2)
-        .collect(Collectors.toSet()).forEach(System.out::println);
-		System.out.println("..........");
+		/*
+		 * reduce()
+		 */
+		System.out.printf("%n%n%n#Sum of the employee salary using reduce method %.2f%n",
+				list.stream().mapToDouble(Employee::getSalary).reduce(0, (val1, val2) -> val1 + val2));
+		/*
+		 * reduce()
+		 */
+
+		System.out.printf("%n%n%n#Sum of the employee salary using reduce method %.2f%n",
+				list.stream().mapToDouble(Employee::getSalary).reduce(0, (v1, v2) -> v1 + v2));
+		
+		/*
+		 * average() getAsDouble() 
+		 */
+		System.out.printf("%n%n%n#Average of the employee salary using average method %.2ff%n",
+				list.stream().mapToDouble(Employee::getSalary).average().getAsDouble());
+		
+		/*
+		 * getting department name from employee list
+		 */
+		List<String> departmentNames = list.stream().map(Employee::getDepartment).collect(Collectors.toList());
+
+		
+		
+		/*
+		 * getting distinct department names from employee list using stream.map().distict()
+		 */
+		System.out.println("\n\n#Distinct department names");
 		list.stream().map(Employee::getDepartment).distinct().collect(Collectors.toList()).forEach(System.out::println);
 		
-		System.out.println(".........&&&.");
-		//list.stream().map(Employee::getFirstName)
-		names.stream().filter(n->Collections.frequency(names, n)>1)
-		.collect(Collectors.toSet()).forEach(System.out::println);
+		/*
+		 * getting  first names from employee list
+		 */
+		System.out.println("\n\n#Employee first names");
+		list.stream().map(Employee::getFirstName).forEach(n-> System.out.printf("   %s%n", n));
 		
 		
-		
+		/*
+		 * filtering Employees who have more than 5000 salary
+		 */
+		System.out.println("\n\n#Employees who have more than 5000 salary");
 		list.stream().filter(e-> e.getSalary()>5000).forEach(employee -> System.out.printf("   %s%n", employee));
 		
-		
-		
-		names.stream().filter(i->Collections.frequency(names, i)>1).collect(Collectors.toList()).forEach(System.out::println);
+		/*
+		 * filtering list for items that have frequency more than one
+		 */
+		System.out.println("\n\n#department names with frequency more than one");
+		departmentNames.stream().filter(i->Collections.frequency(departmentNames, i)>1).collect(Collectors.toList()).forEach(System.out::println);
 			
 		
 		/*
 		 * mapping salaries of all employee objects to list of salaries
 		 */
+		System.out.println("\n\n#Salaries");
 		list.stream().map(Employee::getSalary).collect(Collectors.toList()).forEach(System.out::println);
 		
 		/*
@@ -115,11 +170,14 @@ public class ProcessEmployee {
 		/*
 		 * filtering Employees  with predicate here e-> e.getSalary()>400) chained with skip()
 		 */
+		System.out.println("\n\n#filtered employee list predicate salary>4000 and skip one");
 		list.stream().filter(e-> e.getSalary()>4000).skip(1).forEach(e -> System.out.printf("   %s%n", e));
 		
 		/*
-		 * maping names of employees to list of strings and print them
+		 * Mapping names of employees to list of strings and print them
 		 */
+		System.out.println("\n\n#employee names only");
+
 		list.stream().map(Employee::getFirstName).forEach(System.out::println);
 		
 		/*
@@ -130,25 +188,28 @@ public class ProcessEmployee {
 		/*
 		 * following will return Stream<Stream<String>>
 		 */
+		System.out.println("\n\n# trying to get distinct leters from two words using Map()");
 		words.stream().map(word->word.split(""))
 		.map(Arrays::stream).distinct().forEach(System.out::println);
 		
 		/*
 		 * following will return distinct stream<characters> 
 		 */
+		System.out.println("\n\n# distinct leters from two words using flatMap()");
 		words.stream().map(word->word.split(""))
 		.flatMap(Arrays::stream).distinct().forEach(System.out::println);
 		
 		/*
 		 * map integer list to its squires
 		 */
+		System.out.println("\n\n# numbers and squares");
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5,9);
 		numbers.stream().map(n-> n*n).forEach(System.out::println);
 		
 		/*
 		 * create pairs from two list of integers(combinations)
 		 */
-		System.out.println("combination of two integer list");
+		System.out.println("\n\n#combination of two integer list");
 		List<Integer> numbers1 = Arrays.asList(1, 2, 3,5,6);
 		List<Integer> numbers2 = Arrays.asList(3, 4,7,9);
 		numbers1.stream().flatMap(i->numbers2.stream()
@@ -158,7 +219,7 @@ public class ProcessEmployee {
 		/*
 		 * two list of integers(combinations)  filtering with predicate
 		 */
-		System.out.println("after filtering the combination sum less than 7");
+		System.out.println("\n\n#after filtering the combination sum less than 7");
 		numbers1.stream().flatMap(i->numbers2.stream()
 				.filter(j-> (i+j)<7).map(j->new int[] {i,j}))
 		.forEach(n->System.out.printf("%d,%d%n",n[0],n[1]));
