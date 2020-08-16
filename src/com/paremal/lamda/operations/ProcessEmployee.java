@@ -224,5 +224,16 @@ public class ProcessEmployee {
 				.filter(j-> (i+j)<7).map(j->new int[] {i,j}))
 		.forEach(n->System.out.printf("%d,%d%n",n[0],n[1]));
 		
+		/*
+		 * combination of two list of integers, filtering with predicate sum%5==5
+		 */
+		System.out.println("\n\n#after filtering the combination with predicate  sum%5==0");
+		List<int[]> pairs8=numbers1.stream()
+				.flatMap(i->numbers2.stream()
+						.filter(j-> (i+j)%5==0)
+						.map(j-> new int[] {i,j}))
+				.collect(Collectors.toList());
+		pairs8.forEach(n->System.out.printf("%d,%d%n",n[0],n[1]));
+		
 	}
 }
