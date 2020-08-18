@@ -70,6 +70,8 @@ public class Trade {
 		System.out.println("\n\nFinding the smallest value of all the transactions");
 		System.out.println(transactions.stream().reduce((t1,t2)-> t1.getValue()<t2.getValue() ? t1:t2));
 		
+		System.out.println(transactions.stream().map(Transaction::getValue).reduce((t1,t2)->t1+t2));
+		
 
 	}
 
