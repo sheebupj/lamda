@@ -45,6 +45,13 @@ public class Trade {
 		System.out.println("\n\nReturn a string of all traders’ names sorted alphabetically");
 		System.out.println(transactions.stream().map(t -> t.getTrader().getName()).distinct().sorted()
 				.reduce("",	(a, b) -> a.concat(" ").concat(b)));
+		
+		/*
+		 *find  any traders based in Milan
+		 */
+		System.out.println("\n\nfinding   traders based in Milan");
+		transactions.stream().map(t-> t.getTrader()).filter(tr-> tr.getCity().equals("Milan")).distinct().forEach(System.out::println);
+		
 	}
 
 }
