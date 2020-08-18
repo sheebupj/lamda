@@ -30,7 +30,7 @@ public class Trade {
 				);
 		
 		/*
-		 * Find all transactions in the year 2011 and sort them by value (small to high).
+		 * Find all transactions in the year 2011 and sort them by value (small to high) from list<Transactions>
 		 */
 		System.out.println("Find all transactions in the year 2011 and sort them by value (small to high)");
 		transactions.stream()
@@ -39,11 +39,21 @@ public class Trade {
 		.forEach(tr->System.out.println(tr));
 		
 		/*
-		 * all the unique cities where the traders work
+		 * all the unique cities where the traders work from list<Transactions>
 		 */
 		System.out.println("\n\nall the unique cities where the traders work");
 		transactions.stream().map(t->t.getTrader().getCity()).distinct().forEach(System.out::println);
 		
+		
+		/*
+		 * Find all traders from Cambridge and sort them by name from list<Transactions>
+		 */
+		System.out.println("\n\nFind all traders from Cambridge and sort them by name");
+		transactions.stream()
+		.filter(t->t.getTrader().getCity().equals("Cambridge"))
+		.map(t-> t.getTrader().getName())
+		.sorted()
+		.forEach(System.out::println);
 	}
 
 }
