@@ -43,15 +43,21 @@ public class Trade {
 		 * Return a string of all traders’ names sorted alphabetically.
 		 */
 		System.out.println("\n\nReturn a string of all traders’ names sorted alphabetically");
-		System.out.println(transactions.stream().map(t -> t.getTrader().getName()).distinct().sorted()
-				.reduce("",	(a, b) -> a.concat(" ").concat(b)));
-		
+		System.out.println(transactions.stream().map(t -> t.getTrader().getName()).distinct().sorted().reduce("",
+				(a, b) -> a.concat(" ").concat(b)));
+
 		/*
-		 *find  any traders based in Milan
+		 * find any traders based in Milan
 		 */
 		System.out.println("\n\nfinding   traders based in Milan");
-		transactions.stream().map(t-> t.getTrader()).filter(tr-> tr.getCity().equals("Milan")).distinct().forEach(System.out::println);
-		
+		transactions.stream().map(t -> t.getTrader()).filter(tr -> tr.getCity().equals("Milan")).distinct()
+				.forEach(System.out::println);
+		/*
+		 * Print all transactions’ values from the traders living in Cambridge
+		 */
+		System.out.println("\n\nPrinting all transactions’ values from the traders living in Cambridge");
+		transactions.stream().filter(t->t.getTrader().getCity().equals("Cambridge")).forEach(System.out::println);
+
 	}
 
 }
