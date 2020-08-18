@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Trade {
 
@@ -70,12 +72,13 @@ public class Trade {
 		System.out.println("\n\nFinding the smallest value of all the transactions");
 		System.out.println(transactions.stream().reduce((t1,t2)-> t1.getValue()<t2.getValue() ? t1:t2));
 		
+		
 		/*
 		 *  Finding the sum of all transactions
 		 */
 		System.out.println("\n\n Finding the sum of all transactions");
 		System.out.println(transactions.stream().map(Transaction::getValue).reduce((t1,t2)->t1+t2));
-		
+	
 
 	}
 
