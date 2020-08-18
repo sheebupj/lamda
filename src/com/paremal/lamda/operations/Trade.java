@@ -13,11 +13,6 @@ public class Trade {
 		Trader mario = new Trader("Mario", "Milan");
 		Trader alan = new Trader("Alan", "Cambridge");
 		Trader brian = new Trader("Brian", "Cambridge");
-		List<Trader> traders = new ArrayList<Trader>();
-		traders.add(raoul);
-		traders.add(mario);
-		traders.add(alan);
-		traders.add(brian);
 
 		List<Transaction> transactions = Arrays.asList(new Transaction(brian, 2011, 300),
 				new Transaction(raoul, 2012, 1000), new Transaction(raoul, 2011, 400),
@@ -43,6 +38,13 @@ public class Trade {
 		System.out.println("\n\nFind all traders from Cambridge and sort them by name");
 		transactions.stream().filter(t -> t.getTrader().getCity().equals("Cambridge")).map(t -> t.getTrader().getName())
 				.sorted().forEach(System.out::println);
+
+		/*
+		 * Return a string of all traders’ names sorted alphabetically.
+		 */
+		System.out.println("\n\nReturn a string of all traders’ names sorted alphabetically");
+		System.out.println(transactions.stream().map(t -> t.getTrader().getName()).distinct().sorted()
+				.reduce("",	(a, b) -> a.concat(" ").concat(b)));
 	}
 
 }
