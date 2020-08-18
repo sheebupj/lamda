@@ -31,9 +31,9 @@ public class PrimitivStreamOperations {
 		 * Pythagorean triple
 		 */
 		System.out.println("\nPythagorean triple numbers (a,b)<=100");
-		int thousand=1000;
-		IntStream.rangeClosed(1, thousand).boxed()
-				.flatMap(a -> IntStream.rangeClosed(a, thousand).filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
+		
+		IntStream.rangeClosed(1, 100).boxed()
+				.flatMap(a -> IntStream.rangeClosed(a, 100).filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
 						.mapToObj(b -> new int[] { a, b,(int) Math.sqrt(a*a + b * b )}))
 				.forEach(o -> System.out.println(o[0] + " " + o[1] + " " + o[2]));
 
