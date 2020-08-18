@@ -16,7 +16,7 @@ public class PrimitivStreamOperations {
 				new Transaction(mario, 2012, 710), new Transaction(mario, 2012, 700), new Transaction(alan, 2012, 950));
 		
 		/*
-		 * convert Integer stream to intstram
+		 * convert Integer stream to intStram only primitive stream define sum method
 		 */
 		System.out.println( "sum of transaction values"+ transactions.stream().mapToInt(Transaction::getValue).sum());
 		
