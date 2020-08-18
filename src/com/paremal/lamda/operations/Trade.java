@@ -37,6 +37,13 @@ public class Trade {
 		.filter(t-> t.getYear()==2011)
 		.sorted(Comparator.comparing(Transaction::getValue))
 		.forEach(tr->System.out.println(tr));
+		
+		/*
+		 * all the unique cities where the traders work
+		 */
+		System.out.println("\n\nall the unique cities where the traders work");
+		transactions.stream().map(t->t.getTrader().getCity()).distinct().forEach(System.out::println);
+		
 	}
 
 }
