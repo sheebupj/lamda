@@ -59,16 +59,16 @@ public class Trade {
 		transactions.stream().filter(t -> t.getTrader().getCity().equals("Cambridge")).forEach(System.out::println);
 		
 		/*
-		 *Finding the highest value of all the transactions
+		 *Finding the highest value of all the transactions using max()
 		 */
 		System.out.println("\n\nFinding the highest value of all the transactions");
 		System.out.println(transactions.stream().max(Comparator.comparing(Transaction::getValue)));
 		
 		/*
-		 *  Find the transaction with the smallest value
+		 *  Find the transaction with the smallest value using reduce
 		 */
 		System.out.println("\n\nFinding the smallest value of all the transactions");
-		System.out.println(transactions.stream().min(Comparator.comparing(Transaction::getValue)));
+		System.out.println(transactions.stream().reduce((t1,t2)-> t1.getValue()<t2.getValue() ? t1:t2));
 		
 
 	}
