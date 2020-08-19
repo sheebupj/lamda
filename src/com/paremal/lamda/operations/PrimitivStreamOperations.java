@@ -3,9 +3,14 @@ package com.paremal.lamda.operations;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class PrimitivStreamOperations {
 	public static void main(String[] args) {
+		
+		
+		
+		long t= System.nanoTime();
 
 		Trader raoul = new Trader("Raoul", "Cambridge");
 		Trader mario = new Trader("Mario", "Milan");
@@ -26,17 +31,25 @@ public class PrimitivStreamOperations {
 		 */
 		System.out.println("1-100 even numbers");
 		IntStream.rangeClosed(1, 100).filter(i -> i % 2 == 0).forEach(n-> System.out.printf("%d ", n));
-
+		
 		/**
 		 * Pythagorean triple
 		 */
-		System.out.println("\nPythagorean triple numbers (a,b)<=100");
+		System.out.println("\nPythagorean triple numbers ");
 		
-		IntStream.rangeClosed(1, 100).boxed()
-				.flatMap(a -> IntStream.rangeClosed(a, 100).filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
-						.mapToObj(b -> new int[] { a, b,(int) Math.sqrt(a*a + b * b )}))
-				.forEach(o -> System.out.println(o[0] + " " + o[1] + " " + o[2]));
-
+		int UPPER_LMIT=1000;
+		long NUMBER_OF_ITEM_TO_DISPLAY=10;
+		long t2=System.nanoTime();
+		Stream<int[]> pythagoreanTriple=IntStream.rangeClosed(1, UPPER_LMIT).boxed()
+				.flatMap(a -> IntStream.rangeClosed(a, UPPER_LMIT).filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
+						.mapToObj(b -> new int[] { a, b,(int) Math.sqrt(a*a + b * b )}));
+		long t3=System.nanoTime();
+		
+		
+		
+		pythagoreanTriple.limit(NUMBER_OF_ITEM_TO_DISPLAY).forEach(n-> System.out.println(n[0]+" "+ n[1]+" " +n[2]));
+				
+		System.out.println("time taken"+(t3-t2));
 	}
 
 }
