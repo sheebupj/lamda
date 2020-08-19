@@ -50,6 +50,21 @@ public class PrimitivStreamOperations {
 		pythagoreanTriple.limit(NUMBER_OF_ITEM_TO_DISPLAY).forEach(n-> System.out.println(n[0]+" "+ n[1]+" " +n[2]));
 				
 		System.out.println("time taken"+(t3-t2));
+		
+		/*
+		 * Static method of Stream.of() is used to create stream from values
+		 */
+		
+		Stream<String> stream = Stream.of("Java 8 ", "Lambdas ", "springBoot ", "Microservice");
+		stream.map(String::toUpperCase).forEach(System.out::println);
+		
+		/*
+		 * Arrays.stream() method used to create stream from array
+		 */
+		int [] values= {11,7,9,3,6,4,10,5,2,8,1};
+		System.out.println("Sum of values is:"+Arrays.stream(values).sum());
+		
+		
 	}
 
 }
