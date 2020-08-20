@@ -40,7 +40,7 @@ public class PrimitivStreamOperations {
 		 */
 		System.out.println("\nPythagorean triple numbers ");
 
-		int UPPER_LMIT = 1000;
+		int UPPER_LMIT = 200;
 		long NUMBER_OF_ITEM_TO_DISPLAY = 10;
 		long t2 = System.nanoTime();
 		Stream<int[]> pythagoreanTriple = IntStream.rangeClosed(1, UPPER_LMIT).boxed()
@@ -65,36 +65,50 @@ public class PrimitivStreamOperations {
 		 */
 		int[] values = { 11, 7, 9, 3, 6, 4, 10, 5, 2, 8, 1 };
 		System.out.println("Sum of values is:" + Arrays.stream(values).sum());
-		long uniqueWordCount=0;
+		long uniqueWordCount = 0;
 		/*
 		 * splitting text file to words and count unique words
 		 */
-		long wordCount=0;
+		long wordCount = 0;
 		try {
 			/*
 			 * split files to word list
 			 */
-			List<String> words=Files.lines(Paths.get("data.txt"), Charset.defaultCharset())
+			List<String> words = Files.lines(Paths.get("data.txt"), Charset.defaultCharset())
 					.flatMap(line -> Arrays.stream(line.split(" "))).collect(Collectors.toList());
 			/*
 			 * convert word list to unique word list
 			 */
-			
-			List<String> uniqueWords=words.stream().distinct().collect(Collectors.toList());
-			words.stream().forEach(w-> System.out.printf("%s ", w));
+
+			List<String> uniqueWords = words.stream().distinct().collect(Collectors.toList());
+			words.stream().forEach(w -> System.out.printf("%s ", w));
 			System.out.println();
-			uniqueWords.stream().forEach(w-> System.out.printf("%s ", w));
+			uniqueWords.stream().forEach(w -> System.out.printf("%s ", w));
 			uniqueWordCount = uniqueWords.stream().count();
-			wordCount=words.stream().count();
+			wordCount = words.stream().count();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 
-		System.out.printf("\nThere are " + uniqueWordCount + " unique words in data.txt\nAnd total wordcount is:"+wordCount  );
+		/*
+		 * infinite stream using Stream.iterate() even numbers using infinite integer
+		 * stream
+		 */
+		Stream.iterate(0, n -> n + 2).limit(10).forEach(n -> System.out.println(n));
 
+		/*
+		 * Fibonacci tuple
+		 */
+		Stream.iterate(new int[] { 0, 1 }, t1 -> new int[] { t1[1], t1[0] + t1[1] }).limit(10)
+				.forEach(t1 -> System.out.println("(" + t1[0] + "," + t1[1] + ")"));
+
+		/*
+		 * Fibonacci
+		 */
+		Stream.iterate(new int[] { 0, 1 }, t1 -> new int[] { t1[1], t1[0] + t1[1] }).limit(10).map(t1 -> t1[0])
+				.forEach(System.out::println);
+		
 	}
 
 }
