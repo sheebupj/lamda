@@ -46,7 +46,12 @@ public class CollectingOperations {
 		 /*
 		  * find sum using Collectors and summingInt method
 		  */
-		 System.out.println(transactions.stream().collect(Collectors.summingInt(Transaction::getValue)));
+		 System.out.println("Total amount of transactions:"+transactions.stream().collect(Collectors.summingInt(Transaction::getValue)));
+		 
+		 /*
+		  * get summary of statics of values in stream using Collectors.summarizingInt
+		  */
+		 System.out.println("Summary of transactions:"+transactions.stream().collect(Collectors.summarizingInt(Transaction::getValue)));
 	}
 
 }
