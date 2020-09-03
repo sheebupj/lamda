@@ -11,6 +11,7 @@ import com.paremal.lamda.util.Utils;
 public class CollectingOperations {
 	
 	static List<Transaction> transactions= Utils.getTransactions();
+	static List<Transaction> nulltrans= Utils.getnullTransactions();
 	
 	public static void main(String[] args) {
 		
@@ -39,7 +40,13 @@ public class CollectingOperations {
 		 */
 		 
 		 Optional<Transaction> higehestTransactions=transactions.stream().collect(Collectors.maxBy(Comparator.comparing(Transaction::getValue)));
-		
+	
+		 System.out.println("Transtions with highest amount is:"+higehestTransactions.get());
+		 
+		 /*
+		  * find sum using Collectors and summingInt method
+		  */
+		 System.out.println(transactions.stream().collect(Collectors.summingInt(Transaction::getValue)));
 	}
 
 }

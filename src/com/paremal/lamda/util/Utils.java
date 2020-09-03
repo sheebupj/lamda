@@ -24,4 +24,8 @@ public class Utils {
 		return transactions;
 
 	}
+	public static List<Transaction> getnullTransactions() {
+		return null;
+
+	}
 }
