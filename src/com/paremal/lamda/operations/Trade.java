@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -16,9 +18,9 @@ public class Trade {
 		Trader alan = new Trader("Alan", "Cambridge");
 		Trader brian = new Trader("Brian", "Cambridge");
 
-		List<Transaction> transactions = Arrays.asList(new Transaction(brian, 2011, 300),
-				new Transaction(raoul, 2012, 1000), new Transaction(raoul, 2011, 400),
-				new Transaction(mario, 2012, 710), new Transaction(mario, 2012, 700), new Transaction(alan, 2012, 950));
+		List<Transaction> transactions = Arrays.asList(new Transaction(brian, 2011, 300, "$"),
+				new Transaction(raoul, 2012, 1000, "$"), new Transaction(raoul, 2011, 400, "$"),
+				new Transaction(mario, 2012, 710, "$"), new Transaction(mario, 2012, 700, "$"), new Transaction(alan, 2012, 950, "$"));
 
 		/*
 		 * Find all transactions in the year 2011 and sort them by value (small to high)
@@ -78,6 +80,8 @@ public class Trade {
 		 */
 		System.out.println("\n\n Finding the sum of all transactions");
 		System.out.println(transactions.stream().map(Transaction::getValue).reduce((t1,t2)->t1+t2));
+		
+		
 	
 
 	}
