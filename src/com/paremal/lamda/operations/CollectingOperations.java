@@ -52,6 +52,11 @@ public class CollectingOperations {
 		  * get summary of statics of values in stream using Collectors.summarizingInt
 		  */
 		 System.out.println("Summary of transactions:"+transactions.stream().collect(Collectors.summarizingInt(Transaction::getValue)));
+		 
+		 /*
+		  * Concatenate strings in the stream using Collectors.joining()
+		  */
+		System.out.println(transactions.stream().map(t-> t.getTrader().getName()).collect(Collectors.joining()));
 	}
 
 }
