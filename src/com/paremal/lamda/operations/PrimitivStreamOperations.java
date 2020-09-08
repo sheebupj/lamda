@@ -10,19 +10,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.paremal.lamda.util.Utils;
+
 public class PrimitivStreamOperations {
+	static List<Transaction> transactions= Utils.getTransactions();
+	
 	public static void main(String[] args) {
 
 		long t = System.nanoTime();
-
-		Trader raoul = new Trader("Raoul", "Cambridge");
-		Trader mario = new Trader("Mario", "Milan");
-		Trader alan = new Trader("Alan", "Cambridge");
-		Trader brian = new Trader("Brian", "Cambridge");
-
-		List<Transaction> transactions = Arrays.asList(new Transaction(brian, 2011, 300, "$"),
-				new Transaction(raoul, 2012, 1000, "$"), new Transaction(raoul, 2011, 400, "$"),
-				new Transaction(mario, 2012, 710, "$"), new Transaction(mario, 2012, 700, "$"), new Transaction(alan, 2012, 950, "$"));
 
 		/*
 		 * convert Integer stream to intStram only primitive stream define sum method
@@ -79,6 +74,7 @@ public class PrimitivStreamOperations {
 			/*
 			 * convert word list to unique word list
 			 */
+			System.out.println(" ####"+ words.stream().distinct().count()+"  "+ words.stream().count());
 
 			List<String> uniqueWords = words.stream().distinct().collect(Collectors.toList());
 			words.stream().forEach(w -> System.out.printf("%s ", w));

@@ -9,18 +9,14 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import com.paremal.lamda.util.Utils;
+
 public class Trade {
+	static List<Transaction> transactions= Utils.getTransactions();
 
 	public static void main(String[] args) {
 
-		Trader raoul = new Trader("Raoul", "Cambridge");
-		Trader mario = new Trader("Mario", "Milan");
-		Trader alan = new Trader("Alan", "Cambridge");
-		Trader brian = new Trader("Brian", "Cambridge");
-
-		List<Transaction> transactions = Arrays.asList(new Transaction(brian, 2011, 300, "$"),
-				new Transaction(raoul, 2012, 1000, "$"), new Transaction(raoul, 2011, 400, "$"),
-				new Transaction(mario, 2012, 710, "$"), new Transaction(mario, 2012, 700, "$"), new Transaction(alan, 2012, 950, "$"));
+		
 
 		/*
 		 * Find all transactions in the year 2011 and sort them by value (small to high)
@@ -40,7 +36,7 @@ public class Trade {
 		 * Find all traders from Cambridge and sort them by name from list<Transactions>
 		 */
 		System.out.println("\n\nFind all traders from Cambridge and sort them by name");
-		transactions.stream().filter(t -> t.getTrader().getCity().equals("Cambridge")).map(t -> t.getTrader().getName())
+		transactions.stream().filter(t -> t.getTrader().getCity().equals("Cambridge")).map(t->t.getTrader().getName())
 				.sorted().forEach(System.out::println);
 
 		/*
@@ -60,7 +56,7 @@ public class Trade {
 		 * Print all transactions’ values from the traders living in Cambridge
 		 */
 		System.out.println("\n\nPrinting all transactions values from the traders living in Cambridge");
-		transactions.stream().filter(t -> t.getTrader().getCity().equals("Cambridge")).forEach(System.out::println);
+		transactions.stream().filter(t -> t.getTrader().getCity().equals("Cambridge")).map(Transaction::getValue).forEach(System.out::println);;
 		
 		/*
 		 *Finding the highest value of all the transactions using max()

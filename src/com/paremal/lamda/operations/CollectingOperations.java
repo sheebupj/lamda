@@ -57,6 +57,8 @@ public class CollectingOperations {
 		  * Concatenate strings in the stream using Collectors.joining()
 		  */
 		System.out.println(transactions.stream().map(t-> t.getTrader().getName()).collect(Collectors.joining()));
+		
+		
 	}
 
 }
