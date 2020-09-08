@@ -12,16 +12,13 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import com.paremal.lamda.operations.comparator.EmployeeComparator;
+import com.paremal.lamda.util.Utils;
 
 public class ProcessEmployee {
 
 	public static void main(String[] args) {
 		// initialize array of employee
-		Employee[] employees = { new Employee("Jason", "Red", 5000, "IT"), new Employee("Ashly", "Green", 7600, "IT"),
-				new Employee("Mathew", "Indigo", 3587.5, "Sales"),
-				new Employee("James", "Indigo", 4700.77, "Marketing"), new Employee("Luke", "Indigo", 6200, "IT"),
-				new Employee("Jason", "Blue", 3200, "Sales"), new Employee("Jason", "Blue", 3200, "finance"),
-				new Employee("Wendy", "Brown", 4236.4, "Marketing") };
+		Employee[] employees = Utils.getEmployees();
 
 		List<Employee> list = Arrays.asList(employees);
 
