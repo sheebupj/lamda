@@ -64,8 +64,17 @@ public class CollectingOperations {
 		/*
 		 * calculating sum with Collectors.reducing
 		 */
-		System.out.println("Sum of transactions"+transactions.stream().collect(Collectors.reducing(0,Transaction::getValue,(i,j)-> i+j)));
+		System.out.println("Sum of transactions :"+transactions.stream().collect(Collectors.reducing(0,Transaction::getValue,(i,j)-> i+j)));
 		
+		/*
+		 * finding highest using  Collectors.reducing
+		 */
+		System.out.println("Highest transactions :"+transactions.stream().collect(Collectors.reducing((t1,t2)->t1.getValue()>t2.getValue()? t1:t2)));
+		
+		/*
+		 * finding Lowest using  Collectors.reducing
+		 */
+		System.out.println("Lowest transactions :"+transactions.stream().collect(Collectors.reducing((t1,t2)-> t1.getValue()<t2.getValue()?t1:t2)));
 		
 	}
 
