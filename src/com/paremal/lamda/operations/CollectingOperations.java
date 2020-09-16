@@ -61,6 +61,11 @@ public class CollectingOperations {
 		  */
 		System.out.println(transactions.stream().map(t-> t.getTrader().getName()).collect(Collectors.joining(" ")));
 		
+		/*
+		 * calculating sum with Collectors.reducing
+		 */
+		System.out.println("Sum of transactions"+transactions.stream().collect(Collectors.reducing(0,Transaction::getValue,(i,j)-> i+j)));
+		
 		
 	}
 

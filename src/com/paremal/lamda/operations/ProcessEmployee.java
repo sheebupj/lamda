@@ -20,13 +20,13 @@ public class ProcessEmployee {
 		// initialize array of employee
 		Employee[] employees = Utils.getEmployees();
 
-		List<Employee> list = Arrays.asList(employees);
+		List<Employee> employeeList = Arrays.asList(employees);
 
 		/*
 		 * list all employee objects
 		 */
 		System.out.println("\n\n#All employee objects");
-		list.stream().forEach(System.out::println);
+		employeeList.stream().forEach(System.out::println);
 		/*
 		 * create predicate
 		 */
@@ -36,11 +36,11 @@ public class ProcessEmployee {
 		/*
 		 * filter with predicate
 		 */
-		list.stream().filter(fourToSixThousand).sorted(Comparator.comparing(Employee::getLastName))
+		employeeList.stream().filter(fourToSixThousand).sorted(Comparator.comparing(Employee::getLastName))
 				.forEach(System.out::println);
 
 		System.out.printf("\n\n#highest salary less than 6001 \n%s\n",
-				list.stream().filter(fourToSixThousand).findFirst().get());
+				employeeList.stream().filter(fourToSixThousand).findFirst().get());
 
 		/*
 		 * Function
@@ -57,26 +57,26 @@ public class ProcessEmployee {
 		 * sort by comparator with multiple value comparing
 		 */
 		System.out.println("\n\n#list of employees sorted first by last name then first name");
-		list.stream().sorted(lastThenFirstName).forEach(System.out::println);
+		employeeList.stream().sorted(lastThenFirstName).forEach(System.out::println);
 		/*
 		 * 
 		 * Collection.sort()
 		 */
 		System.out.println("\n\n#list of employees sorted with commparator prior to java 8");
-		Collections.sort(list, new EmployeeComparator());
-		for (Employee e : list) {
+		Collections.sort(employeeList, new EmployeeComparator());
+		for (Employee e : employeeList) {
 			System.out.println(e);
 		}
 		/*
 		 * going through all item in the list with forEach()
 		 */
 		System.out.println("\n\n#going through all item in the list with forEach()");
-		list.stream().forEach(System.out::println);
+		employeeList.stream().forEach(System.out::println);
 		/*
 		 * creating TreeMap with departmentname as key and list of employee as value
 		 * using Collectores.groupingBY()
 		 */
-		Map<String, List<Employee>> groupedByDepartMent = list.stream()
+		Map<String, List<Employee>> groupedByDepartMent = employeeList.stream()
 				.collect(Collectors.groupingBy(Employee::getDepartment));
 		System.out.println("\n\n#iterating with forEach and collectores.groupedBy  ");
 		groupedByDepartMent.forEach((department, employeesInDepartment) -> {
@@ -88,7 +88,7 @@ public class ProcessEmployee {
 		 * creating TreeMap with departmentname as key and count as value using
 		 * Collectores.groupingBY()
 		 */
-		Map<String, Long> employeeCountByDepartMent = list.stream()
+		Map<String, Long> employeeCountByDepartMent = employeeList.stream()
 				.collect(Collectors.groupingBy(Employee::getDepartment, TreeMap::new, Collectors.counting()));
 		System.out.println("\n\n#Iterating with forEach() ");
 		employeeCountByDepartMent
@@ -98,49 +98,49 @@ public class ProcessEmployee {
 		 * mapToDouble and sum()
 		 */
 		System.out.printf("%n%n%n#Sum of the employee salary using sum method %.2f%n",
-				list.stream().mapToDouble(Employee::getSalary).sum());
+				employeeList.stream().mapToDouble(Employee::getSalary).sum());
 
 		/*
 		 * reduce()
 		 */
 		System.out.printf("%n%n%n#Sum of the employee salary using reduce method %.2f%n",
-				list.stream().mapToDouble(Employee::getSalary).reduce(0, (val1, val2) -> val1 + val2));
+				employeeList.stream().mapToDouble(Employee::getSalary).reduce(0, (val1, val2) -> val1 + val2));
 		/*
 		 * reduce()
 		 */
 
 		System.out.printf("%n%n%n#Sum of the employee salary using reduce method %.2f%n",
-				list.stream().mapToDouble(Employee::getSalary).reduce(0, (v1, v2) -> v1 + v2));
+				employeeList.stream().mapToDouble(Employee::getSalary).reduce(0, (v1, v2) -> v1 + v2));
 
 		/*
 		 * average() getAsDouble()
 		 */
 		System.out.printf("%n%n%n#Average of the employee salary using average method %.2ff%n",
-				list.stream().mapToDouble(Employee::getSalary).average().getAsDouble());
+				employeeList.stream().mapToDouble(Employee::getSalary).average().getAsDouble());
 
 		/*
 		 * getting department name from employee list
 		 */
-		List<String> departmentNames = list.stream().map(Employee::getDepartment).collect(Collectors.toList());
+		List<String> departmentNames = employeeList.stream().map(Employee::getDepartment).collect(Collectors.toList());
 
 		/*
 		 * getting distinct department names from employee list using
 		 * stream.map().distict()
 		 */
 		System.out.println("\n\n#Distinct department names");
-		list.stream().map(Employee::getDepartment).distinct().collect(Collectors.toList()).forEach(System.out::println);
+		employeeList.stream().map(Employee::getDepartment).distinct().collect(Collectors.toList()).forEach(System.out::println);
 
 		/*
 		 * getting first names from employee list
 		 */
 		System.out.println("\n\n#Employee first names");
-		list.stream().map(Employee::getFirstName).forEach(n -> System.out.printf("   %s%n", n));
+		employeeList.stream().map(Employee::getFirstName).forEach(n -> System.out.printf("   %s%n", n));
 
 		/*
 		 * filtering Employees who have more than 5000 salary
 		 */
 		System.out.println("\n\n#Employees who have more than 5000 salary");
-		list.stream().filter(e -> e.getSalary() > 5000).forEach(employee -> System.out.printf("   %s%n", employee));
+		employeeList.stream().filter(e -> e.getSalary() > 5000).forEach(employee -> System.out.printf("   %s%n", employee));
 
 		/*
 		 * filtering list for items that have frequency more than one
@@ -153,19 +153,19 @@ public class ProcessEmployee {
 		 * mapping salaries of all employee objects to list of salaries
 		 */
 		System.out.println("\n\n#Salaries");
-		list.stream().map(Employee::getSalary).collect(Collectors.toList()).forEach(System.out::println);
+		employeeList.stream().map(Employee::getSalary).collect(Collectors.toList()).forEach(System.out::println);
 
 		/*
 		 * filtering Employees with predicate here e-> e.getSalary()>5000)
 		 */
-		List<Employee> salries = list.stream().filter(e -> e.getSalary() > 5000).collect(Collectors.toList());
+		List<Employee> salries = employeeList.stream().filter(e -> e.getSalary() > 5000).collect(Collectors.toList());
 
 		/*
 		 * filtering Employees with predicate here e-> e.getSalary()>400) chained with
 		 * skip()
 		 */
 		System.out.println("\n\n#filtered employee list predicate salary>4000 and skip one");
-		list.stream().filter(e -> e.getSalary() > 4000).skip(1).forEach(e -> System.out.printf("   %s%n", e));
+		employeeList.stream().filter(e -> e.getSalary() > 4000).skip(1).forEach(e -> System.out.printf("   %s%n", e));
 
 		/*
 		 * Mapping names of employees to list of strings and print them
@@ -173,7 +173,7 @@ public class ProcessEmployee {
 		 
 		System.out.println("\n\n#employee names only");
 
-		list.stream().map(Employee::getFirstName).forEach(System.out::println);
+		employeeList.stream().map(Employee::getFirstName).forEach(System.out::println);
 
 		/*
 		 * Map() and flatMap()
@@ -268,7 +268,7 @@ public class ProcessEmployee {
 		 * count of  numbers in the list using map-reduce method
 		 */
 		System.out.println("count of  numbers in the list using map-reduce method:"
-				+ numbers1.stream().map(n-> 1).reduce(( a,b)-> a+b));/*
+				+ numbers2.stream().map(n-> 1).reduce(( a,b)-> a+b));/*
 		 * count of  numbers in the list using count method
 		 */
 		System.out.println("count of  numbers in the list using count method:"
