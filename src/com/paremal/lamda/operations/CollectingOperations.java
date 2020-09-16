@@ -23,7 +23,7 @@ public class CollectingOperations {
 		Map<String,List<Transaction>> transactionsByCurrencies=transactions.stream()
 				.collect(Collectors.groupingBy(Transaction::getCurrency));
 		System.out.println("iterating map");
-		transactionsByCurrencies.entrySet().stream().map(m-> m.getValue()).forEach(t-> t.forEach(System.out::println));
+			transactionsByCurrencies.entrySet().stream().map(m-> m.getValue()).forEach(t-> t.forEach(System.out::println));
 		System.out.println("iterating map completed");
 		
 		/*
@@ -59,7 +59,7 @@ public class CollectingOperations {
 		 /*
 		  * Concatenate strings in the stream using Collectors.joining()
 		  */
-		System.out.println(transactions.stream().map(t-> t.getTrader().getName()).collect(Collectors.joining()));
+		System.out.println(transactions.stream().map(t-> t.getTrader().getName()).collect(Collectors.joining(" ")));
 		
 		
 	}
