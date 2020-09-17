@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.paremal.lamda.util.Utils;
@@ -25,6 +26,25 @@ public class CollectingOperations {
 		System.out.println("iterating map");
 			transactionsByCurrencies.entrySet().stream().map(m-> m.getValue()).forEach(t-> t.forEach(System.out::println));
 		System.out.println("iterating map completed");
+		
+		
+		/*
+		 * grouping with collectors
+		 */
+		Map<Trader,List<Transaction>> transactionsMapedtoTraders=transactions.stream()
+				.collect(Collectors.groupingBy(Transaction::getTrader));
+		System.out.println("iterating map1");
+		transactionsMapedtoTraders.entrySet().stream().map(m-> m.getValue()).forEach(t->t.forEach(System.out::println));
+		System.out.println("iterating map1 completed");
+		/*
+		 * Grouping with multple colloctors
+		 */
+		
+		Map<Trader,Transaction> higherTransactions=transactions.stream().collect(Collectors.groupingBy(Transaction::getTrader,
+				Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(Transaction::getValue)), Optional::get)));
+		System.out.println("iterating map2");
+		higherTransactions.entrySet().stream().map(m->m.getValue()).forEach(System.out::println);;
+		System.out.println("iterating map2 completed");
 		
 		/*
 		 * counting using Stream.cout()
