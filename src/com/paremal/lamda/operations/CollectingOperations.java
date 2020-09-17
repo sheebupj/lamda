@@ -47,10 +47,21 @@ public class CollectingOperations {
 		System.out.println("iterating map2 completed");
 		
 		/*
+		 * Grouping and collect to Map object
+		 */
+		
+		Map<Trader,Integer> sumOfTransactionsGroupByTrader=transactions.stream()
+				.collect(Collectors.groupingBy(Transaction::getTrader,Collectors.summingInt(Transaction::getValue)));
+		sumOfTransactionsGroupByTrader.forEach((trader,sumOfValues)-> System.out.printf("#%s Total transaction amount:%d%n", trader,sumOfValues));
+		
+		
+		/*
 		 * counting using Stream.cout()
 		 */
 		
 		Long numberOfTransactions=transactions.stream().count();
+		
+		System.out.println("Transaction count is :"+numberOfTransactions);
 		
 		/*
 		 * counting using collect and Collectors
