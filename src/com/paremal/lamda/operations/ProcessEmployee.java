@@ -73,7 +73,7 @@ public class ProcessEmployee {
 		System.out.println("\n\n#going through all item in the list with forEach()");
 		employeeList.stream().forEach(System.out::println);
 		/*
-		 * creating TreeMap with departmentname as key and list of employee as value
+		 * creating TreeMap with department name as key and list of employee as value
 		 * using Collectores.groupingBY()
 		 */
 		Map<String, List<Employee>> groupedByDepartMent = employeeList.stream()
