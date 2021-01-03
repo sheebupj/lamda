@@ -36,7 +36,7 @@ public class ProcessEmployee {
 		/*
 		 * filter with predicate
 		 */
-		employeeList.stream().filter(fourToSixThousand).sorted(Comparator.comparing(Employee::getLastName))
+		employeeList.stream().filter(fourToSixThousand).sorted(Comparator.comparing(Employee::getLastName).reversed())
 				.forEach(System.out::println);
 
 		System.out.printf("\n\n#highest salary less than 6001 \n%s\n",
