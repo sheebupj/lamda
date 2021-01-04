@@ -257,12 +257,12 @@ public class ProcessEmployee {
 		/*
 		 * Maximum without using reduce
 		 */
-		System.out.println("Maximum of  numbers in the list using sum  method in Integer class and without reduce:"
+		System.out.println("Maximum of  numbers in the list using using reduce :"
 				+ numbers1.stream().reduce(( a,b)-> a>b?a:b));
 		/*
 		 * Minimum without using reduce
 		 */
-		System.out.println("Minimum of  numbers in the list using sum  method in Integer class and without reduce:"
+		System.out.println("Minimum of  numbers in the list using using reduce :"
 				+ numbers1.stream().reduce(( a,b)-> a<b?a:b));
 		/*
 		 * count of  numbers in the list using map-reduce method

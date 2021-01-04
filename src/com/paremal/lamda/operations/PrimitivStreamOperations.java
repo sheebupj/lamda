@@ -36,17 +36,26 @@ public class PrimitivStreamOperations {
 		System.out.println("\nPythagorean triple numbers ");
 
 		int UPPER_LMIT = 200;
-		long NUMBER_OF_ITEM_TO_DISPLAY = 10;
+		long NUMBER_OF_ITEM_TO_DISPLAY = 150;
 		long t2 = System.nanoTime();
 		Stream<int[]> pythagoreanTriple = IntStream.rangeClosed(1, UPPER_LMIT).boxed()
 				.flatMap(a -> IntStream.rangeClosed(a, UPPER_LMIT).filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
 						.mapToObj(b -> new int[] { a, b, (int) Math.sqrt(a * a + b * b) }));
-		long t3 = System.nanoTime();
+		
 
 		pythagoreanTriple.limit(NUMBER_OF_ITEM_TO_DISPLAY)
 				.forEach(n -> System.out.println(n[0] + " " + n[1] + " " + n[2]));
+		long t3 = System.nanoTime();
 
 		System.out.println("time taken" + (t3 - t2));
+		/* optimal code for Pythagorean triple*/
+		IntStream.rangeClosed(1, UPPER_LMIT).boxed()
+								.flatMap(a->IntStream.rangeClosed(a, UPPER_LMIT)
+								.mapToObj(b-> new double[] {a,b,Math.sqrt(a*a+b*b)})
+								.filter(b-> b[2]%1==0)).limit(NUMBER_OF_ITEM_TO_DISPLAY)
+								.forEach(b-> System.out.println("###"+", "+b[0]+", "+b[1]+", "+b[2]));
+		long t4=System.nanoTime();
+		System.out.println("time taken" + (t4 - t3));
 
 		/*
 		 * Static method of Stream.of() is used to create stream from values
