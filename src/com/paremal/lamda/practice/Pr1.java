@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Pr1 {
 
-	public static void main(String[] args) {
+	static public  void   main(String[] args) {
 		List<Integer> n1 = Arrays.asList(1, 2, 3,4);
 		List<Integer> n2 = Arrays.asList(3, 4,5);
 		/* skiping elements*/
@@ -24,7 +24,10 @@ public class Pr1 {
 		for (int[] i : combinations) {
 			System.out.println(i[0] + "," + i[1]);
 		}
-		List<String> words = Arrays.asList("Hello", "world");
+		List<String> words = Arrays.asList("Hello", "world", "warm", "where", "weard","hero", "hectic","horific");
+		System.out.println("------");
+		words.stream().filter(w-> w.startsWith("h")).forEach(System.out::println);
+		System.out.println("------");
 		
 		/*sorting*/
 		words.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);

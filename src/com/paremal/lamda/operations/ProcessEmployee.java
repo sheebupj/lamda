@@ -6,10 +6,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.paremal.lamda.operations.comparator.EmployeeComparator;
 import com.paremal.lamda.util.Utils;
@@ -271,10 +276,42 @@ public class ProcessEmployee {
 				+ numbers2.stream().map(n-> 1).reduce(( a,b)-> a+b));/*
 		 * count of  numbers in the list using count method
 		 */
+		
 		System.out.println("count of  numbers in the list using count method:"
 				+ numbers1.stream().count());
 		
 		
+		 
+		/*
+		 * find  max and min repeated values in Integer list
+		 */
+		List<Integer> grades = Arrays.asList(1,4,6,7,8,8,9,5,7,8,4,3,8,2,1,6,8);
+		
+		/*
+		 * converting integer list to map
+		 */
+		Map<Integer,Integer> frequencies=grades.stream().collect(Collectors.toMap(Function.identity(), v->1,Integer::sum));
+		
+		/*
+		 * sort (ascending) Map to Set<Map.entry> Object and find first for minimum frequency number
+		 */
+		Optional<Map.Entry<Integer, Integer>> minFrequency =
+				frequencies.entrySet().stream().sorted(Map.Entry.comparingByValue()).findFirst();
+		System.out.println("Minimum frequency number in list(1,4,6,7,8,8,9,5,7,8,4,3,8,2,1,6,8) is :"+minFrequency);
+		
+		/*
+		 * sort (descending) Map to Set<Map.entry> Object and find first for Maximum frequency number
+		 */
+		Optional<Map.Entry<Integer, Integer>> maxFrequency=
+				frequencies.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).findFirst();
+		System.out.println("Maximum frequency number in list(1,4,6,7,8,8,9,5,7,8,4,3,8,2,1,6,8) is :"+maxFrequency);
+		
+		
+		
+		
+
 
 	}
+	
 }
+
