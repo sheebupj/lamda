@@ -305,6 +305,10 @@ public class ProcessEmployee {
 		Optional<Map.Entry<Integer, Integer>> maxFrequency=
 				frequencies.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).findFirst();
 		System.out.println("Maximum frequency number in list(1,4,6,7,8,8,9,5,7,8,4,3,8,2,1,6,8) is :"+maxFrequency);
+		// converting array to list java 8
+		List<Employee> emps= Arrays.stream(employees).collect(Collectors.toList());
+		// combine list of strings from each object to single list
+		List<String>phones= emps.stream().map(e-> e.getPhoneNo()).flatMap(p->p.stream()).collect(Collectors.toList());
 		
 		
 		

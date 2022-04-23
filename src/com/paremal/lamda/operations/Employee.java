@@ -1,11 +1,25 @@
 package com.paremal.lamda.operations;
 
+import java.util.List;
+
 public class Employee {
 	private String firstName;
 	private String lastName;
 	private Double salary;
 	private String department;
+	private List<String> phoneNo;
 	
+	
+	
+
+	public List<String> getPhoneNo() {
+		return phoneNo;
+	}
+
+	public void setPhoneNo(List<String> phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -38,12 +52,13 @@ public class Employee {
 		this.department = department;
 	}
 
-	public Employee(String firstName, String lastName, double salary, String department) {
+	public Employee(String firstName, String lastName, double salary, String department,List<String> phno) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.salary = salary;
 		this.department = department;
+		this.phoneNo=phno;
 	}
 
 	@Override
