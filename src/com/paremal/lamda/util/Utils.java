@@ -9,11 +9,13 @@ import com.paremal.lamda.operations.Transaction;
 
 public class Utils {
 	static List<Transaction> transactions = null;
-	static Employee[] employees= {new Employee("Jason", "Red", 5000, "IT"), new Employee("Ashly", "Green", 7600, "IT"),
-			new Employee("Mathew", "Indigo", 3587.5, "Sales"),
-			new Employee("James", "Indigo", 4700.77, "Marketing"), new Employee("Luke", "Indigo", 6200, "IT"),
-			new Employee("Jason", "Blue", 3200, "Sales"), new Employee("Jason", "Blue", 3200, "finance"),
-			new Employee("Wendy", "Brown", 4236.4, "Marketing")};
+	static List<String> phones=Arrays.asList(new String[] {"9387690660","9188584218"});
+	
+	static Employee[] employees= {new Employee("Jason", "Red", 5000, "IT",phones), new Employee("Ashly", "Green", 7600, "IT",phones),
+			new Employee("Mathew", "Indigo", 3587.5, "Sales",phones),
+			new Employee("James", "Indigo", 4700.77, "Marketing",phones), new Employee("Luke", "Indigo", 6200, "IT",phones),
+			new Employee("Jason", "Blue", 3200, "Sales",phones), new Employee("Jason", "Blue", 3200, "finance",phones),
+			new Employee("Wendy", "Brown", 4236.4, "Marketing",phones)};
 
 	static {
 		Trader raoul = new Trader("Raoul", "Cambridge");
