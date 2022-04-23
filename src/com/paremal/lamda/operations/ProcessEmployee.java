@@ -4,6 +4,7 @@ import java.io.ObjectInputStream.GetField;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -84,8 +85,7 @@ public class ProcessEmployee {
 		Map<String, List<Employee>> groupedByDepartMent = employeeList.stream()
 				.collect(Collectors.groupingBy(Employee::getDepartment));
 		System.out.println("\n\n#iterating with forEach and collectores.groupedBy  ");
-		groupedByDepartMent.forEach((department, employeesInDepartment) -> {
-			System.out.println(department);
+		groupedByDepartMent.forEach((department, employeesInDepartment) -> {System.out.println(department);
 			employeesInDepartment.forEach(employee -> System.out.printf("   %s%n", employee));
 		});
 
@@ -310,9 +310,11 @@ public class ProcessEmployee {
 		// combine list of strings from each object to single list
 		List<String>phones= emps.stream().map(e-> e.getPhoneNo()).flatMap(p->p.stream()).collect(Collectors.toList());
 		
+		phones.stream().forEach(System.out::println);
 		
 		
-		
+		Map<String,Long> duplicates=emps.stream().collect(Collectors.groupingBy(Employee::getLastName, HashMap::new, Collectors.counting()));
+	    duplicates.entrySet().stream().filter(e-> e.getValue()>1).forEach(s-> System.out.println(s.getValue()+"..."+s.getValue()));
 		
 		
 
