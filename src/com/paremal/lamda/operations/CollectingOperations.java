@@ -35,6 +35,7 @@ public class CollectingOperations {
 		System.out.println("iterating map1");
 		transactionsMapedtoTraders.entrySet().stream().map(m-> m.getValue()).forEach(t->t.forEach(System.out::println));
 		System.out.println("iterating map1 completed");
+		
 		/*
 		 * Grouping with multple colloctors
 		 */
