@@ -28,6 +28,7 @@ public class CollectingOperations {
 		System.out.println("iterating map completed");
 		
 		
+		
 		/*
 		 * grouping with collectors
 		 */

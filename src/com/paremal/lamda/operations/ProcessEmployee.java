@@ -315,6 +315,9 @@ public class ProcessEmployee {
 		
 		Map<String,Long> duplicates=emps.stream().collect(Collectors.groupingBy(Employee::getLastName, HashMap::new, Collectors.counting()));
 	    duplicates.entrySet().stream().filter(e-> e.getValue()>1).forEach(s-> System.out.println(s.getValue()+"..."+s.getValue()));
+	   List<Employee> filteredEmp=emps.stream().distinct().sorted(Comparator.comparing(Employee::getFirstName)).filter(e-> e.getSalary() >4000).collect(Collectors.toList());
+	   filteredEmp.parallelStream().forEach(e->System.out.println(e));
+	    
 		
 		
 
