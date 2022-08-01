@@ -27,8 +27,6 @@ public class CollectingOperations {
 			transactionsByCurrencies.entrySet().stream().map(m-> m.getValue()).forEach(t-> t.forEach(System.out::println));
 		System.out.println("iterating map completed");
 		
-		
-		
 		/*
 		 * grouping with collectors
 		 */
