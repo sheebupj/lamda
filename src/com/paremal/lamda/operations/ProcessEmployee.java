@@ -293,6 +293,24 @@ public class ProcessEmployee {
 		Map<Integer,Integer> frequencies=grades.stream().collect(Collectors.toMap(Function.identity(), v->1,Integer::sum));
 		
 		/*
+		 * iterate map and print
+		 */
+		System.out.println("#frequencies map");
+		frequencies.entrySet().stream().forEach(System.out::println);
+		
+		/*
+		 * sort map based of key
+		 */
+		System.out.println("#frequencies map sorted based of key");
+		frequencies.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+		
+		/*
+		 * sort map based of value
+		 */
+		System.out.println("#frequencies map sorted based of value");
+		frequencies.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
+		
+		/*
 		 * sort (ascending) Map to Set<Map.entry> Object and find first for minimum frequency number
 		 */
 		Optional<Map.Entry<Integer, Integer>> minFrequency =
@@ -314,7 +332,7 @@ public class ProcessEmployee {
 		
 		
 		Map<String,Long> duplicates=emps.stream().collect(Collectors.groupingBy(Employee::getLastName, HashMap::new, Collectors.counting()));
-	    duplicates.entrySet().stream().filter(e-> e.getValue()>1).forEach(s-> System.out.println(s.getValue()+"..."+s.getValue()));
+	    duplicates.entrySet().stream().filter(e-> e.getValue()>1).forEach(s-> System.out.println(s.getValue()+"...$"+s.getValue()));
 	   List<Employee> filteredEmp=emps.stream().distinct().sorted(Comparator.comparing(Employee::getFirstName)).filter(e-> e.getSalary() >4000).collect(Collectors.toList());
 	   filteredEmp.parallelStream().forEach(e->System.out.println(e));
 	    
