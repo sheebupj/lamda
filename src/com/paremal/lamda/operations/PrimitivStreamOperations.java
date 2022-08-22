@@ -133,11 +133,20 @@ public class PrimitivStreamOperations {
 			.entrySet().stream().sorted(Map.Entry.comparingByValue())
 			.forEach(e-> System.out.println("word: "+e.getKey()+" "+e.getValue()+"times"));
 			
+			/*
+			 * convert list to map by counting each char frequency sort by key
+			 */
+			
 			System.out.println("$$$$charactor count sort by key");
 			words.stream().map(w-> w.split("")).flatMap(Arrays::stream)
 			.collect(Collectors.toMap(Function.identity(),v->1,Integer::sum))
 			.entrySet().stream().sorted(Map.Entry.comparingByKey())
 			.forEach(entry-> System.out.println("char: "+entry.getKey()+ " "+ entry.getValue()+" times"));
+			
+			/*
+			 * convert list to map by counting each char frequency sort by value
+			 */
+			
 			
 			System.out.println("$$$$charactor count sort by value");
 			words.stream().map(w-> w.split("")).flatMap(Arrays::stream)
