@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -127,9 +128,22 @@ public class PrimitivStreamOperations {
 			 * convert list to map by counting each words frequency sort by value
 			 */
 			
-			System.out.println("$$$$");
-			words.stream().collect(Collectors.toMap(Function.identity(),v->1,Integer::sum)).entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
+			System.out.println("$$$$ charactor count");
+			words.stream().collect(Collectors.toMap(Function.identity(),v->1,Integer::sum))
+			.entrySet().stream().sorted(Map.Entry.comparingByValue())
+			.forEach(e-> System.out.println("word: "+e.getKey()+" "+e.getValue()+"times"));
 			
+			System.out.println("$$$$charactor count sort by key");
+			words.stream().map(w-> w.split("")).flatMap(Arrays::stream)
+			.collect(Collectors.toMap(Function.identity(),v->1,Integer::sum))
+			.entrySet().stream().sorted(Map.Entry.comparingByKey())
+			.forEach(entry-> System.out.println("char: "+entry.getKey()+ " "+ entry.getValue()+" times"));
+			
+			System.out.println("$$$$charactor count sort by value");
+			words.stream().map(w-> w.split("")).flatMap(Arrays::stream)
+			.collect(Collectors.toMap(Function.identity(),v->1,Integer::sum))
+			.entrySet().stream().sorted(Map.Entry.comparingByValue())
+			.forEach(entry-> System.out.println("char: "+entry.getKey()+ " "+ entry.getValue()+" times"));
 		
 
 		/*
