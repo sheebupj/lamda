@@ -124,8 +124,11 @@ public class PrimitivStreamOperations {
 			frequencies.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
 			
 			/*
-			 * 
+			 * convert list to map by counting each words frequency sort by value
 			 */
+			
+			System.out.println("$$$$");
+			words.stream().collect(Collectors.toMap(Function.identity(),v->1,Integer::sum)).entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
 			
 		
 
