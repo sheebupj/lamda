@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -74,27 +76,58 @@ public class PrimitivStreamOperations {
 		 * splitting text file to words and count unique words
 		 */
 		long wordCount = 0;
+		List<String> words=null;
 		try {
 			/*
 			 * split files to word list
 			 */
-			List<String> words = Files.lines(Paths.get("data.txt"), Charset.defaultCharset())
+			 words = Files.lines(Paths.get("data.txt"), Charset.defaultCharset())
 					.flatMap(line -> Arrays.stream(line.split(" "))).collect(Collectors.toList());
-			/*
-			 * convert word list to unique word list
-			 */
-			System.out.println(" ####"+ words.stream().distinct().count()+"  "+ words.stream().count());
-
-			List<String> uniqueWords = words.stream().distinct().collect(Collectors.toList());
-			words.stream().forEach(w -> System.out.printf("%s ", w));
-			System.out.println();
-			uniqueWords.stream().forEach(w -> System.out.printf("%s ", w));
-			uniqueWordCount = uniqueWords.stream().count();
-			wordCount = words.stream().count();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+			/*
+			 * convert word list to unique word list
+			 */
+			System.out.println(" ####"+ words.stream().distinct().count()+"  "+ words.stream().count());
+			List<String> uniqueWords = words.stream().distinct().collect(Collectors.toList());
+			uniqueWordCount = uniqueWords.stream().count();
+			System.out.println("#Count of words");
+			wordCount = words.stream().count();
+			/*
+			 * printing all words
+			 */
+			System.out.println("printing all words");
+			words.stream().forEach(w -> System.out.printf("%s ", w));
+			
+			/*
+			 * finding frequencies of words using Map
+			 */
+			
+			Map<String,Integer> frequencies=words.stream().collect(Collectors.toMap(Function.identity(), v->1, Integer::sum));
+			System.out.println();
+			System.out.println("$$$iterating through map and printing frequencies");
+			frequencies.entrySet().stream().forEach(System.out::println);
+			
+			/*
+			 * sort map using key
+			 */
+			System.out.println();
+			System.out.println("$$$iterating through map and printing frequencies sort by key");
+			frequencies.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+			/*
+			 * sort map using value
+			 */
+			
+			System.out.println("$$$iterating through map and printing frequencies sort by value");
+			frequencies.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
+			
+			/*
+			 * 
+			 */
+			
+		
 
 		/*
 		 * infinite stream using Stream.iterate() even numbers using infinite integer
