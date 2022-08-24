@@ -155,9 +155,10 @@ public class PrimitivStreamOperations {
 			.forEach(entry-> System.out.println("char: "+entry.getKey()+ " "+ entry.getValue()+" times"));
 			
 			/*
-			 * 
+			 * counting special characters in a word list
 			 */
-			System.out.println("!!! spcial character count in the text is:"+words.stream().map(w-> w.split("")).flatMap(Arrays::stream).filter(PrimitivStreamOperations::checkspecialChar).count());
+			long count=words.stream().map(w-> w.split("")).flatMap(Arrays::stream).filter(PrimitivStreamOperations::checkspecialChar).count();
+			System.out.println("!!! spcial character count in the text is:"+ count);
 		
 
 		/*
