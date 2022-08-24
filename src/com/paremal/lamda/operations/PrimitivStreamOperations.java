@@ -153,6 +153,11 @@ public class PrimitivStreamOperations {
 			.collect(Collectors.toMap(Function.identity(),v->1,Integer::sum))
 			.entrySet().stream().sorted(Map.Entry.comparingByValue())
 			.forEach(entry-> System.out.println("char: "+entry.getKey()+ " "+ entry.getValue()+" times"));
+			
+			/*
+			 * 
+			 */
+			System.out.println("!!! spcial character count in the text is:"+words.stream().map(w-> w.split("")).flatMap(Arrays::stream).filter(PrimitivStreamOperations::checkspecialChar).count());
 		
 
 		/*
@@ -174,5 +179,18 @@ public class PrimitivStreamOperations {
 				.forEach(System.out::println);
 		
 	}
+	public static boolean checkspecialChar(String s) {
+		boolean result=true;
+		Character c=null;
+		if(s.length()<1) result=false;
+		else {
+			c=s.charAt(0);
+		
+		if(Character.isAlphabetic(c)|| Character.isDigit(c)) result=false;
+		
+		}
+		return result;
+	}
+	
 
 }
