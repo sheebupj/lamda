@@ -157,6 +157,9 @@ public class PrimitivStreamOperations {
 			/*
 			 * counting special characters in a word list
 			 */
+			String str= "This#string%contains^special*characters&.(";
+			System.out.println("!!!"+Arrays.stream(str.split("")).map(s->s.charAt(0)).filter(c-> !(Character.isAlphabetic(c)||Character.isDigit(c))).count());
+			
 			long count=words.stream().map(w-> w.split("")).flatMap(Arrays::stream).filter(PrimitivStreamOperations::checkspecialChar).count();
 			System.out.println("!!! spcial character count in the text is:"+ count);
 		
