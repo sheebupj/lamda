@@ -182,6 +182,10 @@ public class PrimitivStreamOperations {
 		 */
 		Stream.iterate(new int[] { 0, 1 }, t1 -> new int[] { t1[1], t1[0] + t1[1] }).limit(10).map(t1 -> t1[0])
 				.forEach(System.out::println);
+		
+		/*
+		 * printing all primes between 1 to 100
+		 */
 
 		IntStream.rangeClosed(1, 100).mapToObj(i -> new Object[] { i, PrimitivStreamOperations.checkPrime(i) })
 				.filter(f -> (boolean) f[1]).skip(1).forEach(n -> System.out.println(n[0]+" is a Prime"));
