@@ -154,13 +154,7 @@ public class PrimitivStreamOperations {
 				.sorted(Map.Entry.comparingByValue())
 				.forEach(entry -> System.out.println("char: " + entry.getKey() + " " + entry.getValue() + " times"));
 
-		/*
-		 * counting special characters in a word list
-		 */
-		String str = "This#string%contains^special*characters&.(-_";
-		System.out.println("!!!" + Arrays.stream(str.split("")).map(s -> s.charAt(0))
-				.filter(c -> !(Character.isAlphabetic(c) || Character.isDigit(c))).count());
-
+		
 		long count = words.stream().map(w -> w.split("")).flatMap(Arrays::stream)
 				.filter(PrimitivStreamOperations::checkspecialChar).count();
 		System.out.println("!!! spcial character count in the text is:" + count);
@@ -182,6 +176,14 @@ public class PrimitivStreamOperations {
 		 */
 		Stream.iterate(new int[] { 0, 1 }, t1 -> new int[] { t1[1], t1[0] + t1[1] }).limit(10).map(t1 -> t1[0])
 				.forEach(System.out::println);
+		
+		/*
+		 * counting special characters in a word list
+		 */
+		String str = "This#string%contains^special*characters&.(-_";
+		System.out.println("!!!" + Arrays.stream(str.split("")).map(s -> s.charAt(0))
+				.filter(c -> !(Character.isAlphabetic(c) || Character.isDigit(c))).count());
+
 		
 		/*
 		 * printing all primes between 1 to 100
