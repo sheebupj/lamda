@@ -58,6 +58,13 @@ public class Pr1 {
 		 
 		System.out.println(listOfAllIntegers);    //[1, 2, 3, 4, 5, 6, 7, 8, 9]
 		
+		IntStream.rangeClosed(1, 100).filter(n-> {
+			for(int i=2;i*i<=n;i++) {
+				if(n%i==0) return false;
+			}
+			return true;
+		}).forEach(System.out::println);
+		
 
 		
 		
