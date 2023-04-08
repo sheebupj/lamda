@@ -192,6 +192,8 @@ public class PrimitivStreamOperations {
 		IntStream.rangeClosed(1, 100).mapToObj(i -> new Object[] { i, PrimitivStreamOperations.checkPrime(i) })
 				.filter(f -> (boolean) f[1]).skip(1).forEach(n -> System.out.println(n[0]+" is a Prime"));
 	}
+	
+	
 
 	public static boolean checkPrime(Integer i) {
 		boolean flag = true;
