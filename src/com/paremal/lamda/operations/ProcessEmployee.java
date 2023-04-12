@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -335,6 +336,11 @@ public class ProcessEmployee {
 	    duplicates.entrySet().stream().filter(e-> e.getValue()>1).forEach(s-> System.out.println(s.getValue()+"...$"+s.getValue()));
 	   List<Employee> filteredEmp=emps.stream().distinct().sorted(Comparator.comparing(Employee::getFirstName)).filter(e-> e.getSalary() >4000).collect(Collectors.toList());
 	   filteredEmp.parallelStream().forEach(e->System.out.println(e));
+	   System.out.println("**************************");
+	   //second higest salaried emplyees
+	   List<Employee> emplist= Arrays.asList(Utils.getEmployees());
+	   Double secondLargest=emplist.stream().map(e-> e.getSalary()).distinct().sorted(Comparator.reverseOrder()).skip(1).findFirst().get();
+	   emplist.stream().filter(e-> e.getSalary().equals(secondLargest) ).forEach(System.out::println);
 	    
 		
 		
