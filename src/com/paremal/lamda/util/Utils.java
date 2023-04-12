@@ -13,9 +13,9 @@ public class Utils {
 	
 	static Employee[] employees= {new Employee("Jason", "Red", 5000, "IT",phones), new Employee("Ashly", "Green", 7600, "IT",phones),
 			new Employee("Mathew", "Indigo", 3587.5, "Sales",phones),
-			new Employee("James", "Indigo", 4700.77, "Marketing",phones), new Employee("Luke", "Indigo", 6200, "IT",phones),
-			new Employee("Jason", "Blue", 3200, "Sales",phones), new Employee("Jason", "Blue", 3200, "finance",phones),
-			new Employee("Wendy", "Brown", 4236.4, "Marketing",phones),new Employee("Wendy", "Brown", 4236.4, "Marketing",phones)};
+			new Employee("James", "Indigo", 7600, "Marketing",phones), new Employee("Luke", "Indigo", 6200, "IT",phones),
+			new Employee("Jason", "Blue", 6200, "Sales",phones), new Employee("Jason", "Blue", 3200, "finance",phones),
+			new Employee("Wendy", "Brown", 4236.4, "Marketing",phones),new Employee("Wendy", "Brown", 6200, "Marketing",phones)};
 
 	static {
 		Trader raoul = new Trader("Raoul", "Cambridge");
