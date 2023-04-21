@@ -252,6 +252,10 @@ public class PrimitivStreamOperations {
 		}
 		return result;
 	}
+	/*
+	 * method for getting first digit of a number
+	 */
+	
 	public static int getLastNo(int i) {
 		
 		while(i>=10) {
