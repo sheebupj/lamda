@@ -337,10 +337,34 @@ public class ProcessEmployee {
 	   List<Employee> filteredEmp=emps.stream().distinct().sorted(Comparator.comparing(Employee::getFirstName)).filter(e-> e.getSalary() >4000).collect(Collectors.toList());
 	   filteredEmp.parallelStream().forEach(e->System.out.println(e));
 	   System.out.println("**************************");
-	   //second higest salaried emplyees
+	   
 	   List<Employee> emplist= Arrays.asList(Utils.getEmployees());
+	   
+	   /*
+	    * second highest salaried emplyees list
+	    */
 	   Double secondLargest=emplist.stream().map(e-> e.getSalary()).distinct().sorted(Comparator.reverseOrder()).skip(1).findFirst().get();
 	   emplist.stream().filter(e-> e.getSalary().equals(secondLargest) ).forEach(System.out::println);
+	   System.out.println("**************************#");
+	   /*
+	    * Listing employees
+	    */
+	   emplist.stream().forEach(System.out::println);
+	   
+	   /*
+	    * finding employee with highest salary in each department
+	    */
+	   Map<String,Employee> emp=emplist.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors
+			   .collectingAndThen(Collectors.maxBy(Comparator.comparing(Employee::getSalary)),Optional::get)));
+	   System.out.println("**************************#");
+	   emp.entrySet().stream().forEach(e-> System.out.println(e.getKey()+"  "+e.getValue().getSalary()));
+	   /*
+	    * finding employee with lowest salary in each department
+	    */
+	   emplist.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.collectingAndThen
+			   (Collectors.minBy(Comparator.comparing(Employee::getSalary)), Optional::get)))
+	   .entrySet().stream().forEach(e-> System.out.println(e.getKey()+" "+e.getValue().getSalary()));
+	  
 	    
 		
 		
