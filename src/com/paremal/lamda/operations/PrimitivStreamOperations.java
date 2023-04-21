@@ -195,12 +195,36 @@ public class PrimitivStreamOperations {
 		/*
 		 * printing all primes between 1 to 49
 		 */
+		IntStream.range(2, 50).filter(n->{
+			for(int i=2;i*i<=n;i++) {
+				if(n%i==0) return false;
+				}return true;
+			}).forEach(n->System.out.println(n+"  is prime"));
 		
 		IntStream.range(2, 50).filter(n->{
 			for(int i=2;i*i<=n;i++) {
 				if(n%i==0) return false;
 				}return true;
 			}).forEach(n->System.out.println(n+"  is prime"));
+		
+		
+		/*
+		 * print all numbers starting with 1 from a an array
+		 */
+		int[] ns= { 17,257,1078,892638,19,92328332,123456778};
+		Arrays.stream(ns).boxed().filter(i-> {
+			
+			while(i>=10) {
+				i=(i-(i%10))/10;
+			}
+			if(i==1) {
+				return true;
+			}
+			return false;
+			
+		}).forEach(System.out::println);
+		
+		
 	}
 	
 	
@@ -227,6 +251,13 @@ public class PrimitivStreamOperations {
 
 		}
 		return result;
+	}
+	public static int getLastNo(int i) {
+		
+		while(i>=10) {
+			i=(i-(i%10))/10;
+		}
+		return i;
 	}
 
 }
