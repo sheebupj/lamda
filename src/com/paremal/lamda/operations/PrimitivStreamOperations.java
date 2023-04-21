@@ -158,7 +158,6 @@ public class PrimitivStreamOperations {
 		long count = words.stream().map(w -> w.split("")).flatMap(Arrays::stream)
 				.filter(PrimitivStreamOperations::checkspecialChar).count();
 		System.out.println("!!! spcial character count in the text is:" + count);
-
 		/*
 		 * infinite stream using Stream.iterate() even numbers using infinite integer
 		 * stream
@@ -174,6 +173,7 @@ public class PrimitivStreamOperations {
 		/*
 		 * Fibonacci
 		 */
+		System.out.println("********************");
 		Stream.iterate(new int[] { 0, 1 }, t1 -> new int[] { t1[1], t1[0] + t1[1] }).limit(10).map(t1 -> t1[0])
 				.forEach(System.out::println);
 		
@@ -191,6 +191,16 @@ public class PrimitivStreamOperations {
 
 		IntStream.rangeClosed(1, 100).mapToObj(i -> new Object[] { i, PrimitivStreamOperations.checkPrime(i) })
 				.filter(f -> (boolean) f[1]).skip(1).forEach(n -> System.out.println(n[0]+" is a Prime"));
+		
+		/*
+		 * printing all primes between 1 to 49
+		 */
+		
+		IntStream.range(2, 50).filter(n->{
+			for(int i=2;i*i<=n;i++) {
+				if(n%i==0) return false;
+				}return true;
+			}).forEach(n->System.out.println(n+"  is prime"));
 	}
 	
 	
