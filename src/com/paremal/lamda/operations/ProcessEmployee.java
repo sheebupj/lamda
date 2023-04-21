@@ -357,13 +357,13 @@ public class ProcessEmployee {
 	   Map<String,Employee> emp=emplist.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors
 			   .collectingAndThen(Collectors.maxBy(Comparator.comparing(Employee::getSalary)),Optional::get)));
 	   System.out.println("**************************#");
-	   emp.entrySet().stream().forEach(e-> System.out.println(e.getKey()+"  "+e.getValue().getSalary()));
+	   emp.entrySet().stream().forEach(e-> System.out.println(e.getKey()+" department Max salary:"+e.getValue().getSalary()));
 	   /*
 	    * finding employee with lowest salary in each department
 	    */
 	   emplist.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.collectingAndThen
 			   (Collectors.minBy(Comparator.comparing(Employee::getSalary)), Optional::get)))
-	   .entrySet().stream().forEach(e-> System.out.println(e.getKey()+" "+e.getValue().getSalary()));
+	   .entrySet().stream().forEach(e-> System.out.println(e.getKey()+" department Min salary:"+ "Min salary:"+e.getValue().getSalary()));
 	  
 	    
 		
