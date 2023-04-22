@@ -192,7 +192,7 @@ public class PrimitivStreamOperations {
 		IntStream.rangeClosed(1, 100).mapToObj(i -> new Object[] { i, PrimitivStreamOperations.checkPrime(i) })
 				.filter(f -> (boolean) f[1]).skip(1).forEach(n -> System.out.println(n[0]+" is a Prime"));
 		/*
-		 * stream operations with reduce
+		 * stream operations with reduce sum min max
 		 */
 		int[] nums= {5,7,3,8,2,1,4,6};
 		System.out.println("sum of list"+Arrays.stream(nums).reduce((a,b)-> a+b).getAsInt());
