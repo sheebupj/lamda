@@ -363,7 +363,19 @@ public class ProcessEmployee {
 	    */
 	   emplist.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.collectingAndThen
 			   (Collectors.minBy(Comparator.comparing(Employee::getSalary)), Optional::get)))
-	   .entrySet().stream().forEach(e-> System.out.println(e.getKey()+" department Min salary:"+ "Min salary:"+e.getValue().getSalary()));
+	   .entrySet().stream().forEach(e-> System.out.println(e.getKey()+" department Min salary:"+e.getValue().getSalary()));
+	   
+	   emplist.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.averagingDouble
+			   (Employee::getSalary)))
+	   .entrySet().stream().forEach(e-> System.out.println(e.getKey()+" department Avg salary:"+e.getValue()));
+	   
+	   emplist.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.summingDouble(Employee::getSalary)))
+	   .entrySet().forEach(e-> System.out.println("dept:"+e.getKey()+"  "+e.getValue()));
+	   
+	   System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+	   
+	   emplist.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.summarizingDouble(Employee::getSalary)))
+	   .entrySet().forEach(e-> System.out.println("dept:"+e.getKey()+"  "+e.getValue()));
 	  
 	    
 		
