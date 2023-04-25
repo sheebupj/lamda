@@ -209,11 +209,12 @@ public class PrimitivStreamOperations {
 				}return true;
 			}).forEach(n->System.out.println(n+"  is prime"));
 		
-		IntStream.range(2, 50).filter(n->{
-			for(int i=2;i*i<=n;i++) {
-				if(n%i==0) return false;
-				}return true;
-			}).forEach(n->System.out.println(n+"  is prime"));
+		/*
+		 * finding primes with complete lamda
+		 */
+		IntStream.range(2, 50).filter(n->
+			  IntStream.iterate(2, i-> i+1).takeWhile(i-> i*i<=n).noneMatch(i-> n%i==0)
+			).forEach(n->System.out.println(n+"  is prime --find using lamda"));
 		
 		
 		/*
@@ -232,9 +233,27 @@ public class PrimitivStreamOperations {
 			
 		}).forEach(System.out::println);
 		
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		IntStream.rangeClosed(1, 1000).boxed().filter(PrimitivStreamOperations::checkAmstrongOrNot).forEach(System.out::println);
+		
+		
+		
 		
 	}
-	
+	public static boolean checkAmstrongOrNot(int n) {
+		int tmp=n, cubeSum=0, r=0;
+		while(n>=10) {
+			r=n%10;
+			cubeSum+=r*r*r;
+			n=(n-r)/10;
+		}
+		cubeSum+=n*n*n;
+		if(tmp==cubeSum) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 
 	public static boolean checkPrime(Integer i) {
