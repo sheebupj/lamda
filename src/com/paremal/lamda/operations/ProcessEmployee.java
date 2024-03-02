@@ -305,11 +305,19 @@ public class ProcessEmployee {
 		System.out.println("#frequencies map sorted based of key");
 		frequencies.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
 		
+		
+		
+		String sentence="Hi Hello Welcome to Infosys Hi Welcome Again Hi";
+		Map<String, Integer> wordcout=Arrays.stream(sentence.split(" ")).collect(Collectors.toMap(Function.identity(),v->1,Integer::sum));
+		wordcout.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+		
 		/*
 		 * sort map based of value
 		 */
 		System.out.println("#frequencies map sorted based of value");
 		frequencies.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
+		
+		
 		
 		/*
 		 * sort (ascending) Map to Set<Map.entry> Object and find first for minimum frequency number
