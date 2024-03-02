@@ -1,6 +1,7 @@
 package com.paremal.lamda.operations;
 
 import java.io.ObjectInputStream.GetField;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,6 +13,11 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
@@ -306,10 +312,38 @@ public class ProcessEmployee {
 		frequencies.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
 		
 		
-		
+		/*
+		 * split sentence to word array then find frequencies of each word to map then sort map basis of key
+		 */
 		String sentence="Hi Hello Welcome to Infosys Hi Welcome Again Hi";
 		Map<String, Integer> wordcout=Arrays.stream(sentence.split(" ")).collect(Collectors.toMap(Function.identity(),v->1,Integer::sum));
 		wordcout.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+		
+		
+		/*
+		 *  split Array of sentences concurrently using executorService, future and Callable 
+		 *  in each thread sentence is split into  array of word then find frequencies of each word to map then sort map basis of key
+		 * 
+		 */
+		String[] words1={"Hi Hello Welcome to Infosys Hi Welcome Again Hi &&&&&&&&&&",
+				"A Callable interface defined in java.util.concurrent package &&&&&&&&&&",
+				"An object of Callable returns a computed result done by a thread in contrast to a Runnable interface that can only run the thread &&&&&&&&&&",
+				"The Callable object returns Future object that provides methods to monitor the progress of a task executed by a thread &&&&&&&&&&",
+				"An object of the Future used to check the status of a Callable interface and retrieves the result from Callable once the thread has done &&&&&&&&&&"};
+		List<Future<Map<String,Integer>>> lftr= new ArrayList<>();
+		ExecutorService executor= Executors.newFixedThreadPool(5);
+		for(String w:words1) {
+			Callable<Map<String,Integer>> cl=()-> Arrays.stream(w.split(" ")).collect(Collectors.toMap(Function.identity(),v->1,Integer::sum));
+			lftr.add(executor.submit(cl));
+		}	
+		lftr.stream().forEach(m-> {
+			try {
+				m.get().entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+			} catch (InterruptedException | ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 		
 		/*
 		 * sort map based of value
@@ -386,6 +420,12 @@ public class ProcessEmployee {
 	   .entrySet().forEach(e-> System.out.println("dept:"+e.getKey()+"  "+e.getValue()));
 	  
 	    
+	   
+			
+		
+		//Map<String, Integer> wordcout=Arrays.stream(words.split(" ")).collect(Collectors.toMap(Function.identity(),v->1,Integer::sum));
+		//wordcout.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+	
 		
 		
 
