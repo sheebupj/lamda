@@ -31,8 +31,9 @@ public class PracticeClass2 {
 		/*
 		 * print all numbers with second digit is 9 in a list
 		 */
-		int[] numAr= {16,1347,647,198374,2934};
+		int[] numAr= {9,193,1347,647,198374,2934};
 		Arrays.stream(numAr).filter(n->{
+			//if(n<10)return false;
 			while(n>=100) {
 				n=(n-(n%10))/10;
 			}
