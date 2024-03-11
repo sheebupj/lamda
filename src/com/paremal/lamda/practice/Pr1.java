@@ -65,7 +65,29 @@ public class Pr1 {
 			return true;
 		}).forEach(System.out::println);
 		
-
+		
+		/*
+		 * find number of special characters
+		 */
+		String str = "This#string%contains^spe cial*characters&.(-_  ";
+		System.out.println(":"+
+		Arrays.stream(str.split("")).map(s-> s.charAt(0)).filter(c-> !(Character.isAlphabetic(c)|| Character.isDigit(c))).count());
+		
+		
+		/*
+		 * find Armstrong
+		 */
+		IntStream.rangeClosed(1, 500).boxed().filter(n->{
+			int tmp=n;int qubesum=0; int r=0;
+			while(n>=10) {
+				r=n%10;
+				qubesum+=r*r*r;
+				n=(n-r)/10;
+			}
+			qubesum+=n*n*n;
+			if(tmp==qubesum) return true;
+			else return false;
+		}).forEach(System.out::println);
 		
 		
 

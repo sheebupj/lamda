@@ -233,8 +233,23 @@ public class PrimitivStreamOperations {
 			
 		}).forEach(System.out::println);
 		
-		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-		IntStream.rangeClosed(1, 1000).boxed().filter(PrimitivStreamOperations::checkAmstrongOrNot).forEach(System.out::println);
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^print all numbers  with second n=9 from a an array");
+		IntStream.rangeClosed(1, 10000).boxed().filter(PrimitivStreamOperations::checkAmstrongOrNot).forEach(System.out::println);
+		IntStream.rangeClosed(1, 10000).boxed().filter(n->{
+			int tmpNo=n;int cubeSum=0; int r=0;
+			while(n>=10) {
+				r=n%10;
+				cubeSum+= r*r*r;
+				n=(n-r)/10;
+			}
+			cubeSum+= n*n*n;
+			if(tmpNo==cubeSum) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}).forEach(System.out::println);
 		
 		
 		
