@@ -11,9 +11,9 @@ public class Utils {
 	static List<Transaction> transactions = null;
 	static List<String> phones=Arrays.asList(new String[] {"9387690660","9188584218"});
 	
-	static Employee[] employees= {new Employee("Jason", "Red", 5000, "IT",phones), new Employee("Ashly", "Green", 7600, "IT",phones),
+	static Employee[] employees= {new Employee("Jason", "Red", 5000, "IT",phones), new Employee("Ashly", "Green", 7601, "IT",phones),
 			new Employee("Mathew", "Indigo", 3587.5, "Sales",phones),
-			new Employee("James", "Indigo", 7600, "Marketing",phones), new Employee("Luke", "Indigo", 6200, "IT",phones),
+			new Employee("James", "Indigo", 7600, "Marketing",phones), new Employee("Luke", "Indigo", 8200, "IT",phones),
 			new Employee("Jason", "Blue", 6200, "Sales",phones), new Employee("Jason", "Blue", 3200, "finance",phones),
 			new Employee("Wendy", "Brown", 4236.4, "Marketing",phones),new Employee("Wendy", "Brown", 6200, "Marketing",phones)};
 

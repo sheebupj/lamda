@@ -33,7 +33,7 @@ public class PracticeClass2 {
 		 */
 		int[] numAr= {9,193,1347,647,198374,2934};
 		Arrays.stream(numAr).filter(n->{
-			//if(n<10)return false;
+			if(n<10)return false;
 			while(n>=100) {
 				n=(n-(n%10))/10;
 			}

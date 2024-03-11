@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import com.paremal.lamda.operations.Employee;
+import com.paremal.lamda.util.Utils;
 
 public class Pr1 {
 
@@ -90,6 +94,22 @@ public class Pr1 {
 		}).forEach(System.out::println);
 		
 		
+		/*
+		 * second largest salary
+		 */
+		 List<Employee> emplist= Arrays.asList(Utils.getEmployees());
+		 System.out.println("Second lartgest salary:"+emplist.stream().distinct().sorted(Comparator.comparing(Employee::getSalary).reversed()).skip(1).findFirst());
+		
+		 
+		 /*
+		  * highest salary for each department
+		  */
+		 Map<String,Object> dpmtWisemaxSal=emplist.stream()
+		 .collect
+		 (Collectors.groupingBy
+				 (Employee::getDepartment,Collectors.collectingAndThen
+						 (Collectors.maxBy(Comparator.comparing(Employee::getSalary)), Optional::get)));
+		 dpmtWisemaxSal.entrySet().stream().forEach(System.out::println);
 
 	}
 																																														
