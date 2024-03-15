@@ -23,9 +23,9 @@ public class PracticeClass2 {
 		/*
 		 * List all customers who's city is not equal to Newyork
 		 */
-		List<Customer> filtredSusts = customers.stream().filter(c -> !c.city.equals("NewYork"))
+		List<Customer> filtredCusts = customers.stream().filter(c -> !c.city.equals("NewYork"))
 				.collect(Collectors.toList());
-		filtredSusts.forEach(System.out::println);
+		filtredCusts.forEach(System.out::println);
 		
 		/*
 		 * create Map based on city and number of customers with that city
