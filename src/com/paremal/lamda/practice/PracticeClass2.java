@@ -13,7 +13,39 @@ import com.paremal.lamda.util.Utils;
 
 public class PracticeClass2 {
 	static List<Transaction> transactions= Utils.getTransactions();
+	public  record Customer(String name, String age, String city, Double netWorth) {}
 	public static void main(String[] args) {
+		
+		List<Customer> customers = Arrays.asList(new Customer("zohn", "15", "NewJersy", 1000.0),
+				new Customer("aby", "15", "NewYork", 2000.0), new Customer("john3", "15", "NewJersy", 4000.0),
+				new Customer("john4", "15", "NewJersy", 5000.0));
+
+		/*
+		 * List all customers who's city is not equal to Newyork
+		 */
+		List<Customer> filtredSusts = customers.stream().filter(c -> !c.city.equals("NewYork"))
+				.collect(Collectors.toList());
+		filtredSusts.forEach(System.out::println);
+		
+		/*
+		 * create Map based on city and number of customers with that city
+		 */
+		Map<String, Long> custsMap = customers.stream()
+				.collect(Collectors.groupingBy(Customer::city, Collectors.counting()));
+		custsMap.entrySet().stream().forEach(System.out::println);
+		/*
+		 * sort customerlist based of customer name
+		 */
+		customers.stream().sorted(Comparator.comparing(Customer::name)).forEach(System.out::println);
+		
+		/*
+		 * get all customers above average NetWorth
+		 */
+		Double avg = customers.stream().collect(Collectors.averagingDouble(Customer::netWorth));
+		System.out.println(avg);
+		customers.stream().filter(c -> c.netWorth > avg).forEach(System.out::println);
+		
+		
 		//converting list to map
 		Map<String,List<Transaction>> currencyTransactions=transactions.stream()
 				.collect(Collectors.groupingBy(Transaction::getCurrency));
@@ -43,5 +75,6 @@ public class PracticeClass2 {
 			
 		}).forEach(System.out::println);
 	}
+	
 
 }
