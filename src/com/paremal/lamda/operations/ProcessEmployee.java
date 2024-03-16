@@ -400,6 +400,8 @@ public class ProcessEmployee {
 			   .collectingAndThen(Collectors.maxBy(Comparator.comparing(Employee::getSalary)),Optional::get)));
 	   System.out.println("**************************#");
 	   emp.entrySet().stream().forEach(e-> System.out.println(e.getKey()+" department Max salary:"+e.getValue().getSalary()));
+	   
+	   System.out.println("+++"+emplist.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).findFirst());
 	   /*
 	    * finding employee with lowest salary in each department
 	    */
