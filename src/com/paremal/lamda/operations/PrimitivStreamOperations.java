@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -158,6 +159,19 @@ public class PrimitivStreamOperations {
 		long count = words.stream().map(w -> w.split("")).flatMap(Arrays::stream)
 				.filter(PrimitivStreamOperations::checkspecialChar).count();
 		System.out.println("!!! spcial character count in the text is:" + count);
+		List<String>wlist= new ArrayList<>();
+		
+		wlist.add("this");
+		wlist.add("is");
+		wlist.add("test");
+		
+		long vowelCount=wlist.stream()
+				.map(w-> w.split(""))
+				.flatMap(Arrays::stream)
+				
+				.filter(PrimitivStreamOperations::isVowel)
+				.count();
+		System.out.println("Vowel cout:"+ vowelCount);
 		/*
 		 * infinite stream using Stream.iterate() even numbers using infinite integer
 		 * stream
@@ -305,5 +319,17 @@ public class PrimitivStreamOperations {
 		}
 		return i;
 	}
+	public static boolean isVowel(String s) {
+		char c=' ';
+		if(s.length()>0) {
+			c=s.charAt(0);
+		}
 
+
+		if(c=='a'||c=='A'|| c=='e'|| c=='E'|| c=='i'|| c=='I'|| c=='o'|| c=='O'|| c=='u'|| c=='U'  ){
+				return true;
+	}
+	return false;
+
+}
 }
