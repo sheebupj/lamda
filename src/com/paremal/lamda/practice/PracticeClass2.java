@@ -17,11 +17,24 @@ public class PracticeClass2 {
 	public record Customer(String name, String age, String city, Double netWorth) {
 	}
 
-	public static void main(String[] args) {
+	public record Employee(String firstName, String lastName, Double salary, String department, List<String> phoneNo) {
+	}
 
-		List<Customer> customers = Arrays.asList(new Customer("zohn", "15", "NewJersy", 1000.0),
+	public static void main(String[] args) {
+		final List<String> phones = Arrays.asList(new String[] { "9387690660", "9188584218" });
+
+		List<Customer> customers = List.of(new Customer("zohn", "15", "NewJersy", 1000.0),
 				new Customer("aby", "15", "NewYork", 2000.0), new Customer("john3", "15", "NewJersy", 4000.0),
 				new Customer("john4", "15", "NewJersy", 5000.0));
+		
+		List<Employee> empList=List.of( new Employee("Jason", "Red", 5000.0, "IT", phones),
+			new Employee("Ashly", "Green", 7601.0, "IT", phones),
+			new Employee("Mathew", "Indigo", 3587.5, "Sales", phones),
+			new Employee("James", "Indigo", 7600.0, "Marketing", phones),
+			new Employee("Luke", "Indigo", 8200.0, "IT", phones), new Employee("Jason", "Blue", 6200.0, "Sales", phones),
+			new Employee("Jason", "Blue", 3200.0, "finance", phones),
+			new Employee("Wendy", "Brown", 4236.4, "Marketing", phones),
+			new Employee("Wendy", "Brown", 6200.0, "Marketing", phones) );
 
 		/*
 		 * List all customers who's city is not equal to Newyork
@@ -66,12 +79,12 @@ public class PracticeClass2 {
 		 */
 		currencyTransactions.entrySet().stream().map(m -> m.getKey()).forEach(System.out::println);
 
-		List<Employee> empList = Arrays.stream(Utils.getEmployees()).collect(Collectors.toList());
+		List<Employee> empList1 = empList.stream().collect(Collectors.toList());
 		/*
 		 * 
 		 */
-		empList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors
-				.collectingAndThen(Collectors.maxBy(Comparator.comparing(Employee::getSalary)), Optional::get)));
+		empList.stream().collect(Collectors.groupingBy(Employee::department, Collectors
+				.collectingAndThen(Collectors.maxBy(Comparator.comparing(Employee::salary)), Optional::get)));
 
 		/*
 		 * print all numbers with second digit is 9 in a list
@@ -80,7 +93,17 @@ public class PracticeClass2 {
 		Arrays.stream(numAr).filter(PracticeClass2::whetherSecondDigitNineOrNot)
 							.forEach(System.out::println);
 		
+		empList.stream().collect(Collectors.groupingBy(Employee::department,
+						Collectors.collectingAndThen(Collectors.maxBy
+						(Comparator.comparing(Employee::salary)),Optional::get)))
+		        		.entrySet().stream().forEach(System.out::println);
+		
+		
+		empList.stream().collect(Collectors.groupingBy(Employee::department))
+		                  .entrySet().stream().forEach(System.out::println);
+		
 	}
+
 	public static boolean whetherSecondDigitNineOrNot(Integer n) {
 		if (n < 10)
 			return false;
@@ -91,7 +114,7 @@ public class PracticeClass2 {
 		if (n == 9)
 			return true;
 		return false;
-		
+
 	}
 
 }
