@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.paremal.lamda.operations.Employee;
@@ -23,18 +24,19 @@ public class PracticeClass2 {
 	public static void main(String[] args) {
 		final List<String> phones = Arrays.asList(new String[] { "9387690660", "9188584218" });
 
-		List<Customer> customers = List.of(new Customer("zohn", "15", "NewJersy", 1000.0),
+		List<Customer> customers = Arrays.asList(new Customer("zohn", "15", "NewJersy", 1000.0),
 				new Customer("aby", "15", "NewYork", 2000.0), new Customer("john3", "15", "NewJersy", 4000.0),
 				new Customer("john4", "15", "NewJersy", 5000.0));
-		
-		List<Employee> empList=List.of( new Employee("Jason", "Red", 5000.0, "IT", phones),
-			new Employee("Ashly", "Green", 7601.0, "IT", phones),
-			new Employee("Mathew", "Indigo", 3587.5, "Sales", phones),
-			new Employee("James", "Indigo", 7600.0, "Marketing", phones),
-			new Employee("Luke", "Indigo", 8200.0, "IT", phones), new Employee("Jason", "Blue", 6200.0, "Sales", phones),
-			new Employee("Jason", "Blue", 3200.0, "finance", phones),
-			new Employee("Wendy", "Brown", 4236.4, "Marketing", phones),
-			new Employee("Wendy", "Brown", 6200.0, "Marketing", phones) );
+
+		List<Employee> empList = List.of(new Employee("Jason", "Red", 5000.0, "IT", phones),
+				new Employee("Ashly", "Green", 7601.0, "IT", phones),
+				new Employee("Mathew", "Indigo", 3587.5, "Sales", phones),
+				new Employee("James", "Indigo", 7600.0, "Marketing", phones),
+				new Employee("Luke", "Indigo", 8200.0, "IT", phones),
+				new Employee("Jason", "Blue", 6200.0, "Sales", phones),
+				new Employee("Jason", "Blue", 3200.0, "finance", phones),
+				new Employee("Wendy", "Brown", 4236.4, "Marketing", phones),
+				new Employee("Wendy", "Brown", 6200.0, "Marketing", phones));
 
 		/*
 		 * List all customers who's city is not equal to Newyork
@@ -83,25 +85,39 @@ public class PracticeClass2 {
 		/*
 		 * 
 		 */
-		empList.stream().collect(Collectors.groupingBy(Employee::department, Collectors
-				.collectingAndThen(Collectors.maxBy(Comparator.comparing(Employee::salary)), Optional::get)));
+		empList.stream()
+				.collect(Collectors.groupingBy(Employee::department, Collectors
+						.collectingAndThen(Collectors.maxBy(Comparator.comparing(Employee::salary)), Optional::get)))
+				.entrySet().forEach(System.out::println);
+		;
 
 		/*
 		 * print all numbers with second digit is 9 in a list
 		 */
 		int[] numAr = { 9, 193, 1347, 647, 198374, 2934 };
-		Arrays.stream(numAr).filter(PracticeClass2::whetherSecondDigitNineOrNot)
-							.forEach(System.out::println);
-		
-		empList.stream().collect(Collectors.groupingBy(Employee::department,
-						Collectors.collectingAndThen(Collectors.maxBy
-						(Comparator.comparing(Employee::salary)),Optional::get)))
-		        		.entrySet().stream().forEach(System.out::println);
-		
-		
-		empList.stream().collect(Collectors.groupingBy(Employee::department))
-		                  .entrySet().stream().forEach(System.out::println);
-		
+		Arrays.stream(numAr).filter(PracticeClass2::whetherSecondDigitNineOrNot).forEach(System.out::println);
+
+		empList.stream()
+				.collect(Collectors.groupingBy(Employee::department, Collectors
+						.collectingAndThen(Collectors.maxBy(Comparator.comparing(Employee::salary)), Optional::get)))
+				.entrySet().stream().forEach(System.out::println);
+
+		empList.stream().collect(Collectors.groupingBy(Employee::department)).entrySet().stream()
+				.forEach(System.out::println);
+		Map<String, Long> cCustMap = customers.stream()
+				.collect(Collectors.groupingBy(Customer::city, Collectors.counting()));
+		cCustMap.entrySet().forEach(System.out::println);
+		Map<String, Long> empMap = empList.stream()
+				.collect(Collectors.groupingBy(Employee::department, Collectors.counting()));
+		empMap.entrySet().stream().filter(m -> m.getValue() == 2).forEach(System.out::println);
+		empList.stream()
+				.collect(Collectors.groupingBy(Employee::department, Collectors
+						.collectingAndThen(Collectors.maxBy(Comparator.comparing(Employee::salary)), Optional::get)))
+				.entrySet().stream().forEach(System.out::println);
+
+		System.out.println(
+				empList.stream().sorted(Comparator.comparing(Employee::salary).reversed()).findFirst().get().salary);
+
 	}
 
 	public static boolean whetherSecondDigitNineOrNot(Integer n) {

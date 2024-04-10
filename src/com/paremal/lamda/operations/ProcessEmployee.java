@@ -318,7 +318,7 @@ public class ProcessEmployee {
 		 */
 		String sentence="Hi Hello Welcome to Infosys Hi Welcome Again Hi";
 		Map<String, Integer> wordcout=Arrays.stream(sentence.split(" ")).collect(Collectors.toMap(Function.identity(),v->1,Integer::sum));
-		wordcout.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+		wordcout.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
 		
 		
 		/*

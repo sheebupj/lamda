@@ -6,9 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -71,7 +73,7 @@ public class PrimitivStreamOperations {
 		 * Arrays.stream() method used to create stream from array
 		 */
 		int[] values = { 11, 7, 9, 3, 6, 4, 10, 5, 2, 8, 1 };
-		System.out.println("Sum of values is:" + Arrays.stream(values).sum());
+		System.out.println("Sum of values is:" + Arrays.stream(values).max());
 		long uniqueWordCount = 0;
 		/*
 		 * splitting text file to words and count unique words
@@ -130,11 +132,15 @@ public class PrimitivStreamOperations {
 		 * convert list to map by counting each words frequency sort by value
 		 */
 
-		System.out.println("$$$$ charactor count");
+		System.out.println("$$$$ word count");
 		words.stream().collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum)).entrySet().stream()
 				.sorted(Map.Entry.comparingByValue())
 				.forEach(e -> System.out.println("word: " + e.getKey() + " " + e.getValue() + "times"));
-
+		
+		Map<String,Integer> wl=words.stream().collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum,LinkedHashMap::new)).entrySet().stream()
+		.sorted(Map.Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue));
+		System.out.println("$$$**********************************************************************");
+		wl.entrySet().forEach(System.out::println);
 		/*
 		 * convert list to map by counting each char frequency sort by key
 		 */

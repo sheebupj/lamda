@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -37,11 +38,31 @@ public class IntStreamOperations {
 		
 		System.out.printf("Orignial values: %s%n" , Arrays.stream(values));
 		
-//		System.out.printf("Orignial values: %s%n" , Arrays.stream(values)
-//			.sorted().collect(Collectors.toList()));
+	
+		
+		/*
+		 * finding sum min average and sum using IntegerStream
+		 */
+		System.out.println(IntStream.of(1,2,8,9,27,3,29,83,777,4).max());
+		
+		System.out.println(IntStream.of(1,2,8,9,27,3,29,83,777,4).min());
+		
+		System.out.println(IntStream.of(1,2,8,9,27,3,29,83,777,4).sum());
+		
+		System.out.println(IntStream.of(1,2,8,9,27,3,29,83,777,4).average().getAsDouble());
 		
 		
+		/*
+		 * 
+		 */
+		List<Integer> nums=Arrays.asList(1,2,8,9,27,3,29,83,777,4);
 		
+		System.out.println(IntStream.of(1,2,8,9,27,3,29,83,777,4).max());
+		Optional<Integer> max=nums.stream().max(Comparator.naturalOrder());
+		Optional<Integer> min=nums.stream().min(Comparator.naturalOrder());
+		
+		System.out.println("### max:"+max.get());
+		System.out.println("### min:"+min.get());
 		
 		
 		String[] strings= {"red","orange","green","blue","indigo","Vialet","Yellow","pink"};

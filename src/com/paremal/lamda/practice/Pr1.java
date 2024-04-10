@@ -1,11 +1,17 @@
 package com.paremal.lamda.practice;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -28,7 +34,7 @@ public class Pr1 {
 		for (int[] i : combinations) {
 			System.out.println(i[0] + "," + i[1]);
 		}
-		List<String> words = Arrays.asList("Hello", "world", "warm", "where", "weard", "hero", "hectic", "horific");
+		List<String> words = Arrays.asList("Hello", "world", "warm", "where", "weard", "hero", "world", "hectic", "horific");
 		System.out.println("------");
 		words.stream().filter(w -> w.startsWith("h")).forEach(System.out::println);
 		System.out.println("------");
@@ -89,6 +95,24 @@ public class Pr1 {
 		List<Employee> e1 = emplist.stream().filter(e -> e.getFirstName().startsWith("j")).collect(Collectors.toList());
 		System.out.println(e1.size());
 
+		
+		try {
+			/*
+			 * split files to word list
+			 */
+			words = Files.lines(Paths.get("data.txt"), Charset.defaultCharset())
+					.flatMap(line -> Arrays.stream(line.split(" "))).collect(Collectors.toList());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Map<String,Integer> wl=words.stream().collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum));
+		wl.entrySet().stream()
+				.sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
+				System.out.println("$$$**********************************************************************");
+				wl.entrySet().forEach(System.out::println);
+
 	}
 
 	public static boolean amstrongOrNot(Integer n) {
@@ -106,7 +130,7 @@ public class Pr1 {
 		else
 			return false;
 	}
-	
+
 	public static boolean primeOrNot(Integer n) {
 		for (int i = 2; i * i <= n; i++) {
 			if (n % i == 0)
