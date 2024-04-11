@@ -118,9 +118,9 @@ public class PracticeClass2 {
 						.collectingAndThen(Collectors.maxBy(Comparator.comparing(Employee::salary)), Optional::get)))
 				.entrySet().stream().forEach(System.out::println);
 		/**
-		 * second-highest salaries employee
+		 * second-highest salaried employee
 		 */
-		System.out.println("second highst salaried Employee:"+
+		System.out.println("second highest salaried Employee:"+
 				empList.stream().sorted(Comparator.comparing(Employee::salary).reversed()).distinct().skip(1).findFirst().get());
 
 
