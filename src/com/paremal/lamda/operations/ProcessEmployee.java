@@ -20,8 +20,10 @@ public class ProcessEmployee {
 
     public static void main(String[] args) {
         List<String> phones = Arrays.asList("9387690660", "9188584218");
-        List<Customer> customers = List.of(new Customer("John", 20, "IT", 20000.0),
-                new Customer("Joseph", 20, "IT", 20000.0), new Customer("Krishna", 20, "IT", 20000.0),
+        List<Customer> customers = List.of(
+                new Customer("John", 20, "IT", 20000.0),
+                new Customer("Joseph", 20, "IT", 20000.0),
+                new Customer("Krishna", 20, "IT", 20000.0),
                 new Customer("Rma", 20, "IT", 20000.0));
 
         customers.forEach(System.out::println);
@@ -36,7 +38,8 @@ public class ProcessEmployee {
                 new Employee1("Ashly", "Green", 7601.0, "IT", phones),
                 new Employee1("Mathew", "Indigo", 3587.5, "Sales", phones),
                 new Employee1("James", "Indigo", 7600.0, "Marketing", phones),
-                new Employee1("Luke", "Indigo", 8200.0, "IT", phones), new Employee1("Jason", "Blue", 6200.0, "Sales", phones),
+                new Employee1("Luke", "Indigo", 8200.0, "IT", phones),
+                new Employee1("Jason", "Blue", 6200.0, "Sales", phones),
                 new Employee1("Jason", "Blue", 3200.0, "finance", phones),
                 new Employee1("Wendy", "Brown", 4236.4, "Marketing", phones),
                 new Employee1("Wendy", "Brown", 6200.0, "Marketing", phones));
