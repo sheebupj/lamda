@@ -110,13 +110,20 @@ public class PracticeClass2 {
 		Map<String, Long> empMap = empList.stream()
 				.collect(Collectors.groupingBy(Employee::department, Collectors.counting()));
 		empMap.entrySet().stream().filter(m -> m.getValue() == 2).forEach(System.out::println);
+		/**
+		 * department wise highest salaries Employee
+		 */
 		empList.stream()
 				.collect(Collectors.groupingBy(Employee::department, Collectors
 						.collectingAndThen(Collectors.maxBy(Comparator.comparing(Employee::salary)), Optional::get)))
 				.entrySet().stream().forEach(System.out::println);
+		/**
+		 * second-highest salaries employee
+		 */
+		System.out.println("second highst salaried Employee:"+
+				empList.stream().sorted(Comparator.comparing(Employee::salary).reversed()).distinct().skip(1).findFirst().get());
 
-		System.out.println(
-				empList.stream().sorted(Comparator.comparing(Employee::salary).reversed()).findFirst().get().salary);
+
 
 	}
 
