@@ -1,16 +1,14 @@
 package com.paremal.lamda.practice;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.paremal.lamda.operations.Employee;
 import com.paremal.lamda.operations.Transaction;
 import com.paremal.lamda.util.Utils;
+
+import static java.util.Map.*;
 
 public class PracticeClass2 {
 	static List<Transaction> transactions = Utils.getTransactions();
@@ -24,7 +22,7 @@ public class PracticeClass2 {
 	public static void main(String[] args) {
 		final List<String> phones = Arrays.asList(new String[] { "9387690660", "9188584218" });
 
-		List<Customer> customers = Arrays.asList(new Customer("zohn", "15", "NewJersy", 1000.0),
+		List<Customer> customers = List.of(new Customer("zohn", "15", "NewJersy", 1000.0),
 				new Customer("aby", "15", "NewYork", 2000.0), new Customer("john3", "15", "NewJersy", 4000.0),
 				new Customer("john4", "15", "NewJersy", 5000.0));
 
@@ -50,8 +48,18 @@ public class PracticeClass2 {
 		 */
 		Map<String, Long> custsMap = customers.stream()
 				.collect(Collectors.groupingBy(Customer::city, Collectors.counting()));
+		/**
+		 * Sort Map ByKey
+		 */
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		Map<String,Long> cityCoutMapbyKey=sortedMapbyKey(custsMap);
+		cityCoutMapbyKey.entrySet().forEach(System.out::println);
 
-		custsMap.entrySet().stream().forEach(System.out::println);
+		/**
+		 * Sort map by value
+		 */
+		Map<String,Long> cityCoutMapbyValue=sortedMapbyValue(custsMap);
+		cityCoutMapbyValue.entrySet().forEach(System.out::println);
 		/*
 		 * sort customerlist based of customer name
 		 */
@@ -138,6 +146,27 @@ public class PracticeClass2 {
 			return true;
 		return false;
 
+	}
+
+	/**
+	 * sort map by key
+	 * @param custMap
+	 * @return
+	 */
+	public static Map<String,Long> sortedMapbyKey(Map<String,Long> custMap){
+		return custMap
+				.entrySet().stream().sorted(Map.Entry.comparingByKey())
+				.collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)->e1,LinkedHashMap::new));
+	}
+	/**
+	 * sort map by value
+	 * @param custMap
+	 * @return
+	 */
+	public static Map<String,Long> sortedMapbyValue(Map<String,Long> custMap){
+		return custMap
+				.entrySet().stream().sorted(Map.Entry.comparingByValue())
+				.collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)->e1,LinkedHashMap::new));
 	}
 
 }
