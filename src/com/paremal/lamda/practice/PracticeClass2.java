@@ -157,7 +157,7 @@ public class PracticeClass2 {
         System.out.println(result);
         System.out.println(Arrays.stream(str.split(""))
                 .map(String::toLowerCase).map(s->s.charAt(0))
-                .filter(s-> Character.isAlphabetic(s))
+                .filter(Character::isAlphabetic)
                 .collect(Collectors.toMap(Function.identity(),v->1, Integer::sum))
                 .entrySet().stream().filter(e-> e.getValue()>1)
                 .findFirst()
