@@ -154,8 +154,16 @@ public class PracticeClass2 {
                 .entrySet().stream()
                 .findFirst()
                 .get().getKey();
-
         System.out.println(result);
+        System.out.println(Arrays.stream(str.split(""))
+                .map(String::toLowerCase).map(s->s.charAt(0))
+                .filter(s-> Character.isAlphabetic(s))
+                .collect(Collectors.toMap(Function.identity(),v->1, Integer::sum))
+                .entrySet().stream().filter(e-> e.getValue()>1)
+                .findFirst()
+                .get());
+        System.out.println( empList.stream().sorted(Comparator.comparing(Employee::salary).reversed()).skip(1).findFirst().get());
+
 
 
     }
