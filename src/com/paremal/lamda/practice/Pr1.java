@@ -96,23 +96,49 @@ public class Pr1 {
         System.out.println(e1.size());
 
 
-        try {
-            /*
-             * split files to word list
-             */
-            words = Files.lines(Paths.get("data.txt"), Charset.defaultCharset())
-                    .flatMap(line -> Arrays.stream(line.split(" "))).collect(Collectors.toList());
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        try {
+//            /*
+//             * split files to word list
+//             */
+//            words = Files.lines(Paths.get("data.txt"), Charset.defaultCharset())
+//                    .flatMap(line -> Arrays.stream(line.split(" "))).collect(Collectors.toList());
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
 
         Map<String, Integer> wl = words.stream().collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum));
         wl.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
         System.out.println("$$$**********************************************************************");
         wl.entrySet().forEach(System.out::println);
+        String nme="Sheebu Paremal Jayadevan";
+        String [] strArr=nme.split("");
+        StringBuilder stringBuilder= new StringBuilder();
+        for(int index= strArr.length-1;index>=0;index--){
+            stringBuilder.append(strArr[index]);
+        }
+        System.out.println(stringBuilder);
+        System.out.println(nme);/
 
+        StringBuilder stringBuilder1= new StringBuilder();
+        String reversedWords= reverseWordsFromString(nme);
+        System.out.println(reversedWords);
+    }
+    /*
+     reverse every word in a String
+     */
+    public static String reverseWordsFromString(String str){
+        String[] words=str.split(" ");
+        StringBuilder stringBuilder=new StringBuilder();
+        for(String word:words){
+            for(int i= word.length()-1;i>=0;i--){
+                stringBuilder.append(word.charAt(i));
+            }
+            stringBuilder.append(" ");
+
+        }
+        return stringBuilder.toString();
     }
 
     public static boolean amstrongOrNot(Integer n) {
