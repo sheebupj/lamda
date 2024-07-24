@@ -62,8 +62,8 @@ public class Pr1 {
         /*
          * find number of special characters
          */
-        String str = "This#string%contains^spe cial*characters&.(-_  ";
-        System.out.println(":" + Arrays.stream(str.split("")).map(s -> s.charAt(0))
+        String str = "This#string%contains^special*characters&.(-_";
+        System.out.println(str + Arrays.stream(str.split("")).map(s -> s.charAt(0))
                 .filter(c -> !(Character.isAlphabetic(c) || Character.isDigit(c))).count());
 
         /*
@@ -88,7 +88,6 @@ public class Pr1 {
 
         List<Employee> e1 = emplist.stream().filter(e -> e.firstName().startsWith("j")).collect(Collectors.toList());
         System.out.println(e1.size());
-        
 
 
 //        try {
@@ -107,17 +106,17 @@ public class Pr1 {
                 .sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
         System.out.println("$$$**********************************************************************");
         wl.entrySet().forEach(System.out::println);
-        String nme="Sheebu Paremal Jayadevan";
-        String [] strArr=nme.split("");
-        StringBuilder stringBuilder= new StringBuilder();
-        for(int index= strArr.length-1;index>=0;index--){
+        String nme = "Sheebu Paremal Jayadevan";
+        String[] strArr = nme.split("");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int index = strArr.length - 1; index >= 0; index--) {
             stringBuilder.append(strArr[index]);
         }
         System.out.println(stringBuilder);
         System.out.println(nme);
 
-        StringBuilder stringBuilder1= new StringBuilder();
-        String reversedWords= reverseWordsFromString(nme);
+        StringBuilder stringBuilder1 = new StringBuilder();
+        String reversedWords = reverseWordsFromString(nme);
         System.out.println(reversedWords);
 
 
@@ -126,18 +125,19 @@ public class Pr1 {
             Arrays.asList("ABC", "DDBA", "RADEA", "QQ")
          */
 
-        Optional<List<String>>strs= Optional.of(Optional.ofNullable(Arrays.asList("ABC", "DDBA", "RADEA", "QQ")).orElseGet(Collections::emptyList));
+        Optional<List<String>> strs = Optional.of(Optional.ofNullable(Arrays.asList("ABC", "DDBA", "RADEA", "QQ")).orElseGet(Collections::emptyList));
         // strs.stream().filter(s-> !s.isEmpty()).collect(Collectors.toMap(s->s,s->s.length())).entrySet().stream().forEach(System.out::println);
-        strs.ifPresent(s-> s.stream().collect(Collectors.toMap(k-> k, v-> v.length())).entrySet().stream().forEach(System.out::println));
+        strs.ifPresent(s -> s.stream().collect(Collectors.toMap(k -> k, v -> v.length())).entrySet().stream().forEach(System.out::println));
     }
+
     /*
      reverse every word in a String
      */
-    public static String reverseWordsFromString(String str){
-        String[] words=str.split(" ");
-        StringBuilder stringBuilder=new StringBuilder();
-        for(String word:words){
-            for(int i= word.length()-1;i>=0;i--){
+    public static String reverseWordsFromString(String str) {
+        String[] words = str.split(" ");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String word : words) {
+            for (int i = word.length() - 1; i >= 0; i--) {
                 stringBuilder.append(word.charAt(i));
             }
             stringBuilder.append(" ");
@@ -166,6 +166,7 @@ public class Pr1 {
         }
         return true;
     }
+
     class myException extends Exception {
         public myException(String message) {
             super(message);
