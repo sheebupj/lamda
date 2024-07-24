@@ -4,13 +4,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -21,8 +15,8 @@ import com.paremal.lamda.util.Utils;
 public class Pr1 {
 
     static public void main(String[] args) {
-        List<Integer> n1 = Arrays.asList(1, 2, 3, 4);
-        List<Integer> n2 = Arrays.asList(3, 4, 5);
+        List<Integer> n1 = List.of(1, 2, 3, 4);
+        List<Integer> n2 = List.of(3, 4, 5);
         /* skiping elements */
         n1.stream().skip(1).forEach(System.out::println);
         /* sorting */
@@ -94,6 +88,7 @@ public class Pr1 {
 
         List<Employee> e1 = emplist.stream().filter(e -> e.firstName().startsWith("j")).collect(Collectors.toList());
         System.out.println(e1.size());
+        
 
 
 //        try {
@@ -119,11 +114,21 @@ public class Pr1 {
             stringBuilder.append(strArr[index]);
         }
         System.out.println(stringBuilder);
-        System.out.println(nme);/
+        System.out.println(nme);
 
         StringBuilder stringBuilder1= new StringBuilder();
         String reversedWords= reverseWordsFromString(nme);
         System.out.println(reversedWords);
+
+
+        /*
+            create a map from a wordlist with word as key and length as value
+            Arrays.asList("ABC", "DDBA", "RADEA", "QQ")
+         */
+
+        Optional<List<String>>strs= Optional.of(Optional.ofNullable(Arrays.asList("ABC", "DDBA", "RADEA", "QQ")).orElseGet(Collections::emptyList));
+        // strs.stream().filter(s-> !s.isEmpty()).collect(Collectors.toMap(s->s,s->s.length())).entrySet().stream().forEach(System.out::println);
+        strs.ifPresent(s-> s.stream().collect(Collectors.toMap(k-> k, v-> v.length())).entrySet().stream().forEach(System.out::println));
     }
     /*
      reverse every word in a String
@@ -160,6 +165,11 @@ public class Pr1 {
                 return false;
         }
         return true;
+    }
+    class myException extends Exception {
+        public myException(String message) {
+            super(message);
+        }
     }
 
 }
