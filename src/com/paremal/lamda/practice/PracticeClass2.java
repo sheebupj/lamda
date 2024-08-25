@@ -92,7 +92,7 @@ public class PracticeClass2 {
 
         List<Employee> empList1 = empList.stream().collect(Collectors.toList());
         /*
-         *
+         *department wise highest salary
          */
         empList.stream()
                 .collect(Collectors.groupingBy(Employee::department, Collectors
@@ -203,7 +203,6 @@ public class PracticeClass2 {
                 .entrySet().stream().sorted(Map.Entry.comparingByKey())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
-
 
     /**
      * sort map by value

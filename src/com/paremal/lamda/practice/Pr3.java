@@ -1,7 +1,12 @@
 package com.paremal.lamda.practice;
 
+import com.paremal.lamda.util.Utils1;
+
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
+
 
 public class Pr3 {
 
@@ -54,6 +59,7 @@ public class Pr3 {
         return sb.toString();
     }
     public static void main(String[] args) {
+        Optional<List<String>> opString=Optional.of(Optional.ofNullable(List.of("sheebu","sheenoj","sheena")).orElseGet(Collections::emptyList));
         System.out.println(reverseWord("abc"));
         System.out.println(primeOrNot(11));
         System.out.println("151"+amstrongOrNot(151));
@@ -72,8 +78,16 @@ public class Pr3 {
         System.out.println("10:" +factorial(10));
         System.out.println(reverseWord("1234567890"));
         System.out.println("My name is sheebu:"+reverseEachWordsInAstring("My name is Sheebu"));
+        Optional<String> opStr=Optional.empty();
+        //Optional<String> opStr= Optional.ofNullable(str);
+        //opStr.map(s->s.toUpperCase()).ifPresent(System.out::println);
+       // opStr.ifPresent(System.out::println);
+        System.out.println(opStr.orElse("empty1"));
+        opStr.ifPresent(System.out::println);
+
 
     }
-
-
+   static Optional<String> sup() {
+       return Optional.ofNullable(null);
+   }
 }

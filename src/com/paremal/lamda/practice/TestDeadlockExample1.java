@@ -23,9 +23,9 @@ public class TestDeadlockExample1 {
         };
         Thread t2= new Thread(){
             public void run(){
-                synchronized(lock1){
+                synchronized(lock2){
                     System.out.println("Thread2 Acquired Lock2");
-                    synchronized (lock2){
+                    synchronized (lock1){
                         System.out.println("Thread2 Acquired Lock1");
                         try {
                             Thread.sleep(100);

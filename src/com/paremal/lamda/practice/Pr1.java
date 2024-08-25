@@ -3,6 +3,7 @@ package com.paremal.lamda.practice;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
@@ -59,6 +60,16 @@ public class Pr1 {
          */
         IntStream.rangeClosed(1, 100).filter(Pr1::primeOrNot).forEach(System.out::println);
 
+        System.out.println("###");
+        IntStream.rangeClosed(1, 100).filter(n->{
+            for(int i=2;i*i<=n;i++){
+                 if(n%i==0){
+                    return false;
+                }
+            }
+            return true;
+        }).forEach(System.out::println);
+
         /*
          * find number of special characters
          */
@@ -81,27 +92,30 @@ public class Pr1 {
         /*
          * highest salary for each department
          */
-        Map<String, Object> dpmtWisemaxSal = emplist.stream()
+        Map<String, Employee> dpmtWisemaxSal = emplist.stream()
                 .collect(Collectors.groupingBy(Employee::department, Collectors.collectingAndThen(
                         Collectors.maxBy(Comparator.comparing(Employee::salary)), Optional::get)));
         dpmtWisemaxSal.entrySet().stream().forEach(System.out::println);
 
         List<Employee> e1 = emplist.stream().filter(e -> e.firstName().startsWith("j")).collect(Collectors.toList());
         System.out.println(e1.size());
+        List<String> worlds1=null;
+
+        try {
+            /*
+             * split files to word list
+             */
+            Path path=Paths.get("data.txt");
+            words = Files.lines(path, Charset.defaultCharset())
+                    .flatMap(line -> Arrays.stream(line.split(" "))).collect(Collectors.toList());
+            worlds1=Files.lines(Paths.get("data.txt"),Charset.defaultCharset()).flatMap(line->Arrays.stream(line.split(" "))).filter(w->!w.equals("minima")).collect(Collectors.toList());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
 
-//        try {
-//            /*
-//             * split files to word list
-//             */
-//            words = Files.lines(Paths.get("data.txt"), Charset.defaultCharset())
-//                    .flatMap(line -> Arrays.stream(line.split(" "))).collect(Collectors.toList());
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-
-        Map<String, Integer> wl = words.stream().collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum));
+        Map<String, Integer> wl = worlds1.stream().collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum));
         wl.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
         System.out.println("$$$**********************************************************************");
@@ -125,9 +139,13 @@ public class Pr1 {
             Arrays.asList("ABC", "DDBA", "RADEA", "QQ")
          */
 
-        Optional<List<String>> strs = Optional.of(Optional.ofNullable(Arrays.asList("ABC", "DDBA", "RADEA", "QQ")).orElseGet(Collections::emptyList));
+        Optional<List<String>> strs = Optional.of(Optional.ofNullable(List.of("ABC", "DDBA", "RADEA", "QQ")).orElseGet(Collections::emptyList));
         // strs.stream().filter(s-> !s.isEmpty()).collect(Collectors.toMap(s->s,s->s.length())).entrySet().stream().forEach(System.out::println);
-        strs.ifPresent(s -> s.stream().collect(Collectors.toMap(k -> k, v -> v.length())).entrySet().stream().forEach(System.out::println));
+        strs.ifPresent(s -> s.stream().collect(Collectors.toMap(key -> key, value -> value.length())).entrySet().stream().forEach(System.out::println));
+        char c = 'b';
+        String binaryString =Integer.toBinaryString(c);
+        System.out.println("1" + binaryString.substring(0, 3) + "  " + binaryString.substring(3));
+        System.out.println(binaryString);
     }
 
     /*

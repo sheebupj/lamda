@@ -34,13 +34,14 @@ public class ProcessEmployee {
         }
 
 
-        List<Employee1> employeeList = List.of(new Employee1("Jason", "Red", 5000.0, "IT", phones),
+        List<Employee1> employeeList = List.of(
+                new Employee1("Jason", "Red", 5000.0, "IT", phones),
                 new Employee1("Ashly", "Green", 7601.0, "IT", phones),
                 new Employee1("Mathew", "Indigo", 3587.5, "Sales", phones),
                 new Employee1("James", "Indigo", 7600.0, "Marketing", phones),
                 new Employee1("Luke", "Indigo", 8200.0, "IT", phones),
                 new Employee1("Jason", "Blue", 6200.0, "Sales", phones),
-                new Employee1("Jason", "Blue", 3200.0, "finance", phones),
+                new Employee1("Jason", "Blue", 3200.0, "Finance", phones),
                 new Employee1("Wendy", "Brown", 4236.4, "Marketing", phones),
                 new Employee1("Wendy", "Brown", 6200.0, "Marketing", phones));
 
@@ -85,7 +86,7 @@ public class ProcessEmployee {
          * Collection.sort()
          */
         System.out.println("\n\n#list of employees sorted with commparator prior to java 8");
-        employeeList.sort(Comparator.comparing(Employee1::lastName));
+       // employeeList.sort(Comparator.comparing(Employee1::lastName));
         for (Employee1 e : employeeList) {
             System.out.println(e);
         }
@@ -105,6 +106,8 @@ public class ProcessEmployee {
             System.out.println(department);
             employeesInDepartment.forEach(employee -> System.out.printf("   %s%n", employee));
         });
+        System.out.println("####################################");
+        groupedByDepartMent.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
 
         /**
          * creating TreeMap with departmentname as key and count as value using
@@ -319,7 +322,7 @@ public class ProcessEmployee {
          * sort map based of key
          */
         System.out.println("#frequencies map sorted based of key");
-        frequencies.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+        frequencies.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
 
         /*
          * split sentence to word array then find frequencies of each word to map then
