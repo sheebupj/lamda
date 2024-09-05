@@ -23,9 +23,15 @@ public class PracticeClass2 {
     public static void main(String[] args) {
         final List<String> phones = Arrays.asList(new String[]{"9387690660", "9188584218"});
 
-        List<Customer> customers = List.of(new Customer("zohn", "15", "NewJersy", 1000.0),
-                new Customer("aby", "15", "NewYork", 2000.0), new Customer("john3", "15", "NewJersy", 4000.0),
-                new Customer("john4", "15", "NewJersy", 5000.0));
+        List<Customer> customers = List.of(
+                new Customer("zohn", "25", "NewJersy", 1000.0),
+                new Customer("aby", "36", "NewYork", 2000.0),
+                new Customer("john3", "45", "NewJersy", 4000.0),
+                new Customer("john4", "57", "NewJersy", 5000.0),
+                new Customer("joseph", "62", "NewJersy", 1000.0),
+                new Customer("george", "33", "NewYork", 2000.0),
+                new Customer("sebastian", "22", "NewJersy", 4000.0),
+                new Customer("anto", "19", "NewJersy", 5000.0));
 
         List<Employee> empList = List.of(new Employee("Jason", "Red", 5000.0, "IT", phones),
                 new Employee("Ashly", "Green", 7601.0, "IT", phones),
@@ -43,6 +49,7 @@ public class PracticeClass2 {
         List<Customer> filtredCusts = customers.stream().filter(c -> !c.city.equals("NewYork"))
                 .collect(Collectors.toList());
         filtredCusts.forEach(System.out::println);
+
 
         /*
          * create Map based on city and number of customers with that city
@@ -169,6 +176,7 @@ public class PracticeClass2 {
                         (Collectors.maxBy(Comparator.comparing(Employee::salary)), Optional::get)));
         highestSalariedEmployee.entrySet().stream().forEach(System.out::println);
         System.out.println("-------------------------------");
+
         /*
         sorting the map using property inside the entryValue
          */
@@ -177,6 +185,18 @@ public class PracticeClass2 {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (em1, em2) -> em1, LinkedHashMap::new));
 
 
+        /*
+        sorting customer list on city and then name
+         */
+        List<Customer> sortedCustOnCityAndNme=customers.stream().sorted(Comparator.comparing(Customer::city).thenComparing(Customer::name)).collect(Collectors.toList());
+
+        sortedCustOnCityAndNme.forEach(System.out::println);
+        /*
+         count customers based of location from a customer  list
+         */
+        Map<String,Long> cityWiseCustCout=customers.stream().collect(Collectors.groupingBy(Customer::city,Collectors.counting()));
+
+        cityWiseCustCout.entrySet().forEach(System.out::println);
     }
 
     public static boolean whetherSecondDigitNineOrNot(Integer n) {
