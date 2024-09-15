@@ -76,6 +76,11 @@ public class Pr1 {
         String str = "This#string%contains^special*characters&.(-_";
         System.out.println(str + Arrays.stream(str.split("")).map(s -> s.charAt(0))
                 .filter(c -> !(Character.isAlphabetic(c) || Character.isDigit(c))).count());
+        /*
+        removing duplicates from string
+         */
+        String str2="12345678908642";
+        System.out.println(":::"+Arrays.stream(str2.split("")).distinct().collect(Collectors.joining()));
 
         /*
          * find Armstrong
