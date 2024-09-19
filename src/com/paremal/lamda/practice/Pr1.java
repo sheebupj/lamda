@@ -79,7 +79,7 @@ public class Pr1 {
         /*
         removing duplicates from string
          */
-        String str2="12345678908642";
+        String str2="removing duplicates from string";
         System.out.println(":::"+Arrays.stream(str2.split("")).distinct().collect(Collectors.joining()));
 
         /*
@@ -151,6 +151,19 @@ public class Pr1 {
         String binaryString =Integer.toBinaryString(c);
         System.out.println("1" + binaryString.substring(0, 3) + "  " + binaryString.substring(3));
         System.out.println(binaryString);
+        String str1="sheebu";
+        Map<String,Integer> charMap=Arrays.stream(str1.split("")).collect(Collectors.toMap(Function.identity(),v->1,Integer::sum));
+        /*
+        make a string without duplicate char removed (order not kept)
+         */
+       String unequeString=
+                charMap.entrySet().stream().filter(em-> em.getValue()==1).map(em-> em.getKey()).collect(Collectors.joining());
+        System.out.println(unequeString);
+        /*
+        remove duplicate char
+         */
+        String duplicateRemoved=Arrays.stream(str1.split("")).distinct().collect(Collectors.joining());
+        System.out.println(duplicateRemoved);
     }
 
     /*
