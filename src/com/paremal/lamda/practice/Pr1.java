@@ -152,12 +152,12 @@ public class Pr1 {
         System.out.println("1" + binaryString.substring(0, 3) + "  " + binaryString.substring(3));
         System.out.println(binaryString);
         String str1="sheebu";
-        Map<String,Integer> charMap=Arrays.stream(str1.split("")).collect(Collectors.toMap(Function.identity(),v->1,Integer::sum));
         /*
-        make a string without duplicate char removed (order not kept)
+        removing duplicates ...not recommended
          */
-       String unequeString=
-                charMap.entrySet().stream().filter(em-> em.getValue()==1).map(em-> em.getKey()).collect(Collectors.joining());
+        Map<String,Integer> charMap=Arrays.stream(str1.split("")).collect(Collectors.toMap(Function.identity(),v->1,Integer::sum,LinkedHashMap::new));
+        String unequeString=
+                charMap.entrySet().stream().map(es-> es.getKey()).collect(Collectors.joining());
         System.out.println(unequeString);
         /*
         remove duplicate char
