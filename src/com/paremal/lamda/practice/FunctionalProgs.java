@@ -38,10 +38,7 @@ public class FunctionalProgs {
                 .forEach(System.out::println);
         IntStream range = IntStream.range(1, 6);
         range.forEach(System.out::println);
-        var ohMy = Stream.of("lions", "tigers", "bears");
-        Map<Boolean, List<String>> map = ohMy.collect(
-                Collectors.partitioningBy(str -> str.length() <= 5));
-        System.out.println(map);    // {false=[tigers], true=[lions, bears]}
+
 
         var ohMy1 = Stream.of("lions", "tigers", "bears");
         Map<Integer, Optional<Character>> map1 = ohMy1.collect(
@@ -343,34 +340,106 @@ public class FunctionalProgs {
         optional.ifPresent(System.out::println);                  // 5.5
         System.out.println(optional.getAsDouble());               // 5.5
         System.out.println(optional.orElseGet(() -> Double.NaN)); // 5.5
+        IntStream ints1= IntStream.of(3, 5, 6);
+        LongStream longs1 = LongStream.of(5, 10);
+        long sum = longs1.sum();
+        System.out.println(sum);     // 15
+        DoubleStream doubles1 = DoubleStream.generate(() -> Math.PI);
+      //OptionalDouble min1 = doubles1.min(); // runs infinitely
 
 
+        /*
+        Summary statistics include the following:
+        Smallest number (minimum): getMin()
+        Largest number (maximum): getMax()
+        Average: getAverage()
+        Sum: getSum()
+        Number of values: getCount()
+         */
+        IntStream intStream = IntStream.of(1, 2, 3);
+        IntSummaryStatistics stats = intStream.summaryStatistics();
+        System.out.println(stats);
 
+        /*
+        Optional
+        .......
+        .....
+         */
 
+        /*  Collectors
+            Collectors.joining()
+         */
+        var ohMy2 = Stream.of("lions", "tigers", "bears");
+        String result = ohMy2.collect(Collectors.joining(", "));
+        System.out.println(result); // lions, tigers, bears
 
+        //Collectors.averagingInt()
+        var ohMy3 = Stream.of("lions", "tigers", "bears");
+        Double result1 = ohMy3.collect(Collectors.averagingInt(String::length));
+        System.out.println(result1); // 5.333333333333333
 
+        //Collectors.toMap()...HashMap
+        var ohMy4 = Stream.of("lions", "tigers", "bears");
+        Map<Integer, String> map2 = ohMy4.collect(Collectors.toMap(
+                String::length,
+                k -> k,
+                (a1, a2) -> a1 + "," + a2));
+        System.out.println(map2);            // {5=lions,bears, 6=tigers}
+        System.out.println(map2.getClass()); // class java.util.HashMap
 
+        //Collectors.toMap()...LinkedHashMap
+        var ohMy5 = Stream.of("lions", "tigers", "bears");
+        Map<Integer, String> map3 = ohMy5.collect(Collectors.toMap(
+                String::length,
+                k -> k,
+                (a1, a2) -> a1 + "," + a2,
+                LinkedHashMap::new));
+        System.out.println(map3);            // {5=lions,bears, 6=tigers}
+        System.out.println(map3.getClass()); // class java.util.LinkedHashmap
 
+        //Collectors.groupingBy()...TreeMap..Set
+        var ohMy6 = Stream.of("lions", "tigers", "bears");
+        TreeMap<Integer, Set<String>> map4 = ohMy6.collect(
+                Collectors.groupingBy(
+                        String::length,
+                        TreeMap::new,
+                        Collectors.toSet()));
+        System.out.println(map4); // {5=[lions, bears], 6=[tigers]}
 
+        //Collectors.partitioningBy
+        var ohMy = Stream.of("lions", "tigers", "bears");
+        Map<Boolean, List<String>> map = ohMy.collect(
+                Collectors.partitioningBy(str -> str.length() <= 5));
+        System.out.println(map);    // {false=[tigers], true=[lions, bears]}
 
-
-
-
-
-
-
-
+        //Collectors.groupingBy..Collectors.mapping....Collectors.minBy
+        var ohMy7 = Stream.of("lions", "tigers", "bears","abcdef");
+        Map<Integer, Optional<Character>> map5 = ohMy7.collect(
+                Collectors.groupingBy(
+                        String::length,
+                        Collectors.mapping(
+                                cs -> cs.charAt(0),
+                                Collectors.minBy((a, b) -> a -b))));
+        System.out.println(map5);    // {5=Optional[b], 6=Optional[t]}
 
 
 
     }
-    public static Optional<Double> average(int[] scores) {
+    private static Optional<Double> average(int[] scores) {
         if (scores.length == 0) return Optional.empty();
         int sum = 0;
         for (int score : scores) sum += score;
         //return Optional.of((double) sum / scores.length);
         return Optional.empty();
     }
+    private static int range(IntStream ints) {
+        IntSummaryStatistics stats = ints.summaryStatistics();
+        if (stats.getCount() == 0) throw new RuntimeException();
+        return stats.getMax()-stats.getMin();
+    }
+
+
+
 }
 
 
