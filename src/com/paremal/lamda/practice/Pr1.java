@@ -113,7 +113,9 @@ public class Pr1 {
             Path path=Paths.get("data.txt");
             words = Files.lines(path, Charset.defaultCharset())
                     .flatMap(line -> Arrays.stream(line.split(" "))).collect(Collectors.toList());
-            worlds1=Files.lines(Paths.get("data.txt"),Charset.defaultCharset()).flatMap(line->Arrays.stream(line.split(" "))).filter(w->!w.equals("minima")).collect(Collectors.toList());
+            worlds1=Files.lines(path,Charset.defaultCharset())
+                    .flatMap(line->Arrays.stream(line.split(" ")))
+                    .filter(w->!w.equals("minima")).collect(Collectors.toList());
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

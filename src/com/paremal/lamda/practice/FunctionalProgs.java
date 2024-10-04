@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import java.util.stream.*;
 
 public class FunctionalProgs {
-    public static void main(String[] args) {
+    public static <list> void main(String[] args) {
 
         String sr1="Hello";
         String sr4="Hello";
@@ -25,11 +25,11 @@ public class FunctionalProgs {
                 .limit(2)
                 .forEach(System.out::println);
 
-//        Stream.generate(() -> "Elsa")
-//                .filter(n -> n.length() == 4)
-//                .limit(2)
-//                .sorted()
-//                .forEach(System.out::println);
+        Stream.generate(() -> "Elsa")
+                .filter(n -> n.length() == 4)
+                .limit(2)
+                .sorted()
+                .forEach(System.out::println);
         Stream.generate(() -> "Olaf Lazisson")
 
                 .filter(n -> n.length() > 4)
@@ -48,6 +48,16 @@ public class FunctionalProgs {
                                 str1 -> str1.charAt(0),
                                 Collectors.minBy((a, b) -> a -b))));
         System.out.println(map1);    // {5=Optional[b], 6=Optional[t]}
+
+        Predicate<String> egg = e -> e.contains("egg");
+        Predicate<String> brown = e -> e.contains("brown");
+        Predicate<String> brownEggs = egg.and(brown);
+        Predicate<String> otherEggs = egg.and(brown.negate());
+
+        System.out.println(brownEggs.test("borwnegg"));
+        List<String> strlist=List.of("brownegg","othereggs");
+        strlist.stream().filter(e->otherEggs.test(e)).forEach(System.out::println);
+
         Consumer<String> c1 = x -> System.out.print("1: " + x);
         Consumer<String> c2 = x -> System.out.println(",2: " + x);
 
@@ -165,7 +175,8 @@ public class FunctionalProgs {
 
         /*
         reduce()
-        The reduce() method combines a stream into a single object. It is a reduction, which means it processes all elements.
+        The reduce() method combines a stream into a single object.
+        It is a reduction, which means it processes all elements.
 
                 T reduce(T identity, BinaryOperator<T> accumulator)
 
@@ -231,7 +242,9 @@ public class FunctionalProgs {
         s3.distinct() .forEach(System.out::print); // duckgoose
         /*
         limit() and skip()
-        The limit() and skip() methods can make a Stream smaller, or they could make a finite stream out of an infinite stream. The method signatures are shown here:
+        The limit() and skip() methods can make a Stream smaller,
+        or they could make a finite stream out of an infinite stream.
+        The method signatures are shown here:
         Stream<T> limit(long maxSize)
         Stream<T> skip(long n)
         */
@@ -242,7 +255,9 @@ public class FunctionalProgs {
                 .forEach(System.out::print);//67
         /*
         map()
-        The map() method creates a one‐to‐one mapping from the elements in the stream to the elements of the next step in the stream. The method signature is as follows:
+        The map() method creates a one‐to‐one mapping from the elements
+         in the stream to the elements of the next step in the stream.
+         The method signature is as follows:
 
         <R> Stream<R> map(Function<? super T, ? extends R> mapper)
          */
@@ -252,7 +267,8 @@ public class FunctionalProgs {
                 .forEach(System.out::print); // 676
         /*
         flatMap()
-        The flatMap() method takes each element in the stream and makes any elements it contains top‐level elements in a single stream.
+        The flatMap() method takes each element in the stream and
+         makes any elements it contains top‐level elements in a single stream.
         <R> Stream<R> flatMap(
         Function<? super T, ? extends Stream<? extends R>> mapper)
         */
@@ -419,7 +435,7 @@ public class FunctionalProgs {
          to see how many of each length we have.
          */
         var ohMy8 = Stream.of("lions", "tigers", "bears");
-        Map<Integer, Long> map6 = ohMy.collect(
+        Map<Integer, Long> map6 = ohMy8.collect(
                 Collectors.groupingBy(
                         String::length,
                         Collectors.counting()));

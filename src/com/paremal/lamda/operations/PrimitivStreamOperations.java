@@ -133,9 +133,10 @@ public class PrimitivStreamOperations {
 				.forEach(e -> System.out.println("word: " + e.getKey() + " " + e.getValue() + "times"));
 		
 		Map<String,Integer> wl=words.stream().collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum,LinkedHashMap::new)).entrySet().stream()
-		.sorted(Map.Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue));
+		.sorted(Map.Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)-> e1,LinkedHashMap::new));
 		System.out.println("$$$**********************************************************************");
 		wl.entrySet().forEach(System.out::println);
+		System.out.println("$$$**********************************************************************end");
 		/*
 		 * convert list to map by counting each char frequency sort by key
 		 */
