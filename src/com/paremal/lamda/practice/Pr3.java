@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
+import static java.lang.Math.abs;
+
 
 public class Pr3 {
 
@@ -84,10 +86,41 @@ public class Pr3 {
        // opStr.ifPresent(System.out::println);
         System.out.println(opStr.orElse("empty1"));
         opStr.ifPresent(System.out::println);
+        int[] data = {2, 3, -2, 4, -5};
+        int[] result=findClosestToZero(data);
+        System.out.println("Closest number to zero: " +result[0]+ " :" +result[1]);
 
 
     }
    static Optional<String> sup() {
        return Optional.ofNullable(null);
    }
+
+    /*
+    An Array of integers is given, both +ve and -ve.
+    You need to find the two elements such that their
+     sum is closest to zero.
+     */
+    public static int[] findClosestToZero(int[] numbers) {
+        int[] cz= new int[2];
+        cz[0]=abs(numbers[0]);
+        cz[1]=abs(numbers[1]);
+        int cn=cz[0]+cz[1];
+
+        for(int i=0;i<numbers.length;i++){
+            for(int j=i+1;j<numbers.length;j++){
+                //math.abs() is used to get closest to 0 since we are checking lowest no  which include negetives
+                if(cn>abs(numbers[i])+abs(numbers[j])){
+                    cz[0]=numbers[i];
+                    cz[1]=numbers[j];
+                    cn=abs(cz[0])+abs(cz[1]);
+                }
+            }
+
+        }
+
+
+        return cz;
+    }
+
 }
