@@ -412,6 +412,20 @@ public class FunctionalProgs {
                 Collectors.partitioningBy(str -> str.length() <= 5));
         System.out.println(map);    // {false=[tigers], true=[lions, bears]}
 
+        /*
+        Instead of using the downstream collector to specify the type,
+        we can use any of the collectors that we've already shown.
+         For example, we can group by the length of the animal name
+         to see how many of each length we have.
+         */
+        var ohMy8 = Stream.of("lions", "tigers", "bears");
+        Map<Integer, Long> map6 = ohMy.collect(
+                Collectors.groupingBy(
+                        String::length,
+                        Collectors.counting()));
+        System.out.println(map6);    // {5=2, 6=1}
+
+
         //Collectors.groupingBy..Collectors.mapping....Collectors.minBy
         var ohMy7 = Stream.of("lions", "tigers", "bears","abcdef");
         Map<Integer, Optional<Character>> map5 = ohMy7.collect(
