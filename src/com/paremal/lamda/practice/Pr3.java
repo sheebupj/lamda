@@ -1,11 +1,11 @@
 package com.paremal.lamda.practice;
 
-import com.paremal.lamda.util.Utils1;
+
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.IntStream;
+
 
 import static java.lang.Math.abs;
 
@@ -98,7 +98,7 @@ public class Pr3 {
 
     /*
     An Array of integers is given, both +ve and -ve.
-    You need to find the two elements such that their
+    To find the two elements such that their
      sum is closest to zero.
      */
     public static int[] findClosestToZero(int[] numbers) {
