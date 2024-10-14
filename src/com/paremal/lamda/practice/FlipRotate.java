@@ -1,7 +1,5 @@
 package com.paremal.lamda.practice;
 
-import com.sun.tools.javac.Main;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,25 +29,25 @@ public class FlipRotate {
 
         List<List<Integer>> rlist = rotateClockWise(llist);
         System.out.println("after rotating clockwise 90 degree");
-        displY(rlist);
+        disply(rlist);
         List<List<Integer>> rlist2=rotateClockWise(rlist);
         System.out.println("after rotating clockwise 90 degree");
-        displY(rlist2);
+        disply(rlist2);
         List<List<Integer>> rlist3=rotateClockWise(rlist2);
         System.out.println("after rotating clockwise 90 degree");
-        displY(rlist3);
+        disply(rlist3);
         List<List<Integer>> rlist4=rotateClockWise(rlist3);
         System.out.println("after rotating clockwise 90 degree");
-        displY(rlist4);
+        disply(rlist4);
         List<List<Integer>> rlist5=rotateAntiClockWise(rlist4);
         System.out.println("After rotating anti-clockwise 90 degree");
-        displY(rlist5);
+        disply(rlist5);
         List<List<Integer>> rlist6=horizondalFlip(rlist5);
         System.out.println("after flipping horizontally");
-        displY(rlist6);
+        disply(rlist6);
         List<List<Integer>> rlist7=verticalFlip(rlist6);
         System.out.println("after flipping  vertically");
-        displY(rlist7);
+        disply(rlist7);
 
     }
     static List<List<Integer>> verticalFlip(List<List<Integer>> inputList) {
@@ -116,7 +114,7 @@ public class FlipRotate {
     }
 
 
-    static void displY(List<List<Integer>> inputList) {
+    static void disply(List<List<Integer>> inputList) {
         for ( List<Integer> olist : inputList) {
             for (Integer igr : olist) {
                 System.out.print(igr + " ");
