@@ -126,7 +126,6 @@ public class FlipRotate {
         for (List<Integer> olist : inputList) {
             for (Integer igr : olist) {
                 System.out.print(igr + " ");
-
             }
             System.out.println();
         }
@@ -135,14 +134,7 @@ public class FlipRotate {
 
     static void displayArray(Integer[][] ar2d) {
         List<List<Integer>> inputList = Arrays.stream(ar2d).map(Arrays::asList).collect(Collectors.toList());
-        for (List<Integer> olist : inputList) {
-            for (Integer igr : olist) {
-                System.out.print(igr + " ");
-
-            }
-            System.out.println();
-        }
-        System.out.println();
+        display(inputList);
     }
 
 
