@@ -4,7 +4,48 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+/*
+Rotating and flipping image
+rows and columns must be equal
+image inputs are in  List of List Integers
 
+1 2 3
+4 5 6
+7 8 9
+after rotating clockwise 90 degree
+7 4 1
+8 5 2
+9 6 3
+
+1 2 3
+4 5 6
+7 8 9
+After rotating anti-clockwise 90 degree
+3 6 9
+2 5 8
+1 4 7
+
+1 2 3
+4 5 6
+7 8 9
+after flipping horizontally 90 degree
+3 2 1
+6 5 4
+9 8 7
+
+
+1 2 3
+4 5 6
+7 8 9
+after flipping  vertically
+7 8 9
+4 5 6
+1 2 3
+
+
+
+
+ */
 public class FlipRotate {
     public static void main(String[] args) {
 
@@ -12,6 +53,8 @@ public class FlipRotate {
         List<Integer> b = List.of(24,25,26,27);
         List<Integer> c = List.of(28,29,30,31);
         List<Integer> d = List.of(32,33,34,35);
+
+
         List<List<Integer>> llist = new ArrayList<>();
         llist.add(a);
         llist.add(b);
@@ -43,7 +86,7 @@ public class FlipRotate {
         display(rlist5a);
         List<List<Integer>> rlist6 = horizondalFlip(rlist5a);
         System.out.println("after flipping horizontally");
-        display(rlist6);
+          display(rlist6);
         List<List<Integer>> rlist6a = horizondalFlip(rlist6);
         System.out.println("after flipping horizontally");
         display(rlist6a);
@@ -111,7 +154,7 @@ public class FlipRotate {
         int indexsize = size - 1;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                // System.out.println("resultArr2d[j][indexsize - i]="+resultArr2d[j][indexsize - i]+"arr2d[i][j]"+arr2d[i][j]);
+
                 resultArr2d[indexsize - j][i] = arr2d[i][j];
 
             }
