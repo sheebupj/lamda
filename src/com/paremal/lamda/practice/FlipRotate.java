@@ -28,7 +28,7 @@ After rotating anti-clockwise 90 degree
 1 2 3
 4 5 6
 7 8 9
-after flipping horizontally 90 degree
+after flipping horizontally
 3 2 1
 6 5 4
 9 8 7
