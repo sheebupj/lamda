@@ -18,6 +18,7 @@ public class Pr1 {
     static public void main(String[] args) {
         List<Integer> n1 = List.of(1, 2, 3, 4);
         List<Integer> n2 = List.of(3, 4, 5);
+
         /* skiping elements */
         n1.stream().skip(1).forEach(System.out::println);
         /* sorting */
@@ -34,6 +35,8 @@ public class Pr1 {
         words.stream().filter(w -> w.startsWith("h")).forEach(System.out::println);
         System.out.println("------");
 
+
+
         /* sorting */
         words.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
 
@@ -49,7 +52,7 @@ public class Pr1 {
         List<Integer> list1 = Arrays.asList(1, 2, 3);
         List<Integer> list2 = Arrays.asList(4, 5, 6);
         List<Integer> list3 = Arrays.asList(7, 8, 9);
-
+        System.out.println("&&&&"+list3.stream().reduce((a,b)-> a+b).get());
         List<List<Integer>> listOfLists = Arrays.asList(list1, list2, list3);
 
         List<Integer> listOfAllIntegers = listOfLists.stream().flatMap(x -> x.stream()).collect(Collectors.toList());
@@ -166,6 +169,92 @@ public class Pr1 {
          */
         String duplicateRemoved=Arrays.stream(str1.split("")).distinct().collect(Collectors.joining());
         System.out.println(duplicateRemoved);
+
+            // Write your code here
+            Map<Integer,Integer> colorFreqMap=list1.stream().collect
+                    (Collectors.toMap(Function.identity(),v->1,Integer::sum,TreeMap::new));
+           Optional<Integer> opt=colorFreqMap.entrySet().stream().filter(em-> em.getValue()>=2)
+                    .map(em->em.getValue()).map(Pr1::getPairCount).reduce((a,b)-> a+b);
+        int steps=8;
+        String strhike="UDDDUDUU";
+        System.out.println();
+       System.out.println(countingValleys(steps,strhike));
+
+
+
+        int [] intsv= {2,2,1,3,1,1};
+
+
+
+        /*
+        most repeated number from array with frequency ranking up to kth frequency
+         */
+        int k=5;
+        Arrays.stream(intsv).boxed()
+                .collect(Collectors.toMap(Function.identity(),v->1,Integer::sum))
+                .entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(s1,s2)-> s1,LinkedHashMap::new))
+                .entrySet().stream().limit(k)
+                .forEach(em-> System.out.print(em.getKey()+"-"+em.getValue()+" "));
+        long t3=System.nanoTime();
+        System.out.println();
+
+        /*
+       printing first non-Repeatable character from list of words
+       */
+        List<String> strListr= Arrays.asList( "array", "apple", "rat");
+        System.out.println(strListr.stream().map(Pr1::getFirstC).collect(Collectors.joining()));
+
+
+
+
+
+
+    }
+
+    /*
+    Method to find first non-Repeatable character from a string
+     */
+    static String getFirstC(String w){
+        return Arrays.stream(w.split(""))
+                .collect(Collectors.toMap(Function.identity(), v-> 1,Integer::sum, LinkedHashMap::new))
+                .entrySet().stream()
+                .filter(em-> em.getValue()==1)
+                .findFirst()
+                .get()
+                .getKey();
+    }
+
+    public static int countingValleys(int steps, String path) {
+        // Write your code here
+        String [] strArr=path.split("");
+
+        int v=0,present=0,previous=0;
+        for(String str:strArr){
+            previous=present;
+            present=present+getValue(str);
+            v=v+statusChange(present,previous);
+           // System.out.print(v+" ");
+
+        }
+        return v;
+
+    }
+    static int getValue(String c){
+        if(c.equals("U")) return 1;
+        if(c.equals("D")) return -1;
+        return 0;
+    }
+    static int statusChange(int present,int previous){
+        if(previous==-1&&present==0){
+            return 1;
+        }
+        return 0;
+
+
+    }
+    static int getPairCount(Integer n){
+        return n/2;
     }
 
     /*
