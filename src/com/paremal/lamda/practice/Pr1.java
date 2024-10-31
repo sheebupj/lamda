@@ -95,8 +95,8 @@ public class Pr1 {
          */
         List<Employee> emplist = Utils.getEmployeeslist();
         System.out.println("Second lartgest salary:" + emplist.stream().distinct()
-                .sorted(Comparator.comparing(Employee::salary).reversed()).skip(1).findFirst());
-
+                .sorted(Comparator.comparing(Employee::salary).reversed().thenComparing(Employee::firstName).thenComparing(Employee::salary)).skip(1).findFirst());
+        //emplist.stream().sorted()
         /*
          * highest salary for each department
          */
@@ -170,11 +170,7 @@ public class Pr1 {
         String duplicateRemoved=Arrays.stream(str1.split("")).distinct().collect(Collectors.joining());
         System.out.println(duplicateRemoved);
 
-            // Write your code here
-            Map<Integer,Integer> colorFreqMap=list1.stream().collect
-                    (Collectors.toMap(Function.identity(),v->1,Integer::sum,TreeMap::new));
-           Optional<Integer> opt=colorFreqMap.entrySet().stream().filter(em-> em.getValue()>=2)
-                    .map(em->em.getValue()).map(Pr1::getPairCount).reduce((a,b)-> a+b);
+
         int steps=8;
         String strhike="UDDDUDUU";
         System.out.println();
@@ -182,27 +178,26 @@ public class Pr1 {
 
 
 
-        int [] intsv= {2,2,1,3,1,1};
+
 
 
 
         /*
         most repeated number from array with frequency ranking up to kth frequency
          */
-        int k=5;
+        int k=2;
+        int [] intsv= {2,2,1,3,1,1};
         Arrays.stream(intsv).boxed()
                 .collect(Collectors.toMap(Function.identity(),v->1,Integer::sum))
                 .entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(s1,s2)-> s1,LinkedHashMap::new))
                 .entrySet().stream().limit(k)
                 .forEach(em-> System.out.print(em.getKey()+"-"+em.getValue()+" "));
-        long t3=System.nanoTime();
         System.out.println();
-
         /*
        printing first non-Repeatable character from list of words
        */
-        List<String> strListr= Arrays.asList( "array", "apple", "rat");
+        List<String> strListr= Arrays.asList( "arrayy", "appleale", "rat");
         System.out.println(strListr.stream().map(Pr1::getFirstC).collect(Collectors.joining()));
 
 
@@ -216,13 +211,12 @@ public class Pr1 {
     Method to find first non-Repeatable character from a string
      */
     static String getFirstC(String w){
-        return Arrays.stream(w.split(""))
+        Optional<Map.Entry<String,Integer>> me= Arrays.stream(w.split(""))
                 .collect(Collectors.toMap(Function.identity(), v-> 1,Integer::sum, LinkedHashMap::new))
                 .entrySet().stream()
                 .filter(em-> em.getValue()==1)
-                .findFirst()
-                .get()
-                .getKey();
+                .findFirst();
+        return me.isPresent() ? me.get().getKey():"";
     }
 
     public static int countingValleys(int steps, String path) {
