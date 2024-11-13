@@ -196,9 +196,10 @@ public class PrimitivStreamOperations {
 		/*
 		 * counting special characters in a word list
 		 */
-		String str = "This#string%contains^special*characters&.(-_";
-		System.out.println("!!!" + Arrays.stream(str.split("")).map(s -> s.charAt(0))
-				.filter(c -> !(Character.isAlphabetic(c) || Character.isDigit(c))).count());
+		String str = "This#string%contains^special*characters&.(-_ ";
+		System.out.println("!!!" + Arrays.stream(str.split(""))
+						.map(s->s.charAt(0))
+						.filter(c-> !Character.isAlphabetic(c)&& !Character.isDigit(c)).collect(Collectors.counting()));
 
 		
 		/*
@@ -211,7 +212,7 @@ public class PrimitivStreamOperations {
 		 * stream operations with reduce sum min max
 		 */
 		int[] nums= {5,7,3,8,2,1,4,6};
-		System.out.println("sum of list"+Arrays.stream(nums).reduce((a,b)-> a+b).getAsInt());
+		System.out.println("sum of list"+Arrays.stream(nums).reduce(Integer::sum).getAsInt());
 		System.out.println("min of list"+Arrays.stream(nums).reduce((a,b)-> a<b ? a:b).getAsInt());
 		System.out.println("max of list"+Arrays.stream(nums).boxed().reduce((a,b)-> a>b ? a:b).get());
 		
@@ -266,10 +267,45 @@ public class PrimitivStreamOperations {
 				return false;
 			}
 		}).forEach(System.out::println);
-		
-		
-		
-		
+
+
+
+		Random r= new Random();
+		long tt2 = System.nanoTime();
+		IntStream ints=IntStream.generate(()-> r.nextInt(100));
+		int [] intsv=ints.limit(50000).toArray();
+		int x=6;
+
+		/*
+		print highest repeated mumbers in array up to xth position
+		 */
+		Arrays.stream(intsv).boxed()
+				.collect(Collectors.toMap(Function.identity(),v->1,Integer::sum))
+				.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+				.collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)-> e1,LinkedHashMap::new))
+				.entrySet().stream().limit(x).forEach(em-> System.out.print(em.getKey()+"-"+em.getValue()+" "));
+		long tt3=System.nanoTime();
+		System.out.println();
+		System.out.println("milli Seconds:"+(tt3-tt2)/1000000);
+        /*
+        { "array", "apple", "rat"}
+     */
+		List<String> strListr= Arrays.asList( "array", "apple", "rat");
+		System.out.println(strListr.stream().map(PrimitivStreamOperations::getFirstC).collect(Collectors.joining()));
+
+
+
+
+
+	}
+	static String getFirstC(String w){
+		return Arrays.stream(w.split(""))
+				.collect(Collectors.toMap(Function.identity(), v-> 1,Integer::sum, LinkedHashMap::new))
+				.entrySet().stream()
+				.filter(em-> em.getValue()==1)
+				.findFirst()
+				.get()
+				.getKey();
 	}
 	public static boolean checkAmstrongOrNot(int n) {
 		int tmp=n, cubeSum=0, r=0;
