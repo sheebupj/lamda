@@ -1,11 +1,8 @@
 package com.paremal.lamda.operations;
 
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -15,10 +12,20 @@ public class IntStreamOperations {
 	
 	public static void main(String[] args) {
 		
-		int [] values= {11,7,9,3,6,4,10,5,2,8,1};
-		
+		int [] values= {11,7,9,3,6,4,10,5,2,8,1,12,3,5,3};
+		int upto=3;
+		IntStream.of(values).boxed().collect(Collectors.toMap(Function.identity(),v->1,Integer::sum,LinkedHashMap::new))
+				.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+				.collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(es1,es2)-> es1,LinkedHashMap::new))
+				.entrySet().stream().limit(upto).forEach(System.out::println);
+
+
+		System.out.println();
 		System.out.println("Original values");
 		IntStream.of(values).sorted().forEach(value->System.out.printf("%d%n",value));
+		List<? extends Number> list = new ArrayList<Integer>();
+		
+
 		
 		
 		System.out.printf("Count: %d%n",IntStream.of(values).count());
