@@ -297,10 +297,11 @@ public class PrimitivStreamOperations {
 	List<Integer> ns1=List.of(10,6,7,5,2,1,4,3);
 
 
-	//find pairs j
+	//find pairs have sum 8
 	ns1.stream().flatMap(i-> ns1.stream().filter(j-> i+j==8).map(j->new int[]{i,j})).forEach(ar-> System.out.println(ar[0]+" "+ar[1]));
 		System.out.println();
 
+	// finding all pair for numbers having sum of it is 8
 	List<int[]>	intArList=pairsSumList(ns1);
 
 	intArList.stream().forEach(ar-> System.out.println(ar[0]+" "+ar[1]));
