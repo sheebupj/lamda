@@ -235,7 +235,7 @@ public class PrimitivStreamOperations {
 		
 		
 		/*
-		 * print all numbers starting with 1 from a an array
+		 * print all numbers starting with 1 from  an array
 		 */
 		int[] ns= { 17,257,1078,892638,19,92328332,123456778};
 		Arrays.stream(ns).boxed().filter(i-> {
@@ -277,6 +277,7 @@ public class PrimitivStreamOperations {
 		int x=6;
 
 		/*
+
 		print highest repeated mumbers in array up to xth position
 		 */
 		Arrays.stream(intsv).boxed()
@@ -293,10 +294,39 @@ public class PrimitivStreamOperations {
 		List<String> strListr= Arrays.asList( "array", "apple", "rat");
 		System.out.println(strListr.stream().map(PrimitivStreamOperations::getFirstC).collect(Collectors.joining()));
 
+	List<Integer> ns1=List.of(10,6,7,5,2,1,4,3);
+
+
+	//find pairs j
+	ns1.stream().flatMap(i-> ns1.stream().filter(j-> i+j==8).map(j->new int[]{i,j})).forEach(ar-> System.out.println(ar[0]+" "+ar[1]));
+		System.out.println();
+
+	List<int[]>	intArList=pairsSumList(ns1);
+
+	intArList.stream().forEach(ar-> System.out.println(ar[0]+" "+ar[1]));
 
 
 
 
+	}
+	/*
+	find pairs in a list sum of the elements is 8
+	 */
+	static List<int[]> pairsSumList(List<Integer> ns1){
+		List<int[]> intArList= new ArrayList<>();
+		for(int i=0;i<ns1.size()-1;i++){
+			for(int j=i+1;j<ns1.size();j++){
+				if(i==j)continue;
+				if(ns1.get(i)+ns1.get(j)==8){
+					int[] nos= new int[2];
+					nos[0]=ns1.get(i);
+					nos[1]=ns1.get(j);
+					intArList.add(nos);
+				}
+
+			}
+		}
+		return intArList;
 	}
 	static String getFirstC(String w){
 		return Arrays.stream(w.split(""))
