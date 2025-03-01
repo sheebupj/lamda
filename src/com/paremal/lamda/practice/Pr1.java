@@ -200,6 +200,18 @@ public class Pr1 {
         List<String> strListr= Arrays.asList( "arrayy", "appleale", "rat");
         System.out.println(strListr.stream().map(Pr1::getFirstC).collect(Collectors.joining()));
 
+        /*
+          finding third non-repeatable character in a String
+         */
+        String s= "welcome to my home";
+        String[] chars=s.split("");
+        System.out.println("third non repeatable character in String");
+        Arrays.stream(chars)
+                .collect(Collectors.toMap(Function.identity(), v->1,Integer::sum,LinkedHashMap::new))
+                .entrySet().stream().sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(k1-> k1.getKey(),v-> v.getValue(),(ee1,ee2)->ee1,LinkedHashMap::new))
+                .entrySet().stream().filter(es->es.getValue()==1).skip(2).limit(1).forEach(System.out::println);
+
 
 
 
