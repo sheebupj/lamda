@@ -209,8 +209,12 @@ public class Pr1 {
         Arrays.stream(chars)
                 .collect(Collectors.toMap(Function.identity(), v->1,Integer::sum,LinkedHashMap::new))
                 .entrySet().stream().sorted(Map.Entry.comparingByValue())
-                .collect(Collectors.toMap(k1-> k1.getKey(),v-> v.getValue(),(ee1,ee2)->ee1,LinkedHashMap::new))
-                .entrySet().stream().filter(es->es.getValue()==1).skip(2).limit(1).forEach(System.out::println);
+                .collect(Collectors.toMap(k1-> k1.getKey(),v-> v.getValue(),
+                        (ee1,ee2)->ee1,LinkedHashMap::new))
+                .entrySet().stream().filter(es->es.getValue()==1)
+                .skip(2)
+                .limit(1)
+                .forEach(System.out::println);
 
 
 
