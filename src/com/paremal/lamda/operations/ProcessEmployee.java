@@ -13,6 +13,7 @@ public class ProcessEmployee {
                             Double salary,
                             String department,
                             List<String> phoneNo) {
+
     }
 
     public record Customer(String name, Integer age, String dept, Double sal) {
@@ -20,6 +21,7 @@ public class ProcessEmployee {
 
     public static void main(String[] args) {
         List<String> phones = Arrays.asList("9387690660", "9188584218");
+        Employee1 employee1t=new Employee1("ab","abcd",2000.0,"IT",phones);
         List<Customer> customers = List.of(
                 new Customer("John", 20, "IT", 20000.0),
                 new Customer("Joseph", 20, "IT", 20000.0),
