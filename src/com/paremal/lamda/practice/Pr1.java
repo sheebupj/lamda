@@ -203,9 +203,9 @@ public class Pr1 {
         /*
           finding third non-repeatable character in a String
          */
-        String s= "welcome to my home";
+        String s= "welcome to cforge";
         String[] chars=s.split("");
-        System.out.println("third non repeatable character in String");
+
         Arrays.stream(chars)
                 .collect(Collectors.toMap(Function.identity(), v->1,Integer::sum,LinkedHashMap::new))
                 .entrySet().stream().sorted(Map.Entry.comparingByValue())
@@ -214,7 +214,7 @@ public class Pr1 {
                 .entrySet().stream().filter(es->es.getValue()==1)
                 .skip(2)
                 .limit(1)
-                .forEach(System.out::println);
+                .forEach(es->System.out.println("third non repeatable character in String:"+es.getKey()));
 
 
 
