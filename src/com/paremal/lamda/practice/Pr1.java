@@ -216,6 +216,17 @@ public class Pr1 {
                 .limit(1)
                 .forEach(es->System.out.println("third non repeatable character in String:"+es.getKey()));
 
+        /*
+        generate list of randome integers between 1 and 10
+         */
+        Random random= new Random();
+        var ints=IntStream.generate(()->random.nextInt(1,10))
+                .boxed()
+                .limit(10)
+                .collect(Collectors.toList());
+        System.out.println("......................................."+ints.size());
+        ints.forEach(System.out::println);
+
 
 
 
