@@ -7,8 +7,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import com.paremal.lamda.util.Utils.Employee;
 import com.paremal.lamda.util.Utils;
@@ -226,6 +229,19 @@ public class Pr1 {
                 .collect(Collectors.toList());
         System.out.println("......................................."+ints.size());
         ints.forEach(System.out::println);
+
+        /*
+        find longest string that contains vowels
+         */
+
+        String regex = "[aeiouAEIOU]";
+        Pattern pattern = Pattern.compile(regex);
+        Stream.of("ada", "xyz", "absolute", "arithematic", "bcdfghjklm")
+                .filter(s -> {
+                    Matcher matcher = pattern.matcher(s);
+                    return matcher.find();
+                }).reduce((a, b) -> a.length() > b.length() ? a : b)
+                .ifPresent(System.out::println);
 
 
 
