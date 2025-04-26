@@ -55,7 +55,7 @@ public class Pr1 {
         List<Integer> list1 = Arrays.asList(1, 2, 3);
         List<Integer> list2 = Arrays.asList(4, 5, 6);
         List<Integer> list3 = Arrays.asList(7, 8, 9);
-        System.out.println("&&&&"+list3.stream().reduce((a,b)-> a+b).get());
+        System.out.println("&&&&" + list3.stream().reduce((a, b) -> a + b).get());
         List<List<Integer>> listOfLists = Arrays.asList(list1, list2, list3);
 
         List<Integer> listOfAllIntegers = listOfLists.stream().flatMap(x -> x.stream()).collect(Collectors.toList());
@@ -67,9 +67,9 @@ public class Pr1 {
         IntStream.rangeClosed(1, 100).filter(Pr1::primeOrNot).forEach(System.out::println);
 
         System.out.println("###");
-        IntStream.rangeClosed(1, 100).filter(n->{
-            for(int i=2;i*i<=n;i++){
-                 if(n%i==0){
+        IntStream.rangeClosed(1, 100).filter(n -> {
+            for (int i = 2; i * i <= n; i++) {
+                if (n % i == 0) {
                     return false;
                 }
             }
@@ -85,8 +85,8 @@ public class Pr1 {
         /*
         removing duplicates from string
          */
-        String str2="removing duplicates from string";
-        System.out.println(":::"+Arrays.stream(str2.split("")).distinct().collect(Collectors.joining()));
+        String str2 = "removing duplicates from string";
+        System.out.println(":::" + Arrays.stream(str2.split("")).distinct().collect(Collectors.joining()));
 
         /*
          * find Armstrong
@@ -110,18 +110,18 @@ public class Pr1 {
 
         List<Employee> e1 = emplist.stream().filter(e -> e.firstName().startsWith("j")).collect(Collectors.toList());
         System.out.println(e1.size());
-        List<String> worlds1=null;
+        List<String> worlds1 = null;
 
         try {
             /*
              * split files to word list
              */
-            Path path=Paths.get("data.txt");
+            Path path = Paths.get("data.txt");
             words = Files.lines(path, Charset.defaultCharset())
                     .flatMap(line -> Arrays.stream(line.split(" "))).collect(Collectors.toList());
-            worlds1=Files.lines(path,Charset.defaultCharset())
-                    .flatMap(line->Arrays.stream(line.split(" ")))
-                    .filter(w->!w.equals("minima")).collect(Collectors.toList());
+            worlds1 = Files.lines(path, Charset.defaultCharset())
+                    .flatMap(line -> Arrays.stream(line.split(" ")))
+                    .filter(w -> !w.equals("minima")).collect(Collectors.toList());
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -156,28 +156,28 @@ public class Pr1 {
         // strs.stream().filter(s-> !s.isEmpty()).collect(Collectors.toMap(s->s,s->s.length())).entrySet().stream().forEach(System.out::println);
         strs.ifPresent(s -> s.stream().collect(Collectors.toMap(key -> key, value -> value.length())).entrySet().stream().forEach(System.out::println));
         char c = 'b';
-        String binaryString =Integer.toBinaryString(c);
+        String binaryString = Integer.toBinaryString(c);
         System.out.println("1" + binaryString.substring(0, 3) + "  " + binaryString.substring(3));
         System.out.println(binaryString);
-        String str1="sheebu";
+        String str1 = "sheebu";
         /*
         removing duplicates ...not recommended
          */
-        Map<String,Integer> charMap=Arrays.stream(str1.split("")).collect(Collectors.toMap(Function.identity(),v->1,Integer::sum,LinkedHashMap::new));
-        String unequeString=
-                charMap.entrySet().stream().map(es-> es.getKey()).collect(Collectors.joining());
+        Map<String, Integer> charMap = Arrays.stream(str1.split("")).collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum, LinkedHashMap::new));
+        String unequeString =
+                charMap.entrySet().stream().map(es -> es.getKey()).collect(Collectors.joining());
         System.out.println(unequeString);
         /*
         remove duplicate char
          */
-        String duplicateRemoved=Arrays.stream(str1.split("")).distinct().collect(Collectors.joining());
+        String duplicateRemoved = Arrays.stream(str1.split("")).distinct().collect(Collectors.joining());
         System.out.println(duplicateRemoved);
 
 
-        int steps=8;
-        String strhike="UDDDUDUU";
+        int steps = 8;
+        String strhike = "UDDDUDUU";
         System.out.println();
-       System.out.println(countingValleys(steps,strhike));
+        System.out.println(countingValleys(steps, strhike));
 
 
 
@@ -188,46 +188,46 @@ public class Pr1 {
         /*
         most repeated number from array with frequency ranking up to kth frequency
          */
-        int k=2;
-        int [] intsv= {2,2,1,3,1,1};
+        int k = 2;
+        int[] intsv = {2, 2, 1, 3, 1, 1};
         Arrays.stream(intsv).boxed()
-                .collect(Collectors.toMap(Function.identity(),v->1,Integer::sum))
+                .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum))
                 .entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(s1,s2)-> s1,LinkedHashMap::new))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (s1, s2) -> s1, LinkedHashMap::new))
                 .entrySet().stream().limit(k)
-                .forEach(em-> System.out.print(em.getKey()+"-"+em.getValue()+" "));
+                .forEach(em -> System.out.print(em.getKey() + "-" + em.getValue() + " "));
         System.out.println();
         /*
        printing first non-Repeatable character from list of words
        */
-        List<String> strListr= Arrays.asList( "arrayy", "appleale", "rat");
+        List<String> strListr = Arrays.asList("arrayy", "appleale", "rat");
         System.out.println(strListr.stream().map(Pr1::getFirstC).collect(Collectors.joining()));
 
         /*
           finding third non-repeatable character in a String
          */
-        String s= "welcome to cforge";
-        String[] chars=s.split("");
+        String s = "welcome to cforge";
+        String[] chars = s.split("");
 
         Arrays.stream(chars)
-                .collect(Collectors.toMap(Function.identity(), v->1,Integer::sum,LinkedHashMap::new))
+                .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum, LinkedHashMap::new))
                 .entrySet().stream().sorted(Map.Entry.comparingByValue())
-                .collect(Collectors.toMap(k1-> k1.getKey(),v-> v.getValue(),
-                        (ee1,ee2)->ee1,LinkedHashMap::new))
-                .entrySet().stream().filter(es->es.getValue()==1)
+                .collect(Collectors.toMap(k1 -> k1.getKey(), v -> v.getValue(),
+                        (ee1, ee2) -> ee1, LinkedHashMap::new))
+                .entrySet().stream().filter(es -> es.getValue() == 1)
                 .skip(2)
                 .limit(1)
-                .forEach(es->System.out.println("third non repeatable character in String:"+es.getKey()));
+                .forEach(es -> System.out.println("third non repeatable character in String:" + es.getKey()));
 
         /*
         generate list of randome integers between 1 and 10
          */
-        Random random= new Random();
-        var ints=IntStream.generate(()->random.nextInt(1,10))
+        Random random = new Random();
+        var ints = IntStream.generate(() -> random.nextInt(1, 10))
                 .boxed()
                 .limit(10)
                 .collect(Collectors.toList());
-        System.out.println("......................................."+ints.size());
+        System.out.println("......................................." + ints.size());
         ints.forEach(System.out::println);
 
         /*
@@ -236,7 +236,11 @@ public class Pr1 {
 
         String regex = "[aeiouAEIOU]";
         Pattern pattern = Pattern.compile(regex);
-        Stream.of("ada", "xyz", "absolute", "arithematic", "bcdfghjklm")
+        Stream.of("ada",
+                        "xyz",
+                        "absolute",
+                        "arithmetic",
+                        "bcdfghjklm")
                 .filter(s -> {
                     Matcher matcher = pattern.matcher(s);
                     return matcher.find();
@@ -244,54 +248,53 @@ public class Pr1 {
                 .ifPresent(System.out::println);
 
 
-
-
-
-
     }
 
     /*
     Method to find first non-Repeatable character from a string
      */
-    static String getFirstC(String w){
-        Optional<Map.Entry<String,Integer>> me= Arrays.stream(w.split(""))
-                .collect(Collectors.toMap(Function.identity(), v-> 1,Integer::sum, LinkedHashMap::new))
+    static String getFirstC(String w) {
+        Optional<Map.Entry<String, Integer>> me = Arrays.stream(w.split(""))
+                .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum, LinkedHashMap::new))
                 .entrySet().stream()
-                .filter(em-> em.getValue()==1)
+                .filter(em -> em.getValue() == 1)
                 .findFirst();
-        return me.isPresent() ? me.get().getKey():"";
+        return me.isPresent() ? me.get().getKey() : "";
     }
 
     public static int countingValleys(int steps, String path) {
         // Write your code here
-        String [] strArr=path.split("");
+        String[] strArr = path.split("");
 
-        int v=0,present=0,previous=0;
-        for(String str:strArr){
-            previous=present;
-            present=present+getValue(str);
-            v=v+statusChange(present,previous);
-           // System.out.print(v+" ");
+        int v = 0, present = 0, previous = 0;
+        for (String str : strArr) {
+            previous = present;
+            present = present + getValue(str);
+            v = v + statusChange(present, previous);
+            // System.out.print(v+" ");
 
         }
         return v;
 
     }
-    static int getValue(String c){
-        if(c.equals("U")) return 1;
-        if(c.equals("D")) return -1;
+
+    static int getValue(String c) {
+        if (c.equals("U")) return 1;
+        if (c.equals("D")) return -1;
         return 0;
     }
-    static int statusChange(int present,int previous){
-        if(previous==-1&&present==0){
+
+    static int statusChange(int present, int previous) {
+        if (previous == -1 && present == 0) {
             return 1;
         }
         return 0;
 
 
     }
-    static int getPairCount(Integer n){
-        return n/2;
+
+    static int getPairCount(Integer n) {
+        return n / 2;
     }
 
     /*
