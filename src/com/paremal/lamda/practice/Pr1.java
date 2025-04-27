@@ -240,8 +240,8 @@ public class Pr1 {
                         "absolute",
                         "arithmetic",
                         "bcdfghjklm")
-                .filter(s -> {
-                    Matcher matcher = pattern.matcher(s);
+                .filter(w -> {
+                    Matcher matcher = pattern.matcher(w);
                     return matcher.find();
                 })
                 .reduce((a, b) -> a.length() > b.length() ? a : b)
@@ -250,12 +250,13 @@ public class Pr1 {
          /*
         find longest string in the collection that contains vowels using method reference  and stream
          */
-        Pattern pattern = Pattern.compile(regex);
+
         Stream.of("ada",
                 "xyz",
                 "absolute",
                 "arithmetic",
-                "bcdfghjklm")
+                "bcdfghjklm",
+                "aithmatic-expression")
                 .filter(Pr1::containsVowel)
                 .reduce((a,b)-> a.length()>b.length() ? a:b)
                 .ifPresent(System.out::println);
