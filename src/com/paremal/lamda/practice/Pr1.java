@@ -231,9 +231,8 @@ public class Pr1 {
         ints.forEach(System.out::println);
 
         /*
-        find longest string that contains vowels
+        find longest string in the collection that contains vowels using stream and regex
          */
-
         String regex = "[aeiouAEIOU]";
         Pattern pattern = Pattern.compile(regex);
         Stream.of("ada",
@@ -244,11 +243,49 @@ public class Pr1 {
                 .filter(s -> {
                     Matcher matcher = pattern.matcher(s);
                     return matcher.find();
-                }).reduce((a, b) -> a.length() > b.length() ? a : b)
+                })
+                .reduce((a, b) -> a.length() > b.length() ? a : b)
+                .ifPresent(System.out::println);
+
+         /*
+        find longest string in the collection that contains vowels using method reference  and stream
+         */
+        Pattern pattern = Pattern.compile(regex);
+        Stream.of("ada",
+                "xyz",
+                "absolute",
+                "arithmetic",
+                "bcdfghjklm")
+                .filter(Pr1::containsVowel)
+                .reduce((a,b)-> a.length()>b.length() ? a:b)
                 .ifPresent(System.out::println);
 
 
     }
+    /*
+      method to  check a String contains vowel or not
+     */
+    static boolean containsVowel(String str) {
+        String[] strs = str.split("");
+        for (String s : strs) {
+
+            if (s.equals("a") ||
+                    s.equals("e") ||
+                    s.equals("i") ||
+                    s.equals("o") ||
+                    s.equals("u") ||
+                    s.equals("A") ||
+                    s.equals("E") ||
+                    s.equals("I") ||
+                    s.equals("O") ||
+                    s.equals("U")) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     /*
     Method to find first non-Repeatable character from a string
