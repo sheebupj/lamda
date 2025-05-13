@@ -231,7 +231,7 @@ public class Pr1 {
         ints.forEach(System.out::println);
 
         /*
-        find longest string in the collection that contains vowels using stream and regex
+        find longest string that do not contain vowel in the collection  using stream and regex
          */
         String regex = "[aeiouAEIOU]";
         Pattern pattern = Pattern.compile(regex);
@@ -248,21 +248,40 @@ public class Pr1 {
                 .ifPresent(System.out::println);
 
          /*
-        find longest string in the collection that contains vowels using method reference  and stream
+        find longest string that do not contain vowel in the collection using method reference  and stream
          */
 
         Stream.of("ada",
                 "xyz",
                 "absolute",
-                "arithmetic",
+                "arithmetic1",
                 "bcdfghjklm",
                 "aithmatic-expression")
+
                 .filter(Pr1::containsVowel)
                 .reduce((a,b)-> a.length()>b.length() ? a:b)
+                .ifPresent(System.out::println);
+        /*
+        find max length string that do not contain vowel in the collection
+         */
+
+        Stream.of("abstract", "devil", "friend", "abcd", "evolution", "fghjklm", "pronouciation", "nmpqrstvwxyz")
+                .filter(w -> {
+                    String lCase = w.toLowerCase();
+                    if (lCase.contains("a")
+                            || lCase.contains("e")
+                            || lCase.contains("i")
+                            || lCase.contains("o")
+                            || lCase.contains("u")) {
+                        return false;
+                    }
+                    return true;
+                }).reduce((w1, w2) -> w1.length() > w2.length() ? w1 : w2)
                 .ifPresent(System.out::println);
 
 
     }
+
     /*
       method to  check a String contains vowel or not
      */
@@ -270,11 +289,11 @@ public class Pr1 {
         String[] strs = str.split("");
         for (String s : strs) {
 
-            if (s.equals("a") ||
+            if (   s.equals("a") ||
                     s.equals("e") ||
                     s.equals("i") ||
                     s.equals("o") ||
-                    s.equals("u") ||
+                    s.equals("u")||
                     s.equals("A") ||
                     s.equals("E") ||
                     s.equals("I") ||
