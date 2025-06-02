@@ -203,9 +203,6 @@ public class Pr1 {
         List<String> strListr = Arrays.asList("arrayy", "appleale", "rat");
         System.out.println(strListr.stream().map(Pr1::getFirstC).collect(Collectors.joining()));
 
-        /*
-          finding third non-repeatable character in a String
-         */
         String s = "welcome to cforge";
         String[] chars = s.split("");
 
@@ -242,7 +239,7 @@ public class Pr1 {
                         "bcdfghjklm")
                 .filter(w -> {
                     Matcher matcher = pattern.matcher(w);
-                    return matcher.find();
+                    return !matcher.find();
                 })
                 .reduce((a, b) -> a.length() > b.length() ? a : b)
                 .ifPresent(System.out::println);
@@ -268,14 +265,18 @@ public class Pr1 {
         Stream.of("abstract", "devil", "friend", "abcd", "evolution", "fghjklm", "pronouciation", "nmpqrstvwxyz")
                 .filter(w -> {
                     String lCase = w.toLowerCase();
-                    if (lCase.contains("a")
-                            || lCase.contains("e")
-                            || lCase.contains("i")
-                            || lCase.contains("o")
-                            || lCase.contains("u")) {
-                        return false;
+                    String[] cAr=lCase.split("");
+                    boolean rsl=true;
+                    for(String chr:cAr) {
+                        if (chr.contains("a")
+                                || chr.contains("e")
+                                || chr.contains("i")
+                                || chr.contains("o")
+                                || chr.contains("u")) {
+                            rsl= false;
+                        }
                     }
-                    return true;
+                    return rsl;
                 }).reduce((w1, w2) -> w1.length() > w2.length() ? w1 : w2)
                 .ifPresent(System.out::println);
 
@@ -287,6 +288,7 @@ public class Pr1 {
      */
     static boolean containsVowel(String str) {
         String[] strs = str.split("");
+        boolean rslt=true;
         for (String s : strs) {
 
             if (   s.equals("a") ||
@@ -299,11 +301,11 @@ public class Pr1 {
                     s.equals("I") ||
                     s.equals("O") ||
                     s.equals("U")) {
-                return true;
+                rslt= false;
             }
         }
 
-        return false;
+        return rslt;
     }
 
 
