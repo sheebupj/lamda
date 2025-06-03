@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /*
 Rotating and flipping image
 rows and columns must be equal
@@ -67,7 +69,7 @@ public class FlipRotate {
 
         displayArray(IntArr2d);
 
-        List<List<Integer>> rlist = rotateClockWise(llist);
+        List<List<Integer>> rlist = rotateClockWise1(llist);
         System.out.println("after rotating clockwise 90 degree");
         display(rlist);
         List<List<Integer>> rlist2 = rotateClockWise(rlist);
@@ -103,7 +105,7 @@ public class FlipRotate {
 
     static List<List<Integer>> verticalFlip(List<List<Integer>> inputList) {
         int size = inputList.size();
-        Integer[][] arr2d = inputList.stream().map(l -> l.stream().toArray(Integer[]::new)).toArray(Integer[][]::new);
+        Integer[][] arr2d = inputList.stream().map(l-> l.stream().toArray(Integer []::new)).toArray(Integer [][]::new);
         Integer[][] resultArr2d = new Integer[size][size];
         int indexsize = size - 1;
         for (int i = 0; i < size; i++) {
@@ -179,6 +181,20 @@ public class FlipRotate {
     static void displayArray(Integer[][] ar2d) {
         List<List<Integer>> inputList = Arrays.stream(ar2d).map(Arrays::asList).collect(Collectors.toList());
         display(inputList);
+    }
+    static List<List<Integer>> rotateClockWise1(List<List<Integer>> inputList) {
+        int size=inputList.size();
+        Integer[][] twoDArr=inputList.stream().map(l->l.stream().toArray(Integer[]::new)).toArray(Integer[][]::new);
+        Integer[][] result2DArr= new Integer[size][size];
+        int indexSize=size-1;
+        for(int i=0;i<size;i++){
+            for (int j=0;j<size;j++){
+                result2DArr[j][indexSize-i]=twoDArr[i][j];
+
+            }
+        }
+        return Stream.of(result2DArr).map(ar-> Arrays.stream(ar).collect(Collectors.toList())).collect(Collectors.toList());
+
     }
 
 

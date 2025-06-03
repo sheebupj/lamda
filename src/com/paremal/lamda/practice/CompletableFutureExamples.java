@@ -11,7 +11,13 @@ public class CompletableFutureExamples {
         CompletableFuture.runAsync(() -> System.out.print("Hello")).thenRun(() -> System.out.println(" World"));
         CompletableFuture.supplyAsync(() -> 30).thenApply(x -> x * 10).thenAccept(System.out::println);
         Random random = new Random();
-        CompletableFuture.supplyAsync(() -> IntStream.generate(() -> random.nextInt(10, 100)).boxed().limit(10).collect(Collectors.toList())).thenApply(n -> n.stream().map(x -> x * 10).collect(Collectors.toList())).thenAccept(x -> x.forEach(System.out::println));
+        CompletableFuture.supplyAsync(() -> IntStream.generate(() -> random.nextInt(10, 100))
+                .boxed()
+                .limit(10)
+                .collect(Collectors.toList()))
+                .thenApply(n -> n.stream().map(x -> x * 10)
+                        .collect(Collectors.toList())).
+                thenAccept(x -> x.forEach(System.out::println));
 
         try {
             Thread.sleep(1000);
@@ -42,6 +48,8 @@ public class CompletableFutureExamples {
             });
         };
         CompletableFuture.runAsync(runnable).thenRun(runnable2);
+
+
 
 
           //  Thread.sleep(2500);
