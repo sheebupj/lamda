@@ -34,6 +34,7 @@ public class StringToJson {
         Gson gson= new Gson();
         JsonObject jsonObject=gson.fromJson(str,JsonObject.class);
         System.out.println(jsonObject.toString());
+        str.indexOf("a");
 
         ObjectMapper objectMapper= new ObjectMapper();
 

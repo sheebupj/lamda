@@ -1,8 +1,11 @@
 package com.paremal.lamda.practice;
 
 import java.util.LinkedList;
+import java.util.Random;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class ProducerConsumerRunner {
     public static void main(String[] args) {
@@ -27,6 +30,8 @@ public class ProducerConsumerRunner {
         ExecutorService ex = Executors.newFixedThreadPool(2);
         ex.submit(produce);
         ex.submit(consumer);
+
+
     }
 
 
@@ -39,14 +44,17 @@ public class ProducerConsumerRunner {
 
 
     public void produce() throws InterruptedException {
-        int value = 0;
+        Random rand= new Random();
+       int val;
         while (true) {
             synchronized (this) {
-                while (llist.size() == 2)
+                while (llist.size() ==capacity)
                     wait();
-                System.out.println("produced" + value);
-                llist.add(value++);
+                val=rand.nextInt(1,100);
+                llist.add(val);
+                System.out.println("value :"+val+"produced in the queue");
                 notify();
+
                 Thread.sleep(1000);
             }
         }
@@ -60,7 +68,7 @@ public class ProducerConsumerRunner {
                     wait();
                 }
                 int val = llist.removeFirst();
-                System.out.println("Consumed" + val);
+                System.out.println("Consumed: " + val);
                 notify();
                 Thread.sleep(1000);
 
