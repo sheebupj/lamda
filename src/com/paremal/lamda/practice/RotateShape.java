@@ -73,6 +73,16 @@ public class RotateShape {
 
     }
 
+
+    /*
+   1 2 3
+   4 5 6
+   7 8 9
+   After rotating anti-clockwise  it become
+   3 6 9
+   2 5 8
+   1 4 7
+    */
     static List<List<Integer>> rotateAntiClockwise(List<List<Integer>> llist) {
         int size = llist.size();
         Integer[][] twoDArr=llist.stream().map(l-> l.stream().toArray(Integer[]::new)).toArray(Integer[][]::new);

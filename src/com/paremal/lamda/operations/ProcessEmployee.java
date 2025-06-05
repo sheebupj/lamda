@@ -462,6 +462,16 @@ public class ProcessEmployee {
                         Collectors.collectingAndThen(Collectors.maxBy
                                 (Comparator.comparing(Employee1::salary)), Optional::get)));
         deptWiseHighestSal.entrySet().forEach(System.out::println);
+
+        Map<String,Optional<Employee1>> depWisempCnt=employeeList.stream()
+                .collect(Collectors.groupingBy(Employee1::department,
+                        Collectors.maxBy(Comparator.comparing(Employee1::salary))));
+
+        depWisempCnt.entrySet().stream().forEach(es-> {
+            System.out.print(es.getKey()+".......");
+            es.getValue().ifPresent(System.out::println);
+        });
+
     }
 
 }

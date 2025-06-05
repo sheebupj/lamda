@@ -103,6 +103,16 @@ public class FlipRotate {
 
     }
 
+
+    /*
+   1 2 3
+   4 5 6
+   7 8 9
+   after flipping vertical it becomes
+   7 8 9
+   4 5 6
+   1 2 3
+    */
     static List<List<Integer>> verticalFlip(List<List<Integer>> inputList) {
         int size = inputList.size();
         Integer[][] arr2d = inputList.stream().map(l-> l.stream().toArray(Integer []::new)).toArray(Integer [][]::new);
@@ -118,6 +128,16 @@ public class FlipRotate {
 
     }
 
+
+    /*
+  1 2 3
+  4 5 6
+  7 8 9
+  after flipping horizontal
+  3 2 1
+  6 5 4
+  9 8 7
+   */
     static List<List<Integer>> horizondalFlip(List<List<Integer>> inputList) {
         int size = inputList.size();
         Integer[][] arr2d = inputList.stream().map(l -> l.stream().toArray(Integer[]::new)).toArray(Integer[][]::new);
@@ -133,7 +153,15 @@ public class FlipRotate {
 
     }
 
-
+    /*
+   1 2 3
+   4 5 6
+   7 8 9
+   After rotating clockwise  it become
+   7 4 1
+   8 5 2
+   9 6 3
+  */
     static List<List<Integer>> rotateClockWise(List<List<Integer>> inputList) {
         int size = inputList.size();
         Integer[][] arr2d = inputList.stream().map(l -> l.stream().toArray(Integer[]::new)).toArray(Integer[][]::new);
@@ -150,6 +178,16 @@ public class FlipRotate {
 
     }
 
+
+    /*
+   1 2 3
+   4 5 6
+   7 8 9
+   After rotating anti-clockwise  it become
+   3 6 9
+   2 5 8
+   1 4 7
+    */
     static List<List<Integer>> rotateAntiClockWise(List<List<Integer>> inputList) {
         int size = inputList.size();
         Integer[][] arr2d = inputList.stream().map(l -> l.stream().toArray(Integer[]::new)).toArray(Integer[][]::new);
