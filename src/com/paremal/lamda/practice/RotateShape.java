@@ -168,7 +168,7 @@ public class RotateShape {
 
 
     public static void main(String[] args) {
-        System.out.println("Enter integers n*n (squire) number of numbers in one line equal to number of line and after enter additional Enter key");
+        System.out.println("Enter integers n*n (squire) numbers in one line equal to number of line and after enter additional Enter key");
         System.out.println(":");
        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         List<List<Integer>> input = new ArrayList<>();
