@@ -30,7 +30,7 @@ public class RotateShape {
         int size = llist.size();
         Integer[][] twoDArr=llist.stream().map(l-> l.stream().toArray(Integer[]::new)).toArray(Integer[][]::new);
 
-        return Stream.of(rotateClockewise(twoDArr)).map(Arrays::asList).collect(Collectors.toList());
+        return Stream.of(rotateClockewise(twoDArr)).map(Arrays::asList).toList();
 
 
     }
@@ -49,7 +49,7 @@ public class RotateShape {
 
         Integer[][] twoDArr=llist.stream().map(l-> l.stream().toArray(Integer[]::new)).toArray(Integer[][]::new);
 
-        return Stream.of(flipVertical(twoDArr)).map(Arrays::asList).collect(Collectors.toList());
+        return Stream.of(flipVertical(twoDArr)).map(Arrays::asList).toList();
 
 
     }
@@ -68,7 +68,7 @@ public class RotateShape {
 
         Integer[][] twoDArr=llist.stream().map(l-> l.stream().toArray(Integer[]::new)).toArray(Integer[][]::new);
 
-        return Stream.of(flipHorzontal(twoDArr)).map(Arrays::asList).collect(Collectors.toList());
+        return Stream.of(flipHorzontal(twoDArr)).map(Arrays::asList).toList();
 
 
     }
@@ -77,7 +77,7 @@ public class RotateShape {
         int size = llist.size();
         Integer[][] twoDArr=llist.stream().map(l-> l.stream().toArray(Integer[]::new)).toArray(Integer[][]::new);
 
-        return Stream.of(rotateAntiClockewise(twoDArr)).map(Arrays::asList).collect(Collectors.toList());
+        return Stream.of(rotateAntiClockewise(twoDArr)).map(Arrays::asList).toList();
 
 
     }
