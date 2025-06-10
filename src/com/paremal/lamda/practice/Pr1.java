@@ -144,9 +144,9 @@ public class Pr1 {
 
         StringBuilder stringBuilder1 = new StringBuilder();
         String reversedWords = reverseWordsFromString(nme);
-        String reversedWords1=reverseStringUsingStreamApi(nme);
-        System.out.println(reversedWords+" : "+reversedWords1);
-        String reverseEachWords=reverseEachStringUsingStreamApi(nme);
+        String reversedWords1 = reverseStringUsingStreamApi(nme);
+        System.out.println(reversedWords + " : " + reversedWords1);
+        String reverseEachWords = reverseEachStringUsingStreamApi(nme);
         System.out.println(reverseEachWords);
 
 
@@ -208,14 +208,13 @@ public class Pr1 {
         /*
         combining  first non-Repeatable character from list of words in single stream api method pipeline
          */
-        String stringFromNonrepeatables=strListr.stream().map(w->{
-            Optional<Map.Entry<String,Integer>> buildStringFistNonRepeatableChar=Arrays.stream(w.split(""))
-                    .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum,LinkedHashMap::new))
+        String stringFromNonrepeatables = strListr.stream().map(w -> {
+            Optional<Map.Entry<String, Integer>> buildStringFistNonRepeatableChar = Arrays.stream(w.split(""))
+                    .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum, LinkedHashMap::new))
                     .entrySet().stream().filter(es -> es.getValue() == 1).findFirst();
-            return buildStringFistNonRepeatableChar.isPresent() ? buildStringFistNonRepeatableChar.get().getKey():"";
+            return buildStringFistNonRepeatableChar.isPresent() ? buildStringFistNonRepeatableChar.get().getKey() : "";
         }).collect(Collectors.joining());
-        System.out.println("&&& "+stringFromNonrepeatables);
-
+        System.out.println("&&& " + stringFromNonrepeatables);
 
 
         String s = "welcome to cforge";
@@ -264,14 +263,14 @@ public class Pr1 {
          */
 
         Stream.of("ada",
-                "xyz",
-                "absolute",
-                "arithmetic1",
-                "bcdfghjklm",
-                "aithmatic-expression")
+                        "xyz",
+                        "absolute",
+                        "arithmetic1",
+                        "bcdfghjklm",
+                        "aithmatic-expression")
 
                 .filter(Pr1::containsVowel)
-                .reduce((a,b)-> a.length()>b.length() ? a:b)
+                .reduce((a, b) -> a.length() > b.length() ? a : b)
                 .ifPresent(System.out::println);
         /*
         find max length string that do not contain vowel in the collection
@@ -280,15 +279,15 @@ public class Pr1 {
         Stream.of("abstract", "devil", "friend", "abcd", "evolution", "fghjklm", "pronouciation", "nmpqrstvwxyz")
                 .filter(w -> {
                     String lCase = w.toLowerCase();
-                    String[] cAr=lCase.split("");
-                    boolean rsl=true;
-                    for(String chr:cAr) {
+                    String[] cAr = lCase.split("");
+                    boolean rsl = true;
+                    for (String chr : cAr) {
                         if (chr.contains("a")
                                 || chr.contains("e")
                                 || chr.contains("i")
                                 || chr.contains("o")
                                 || chr.contains("u")) {
-                            rsl= false;
+                            rsl = false;
                         }
                     }
                     return rsl;
@@ -303,20 +302,20 @@ public class Pr1 {
      */
     static boolean containsVowel(String str) {
         String[] strs = str.split("");
-        boolean rslt=true;
+        boolean rslt = true;
         for (String s : strs) {
 
-            if (   s.equals("a") ||
+            if (s.equals("a") ||
                     s.equals("e") ||
                     s.equals("i") ||
                     s.equals("o") ||
-                    s.equals("u")||
+                    s.equals("u") ||
                     s.equals("A") ||
                     s.equals("E") ||
                     s.equals("I") ||
                     s.equals("O") ||
                     s.equals("U")) {
-                rslt= false;
+                rslt = false;
             }
         }
 
@@ -386,18 +385,19 @@ public class Pr1 {
         }
         return stringBuilder.toString();
     }
+
     /*
     reverse  String   without using built in reverse method(using stream api method)
     */
     public static String reverseStringUsingStreamApi(String str) {
         String[] chars = str.split("");
-        int len=chars.length;
-        return   IntStream.iterate(len-1,i-> i>=0,i-> i=i-1)
+        int len = chars.length;
+        return IntStream.iterate(len - 1, i -> i >= 0, i -> i = i - 1)
                 .boxed()
                 .map(str::charAt)
-                .map(c-> String.valueOf(c))
+                .map(c -> String.valueOf(c))
                 .collect(Collectors.joining());
-   }
+    }
 
     /*
     reverse each words in a wordlist    without using built in reverse method(using stream api method)
@@ -409,15 +409,14 @@ public class Pr1 {
                 .boxed()
                 .map(j -> words[j])
                 .map(w -> {
-                    String[] wrd = w.split("");
-                    int l = wrd.length;
+                    int l = w.length();
                     return IntStream.iterate(l - 1, i -> i >= 0, i -> i = i - 1)
                             .boxed()
                             .map(w::charAt)
-                            .map(c -> String.valueOf(c))
+                            .map(String::valueOf)
                             .collect(Collectors.joining());
                 })
-                .map(w-> w+" ")
+                .map(w -> w + " ")
                 .collect(Collectors.joining());
     }
 
