@@ -144,7 +144,10 @@ public class Pr1 {
 
         StringBuilder stringBuilder1 = new StringBuilder();
         String reversedWords = reverseWordsFromString(nme);
-        System.out.println(reversedWords);
+        String reversedWords1=reverseStringUsingStreamApi(nme);
+        System.out.println(reversedWords+" : "+reversedWords1);
+        String reverseEachWords=reverseEachStringUsingStreamApi(nme);
+        System.out.println(reverseEachWords);
 
 
         /*
@@ -369,7 +372,7 @@ public class Pr1 {
     }
 
     /*
-     reverse every word in a String
+     reverse every word in a String without using built in reverse method
      */
     public static String reverseWordsFromString(String str) {
         String[] words = str.split(" ");
@@ -382,6 +385,40 @@ public class Pr1 {
 
         }
         return stringBuilder.toString();
+    }
+    /*
+    reverse  String   without using built in reverse method(using stream api method)
+    */
+    public static String reverseStringUsingStreamApi(String str) {
+        String[] chars = str.split("");
+        int len=chars.length;
+        return   IntStream.iterate(len-1,i-> i>=0,i-> i=i-1)
+                .boxed()
+                .map(str::charAt)
+                .map(c-> String.valueOf(c))
+                .collect(Collectors.joining());
+   }
+
+    /*
+    reverse each words in a wordlist    without using built in reverse method(using stream api method)
+    */
+    public static String reverseEachStringUsingStreamApi(String str) {
+        String[] words = str.split(" ");
+        int len = words.length;
+        return IntStream.iterate(0, j -> j < len, j -> j = j + 1)
+                .boxed()
+                .map(j -> words[j])
+                .map(w -> {
+                    String[] wrd = w.split("");
+                    int l = wrd.length;
+                    return IntStream.iterate(l - 1, i -> i >= 0, i -> i = i - 1)
+                            .boxed()
+                            .map(w::charAt)
+                            .map(c -> String.valueOf(c))
+                            .collect(Collectors.joining());
+                })
+                .map(w-> w+" ")
+                .collect(Collectors.joining());
     }
 
     public static boolean amstrongOrNot(Integer n) {
