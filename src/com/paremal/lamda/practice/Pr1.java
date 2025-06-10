@@ -198,10 +198,22 @@ public class Pr1 {
                 .forEach(em -> System.out.print(em.getKey() + "-" + em.getValue() + " "));
         System.out.println();
         /*
-       printing first non-Repeatable character from list of words
+       combining  first non-Repeatable character from list of words
        */
-        List<String> strListr = Arrays.asList("arrayy", "appleale", "rat");
+        List<String> strListr = Arrays.asList("array", "apple", "rat");
         System.out.println(strListr.stream().map(Pr1::getFirstC).collect(Collectors.joining()));
+        /*
+        combining  first non-Repeatable character from list of words in single stream api method pipeline
+         */
+        String stringFromNonrepeatables=strListr.stream().map(w->{
+            Optional<Map.Entry<String,Integer>> buildStringFistNonRepeatableChar=Arrays.stream(w.split(""))
+                    .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum,LinkedHashMap::new))
+                    .entrySet().stream().filter(es -> es.getValue() == 1).findFirst();
+            return buildStringFistNonRepeatableChar.isPresent() ? buildStringFistNonRepeatableChar.get().getKey():"";
+        }).collect(Collectors.joining());
+        System.out.println("&&& "+stringFromNonrepeatables);
+
+
 
         String s = "welcome to cforge";
         String[] chars = s.split("");
