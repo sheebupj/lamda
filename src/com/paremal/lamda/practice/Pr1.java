@@ -29,7 +29,7 @@ public class Pr1 {
         /* combinations */
         List<int[]> combinations = n1.stream()
                 .flatMap(i -> n2.stream().filter(j -> (i + j) % 2 == 0).map(j -> new int[]{i, j}))
-                .collect(Collectors.toList());
+                .toList();
         for (int[] i : combinations) {
             System.out.println(i[0] + "," + i[1]);
         }
@@ -45,10 +45,11 @@ public class Pr1 {
 
         /* avoiding duplicate charachors */
         List<String> uChars = words.stream().map(w -> w.split("")).flatMap(Arrays::stream).distinct()
-                .collect(Collectors.toList());
+                .toList();
         uChars.forEach(System.out::println);
         /* sum using reduce */
         Optional<Integer> sum = n1.stream().reduce(Integer::sum);
+        System.out.println(sum);
 
         int sum1 = n1.stream().reduce(0, (x, y) -> x + y);
 
@@ -193,7 +194,8 @@ public class Pr1 {
          */
         int k = 2;
         int[] intsv = {2, 2, 1, 3, 1, 1};
-        Arrays.stream(intsv).boxed()
+        Arrays.stream(intsv)
+                .boxed()
                 .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum))
                 .entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (s1, s2) -> s1, LinkedHashMap::new))
@@ -203,16 +205,18 @@ public class Pr1 {
         /*
        combining  first non-Repeatable character from list of words
        */
-        List<String> strListr = Arrays.asList("array", "apple", "rat");
-        System.out.println(strListr.stream().map(Pr1::getFirstC).collect(Collectors.joining()));
+        List<String> strListrList = Arrays.asList("array", "apple", "rat");
+        System.out.println(strListrList.stream().map(Pr1::getFirstC).collect(Collectors.joining()));
+        String combinedFirstChars=buildStringFistNonRepeatableCharSingleMethod(strListrList);
+        System.out.println(combinedFirstChars);
         /*
         combining  first non-Repeatable character from list of words in single stream api method pipeline
          */
-        String stringFromNonrepeatables = strListr.stream().map(w -> {
-            Optional<Map.Entry<String, Integer>> buildStringFistNonRepeatableChar = Arrays.stream(w.split(""))
+        String stringFromNonrepeatables = strListrList.stream().map(w -> {
+                    Optional<Map.Entry<String, Integer>> buildStringFistNonRepeatableChar = Arrays.stream(w.split(""))
                     .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum, LinkedHashMap::new))
                     .entrySet().stream().filter(es -> es.getValue() == 1).findFirst();
-            return buildStringFistNonRepeatableChar.isPresent() ? buildStringFistNonRepeatableChar.get().getKey() : "";
+                    return buildStringFistNonRepeatableChar.isPresent() ? buildStringFistNonRepeatableChar.get().getKey() : "";
         }).collect(Collectors.joining());
         System.out.println("&&& " + stringFromNonrepeatables);
 
@@ -237,7 +241,7 @@ public class Pr1 {
         var ints = IntStream.generate(() -> random.nextInt(1, 10))
                 .boxed()
                 .limit(10)
-                .collect(Collectors.toList());
+                .toList();
         System.out.println("......................................." + ints.size());
         ints.forEach(System.out::println);
 
@@ -293,6 +297,19 @@ public class Pr1 {
                     return rsl;
                 }).reduce((w1, w2) -> w1.length() > w2.length() ? w1 : w2)
                 .ifPresent(System.out::println);
+        Integer[] ints1 = new Integer[]{1, 9, 7, 3, 7, 2, 5, 4, 7, 6, 2};
+        Map<Integer, Integer> actualMap = Pr1.numbersFrequencyRankBasedUptoNo(ints1, 2);
+        actualMap.forEach((k1, v) -> System.out.println(k1 + ":" + v));
+        List<String> words1=List.of("deliberate","absolute","determination");
+        System.out.println(Pr1.buildStringFistNonRepeatableChar(words1));
+        System.out.println(Pr1.buildStringFistNonRepeatableCharSingleMethod(words1));
+        long t1=System.nanoTime();
+        String text = "In this chapter, we will be introduced to how to build a set of cooperating microservices using Spring Boot," +
+                " focusing on how to develop functionality that delivers business value. The challenges with microservices that we" +
+                " pointed out in the previous chapter will be considered only to some degree, but they will be addressed to their " +
+                "full extent in later chapters. ";
+        List<String> words2= Arrays.stream(text.split(" ")).toList();
+        String stringfromNonrepeatableChars=Pr1.buildStringFistNonRepeatableCharSingleMethod(words2);
 
 
     }
@@ -327,7 +344,7 @@ public class Pr1 {
     Method to find first non-Repeatable character from a string
      */
     static String getFirstC(String w) {
-        Optional<Map.Entry<String, Integer>> me = Arrays.stream(w.split(""))
+                Optional<Map.Entry<String, Integer>> me = Arrays.stream(w.split(""))
                 .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum, LinkedHashMap::new))
                 .entrySet().stream()
                 .filter(em -> em.getValue() == 1)
@@ -395,7 +412,7 @@ public class Pr1 {
         return IntStream.iterate(len - 1, i -> i >= 0, i -> i = i - 1)
                 .boxed()
                 .map(str::charAt)
-                .map(c -> String.valueOf(c))
+                .map(String::valueOf)
                 .collect(Collectors.joining());
     }
 
@@ -439,6 +456,32 @@ public class Pr1 {
                 return false;
         }
         return true;
+    }
+    static String buildStringFistNonRepeatableCharSingleMethod(List<String> words) {
+        return words.stream().map(w->{
+            Optional<Map.Entry<String,Integer>> buildStringFistNonRepeatableChar=Arrays.stream(w.split(""))
+                    .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum,LinkedHashMap::new))
+                    .entrySet().stream().filter(es -> es.getValue() == 1).findFirst();
+            return buildStringFistNonRepeatableChar.isPresent() ? buildStringFistNonRepeatableChar.get().getKey():"";
+        }).collect(Collectors.joining());
+    }
+    static Map<Integer, Integer> numbersFrequencyRankBasedUptoNo(Integer[] nums, Integer uptoRank) {
+        return Arrays.stream(nums).collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum, LinkedHashMap::new))
+                .entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (es1, es2) -> es1, LinkedHashMap::new))
+                .entrySet().stream().limit(uptoRank)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (es1, es2) -> es1, LinkedHashMap::new));
+
+    }
+    static String getFirstNonRepeatableChar(String str){
+        Optional<Map.Entry<String,Integer>> firstNonRepatableChar=Arrays.stream(str.split("")).collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum,LinkedHashMap::new))
+                .entrySet().stream().filter(es -> es.getValue() == 1).findFirst();
+        return firstNonRepatableChar.isPresent() ? firstNonRepatableChar.get().getKey():"";
+
+    }
+
+    static String buildStringFistNonRepeatableChar(List<String> words) {
+        return words.stream().map(Pr1::getFirstNonRepeatableChar).collect(Collectors.joining());
     }
 
     class myException extends Exception {
