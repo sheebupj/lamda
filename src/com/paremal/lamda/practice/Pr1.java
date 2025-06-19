@@ -474,14 +474,6 @@ public class Pr1 {
         return true;
     }
 
-    static String buildStringFistNonRepeatableCharSingleMethod(List<String> words) {
-        return words.stream().map(w -> {
-            Optional<Map.Entry<String, Integer>> buildStringFistNonRepeatableChar = Arrays.stream(w.split(""))
-                    .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum, LinkedHashMap::new))
-                    .entrySet().stream().filter(es -> es.getValue() == 1).findFirst();
-            return buildStringFistNonRepeatableChar.isPresent() ? buildStringFistNonRepeatableChar.get().getKey() : "";
-        }).collect(Collectors.joining());
-    }
 
     static Map<Integer, Integer> numbersFrequencyRankBasedUptoNo(Integer[] nums, Integer uptoRank) {
         return Arrays.stream(nums).collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum, LinkedHashMap::new))
@@ -502,6 +494,18 @@ public class Pr1 {
     static String buildStringFistNonRepeatableChar(List<String> words) {
         return words.stream().map(Pr1::getFirstNonRepeatableChar).collect(Collectors.joining());
     }
+
+    static String buildStringFistNonRepeatableCharSingleMethod(List<String> words) {
+        return words.stream().map(w -> {
+            Optional<Map.Entry<String, Integer>> buildStringFistNonRepeatableChar = Arrays.stream(w.split(""))
+                    .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum, LinkedHashMap::new))
+                    .entrySet().stream().filter(es -> es.getValue() == 1).findFirst();
+            return buildStringFistNonRepeatableChar.isPresent() ? buildStringFistNonRepeatableChar.get().getKey() : "";
+        }).collect(Collectors.joining());
+    }
+
+
+
 
 
     /*
